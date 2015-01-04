@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/courier")
 public class CourierController {
     
+    @Autowired
     private CourierService courierService;
 
     /**

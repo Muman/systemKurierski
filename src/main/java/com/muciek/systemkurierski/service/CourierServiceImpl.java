@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourierServiceImpl implements CourierService{
     
+    @Autowired
     private CourierDao courierDao;
 
     /**
@@ -56,6 +57,8 @@ public class CourierServiceImpl implements CourierService{
 
     @Override
     public List<Courier> getAllCouriers() {
-        return getCourierDao().getAllCouriers();
+        List<Courier> allCouriers = getCourierDao().getAllCouriers();
+        
+        return allCouriers;
     }
 }
