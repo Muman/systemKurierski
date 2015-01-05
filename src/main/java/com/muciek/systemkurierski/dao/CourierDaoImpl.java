@@ -19,7 +19,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public class CourierDaoImpl implements CourierDao{
-
+    
+    @Autowired
     private SessionFactory sessionFactory;
     
     @Override
@@ -38,7 +39,7 @@ public class CourierDaoImpl implements CourierDao{
     }
 
     @Override
-    public Courier getCourierById(String id) {
+    public Courier getCourierById(int id) {
         Courier courier = null;
         courier = (Courier)sessionFactory.getCurrentSession().get(Courier.class, id);
         return courier;   

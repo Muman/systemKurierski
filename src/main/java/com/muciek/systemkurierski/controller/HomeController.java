@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Muman
  */
 @Controller
-@RequestMapping("/welcome")
+@RequestMapping({"/","/content"})
 public class HomeController {
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
@@ -24,7 +24,7 @@ public class HomeController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "This is welcome page!");
-		model.setViewName("hello");
+		model.setViewName("index");
 		return model;
 
 	}
@@ -76,8 +76,6 @@ public class HomeController {
 		model.addObject("message", "This is user  page!");
 		
 		model.setViewName("user");
-
 		return model;
-
 	}
 }

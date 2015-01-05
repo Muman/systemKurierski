@@ -8,8 +8,10 @@ package com.muciek.systemkurierski.controller;
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.service.CourierService;
 import java.util.List;
+import javax.ws.rs.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,8 +42,19 @@ public class CourierController {
         this.courierService = courierService;
     }
     
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public @ResponseBody List<Courier> viewAllTodos(){
+    @RequestMapping(value = "/all.json", method = RequestMethod.GET)
+    public @ResponseBody List<Courier> getAllCouriers(){
         return courierService.getAllCouriers();
+    }
+    
+    @RequestMapping(value = "/{id}")
+    public @ResponseBody Courier getCourierById(@PathVariable("id") String id){
+        Courier requestedCourier = getCourierService().getCourierById(Integer.valueOf(id));
+        return requestedCourier;
+    }
+    
+    @RequestMapping(value = "/")
+    public String getTodoPartialPage(){
+        return "couriers";
     }
 }

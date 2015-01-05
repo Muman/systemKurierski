@@ -19,7 +19,7 @@ public interface CourierService {
 
     public void updateCourier(Courier courier);
 
-    public Courier getCourierById(String id);
+    public Courier getCourierById(int id);
     
     public List<Courier> getAllCouriers();
 }

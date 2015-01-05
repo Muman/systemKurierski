@@ -51,7 +51,7 @@ public class CourierServiceImpl implements CourierService{
     }
 
     @Override
-    public Courier getCourierById(String id) {
+    public Courier getCourierById(int id) {
         return getCourierDao().getCourierById(id);
     }
 
