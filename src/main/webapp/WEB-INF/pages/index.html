@@ -1,68 +1,58 @@
-<!doctype html>
-<html  ng-app="phonecatApp">
+<!DOCTYPE html>
+<html  >
     <head>
-<!--        <meta charset="utf-8">-->
         <title>CloudSole Angular</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- Bootstrap core CSS -->
-        <link href="../resources/css/bootstrap.css" rel="stylesheet">
-        <link href="../resources/css/animate.css" rel="stylesheet">
+        <link href="resources/css/bootstrap.css" rel="stylesheet">
+        <link href="resources/css/animate.css" rel="stylesheet">
 
         <!-- AngularJS XEditable CSS -->
-        <link href="../resources/css/xeditable.css" rel="stylesheet">
+        <link href="resources/css/xeditable.css" rel="stylesheet">
 
         <!-- Add custom CSS here -->
-        <link href="../resources/css/table.css" rel="stylesheet">
-        <link href="../resources/css/sb-admin.css" rel="stylesheet">
-        <link href="../resources/css/user.css" rel="stylesheet">
+        <link href="resources/css/table.css" rel="stylesheet">
+        <link href="resources/css/sb-admin.css" rel="stylesheet">
+        <link href="resources/css/user.css" rel="stylesheet">
         <link rel="stylesheet"
-              href="../resources/font-awesome/css/font-awesome.min.css">
-        <link href="../resources/css/valid.css" rel="stylesheet">
-        
-        <script src="../js/controllers/controllers.js"></script>
-                
-        <script src="../js/lib/angular/angular.js"></script>
-<!--        <script src="../resources/js/app.js"></script>-->
-    </head>
-    
-    <body ng-controller="PhoneListCtrl">
-<!--        <div id="wrapper">-->
+              href="resources/font-awesome/css/font-awesome.min.css">
+        <link href="resources/css/valid.css" rel="stylesheet">
 
-<!--            <ul class="demo-sidebar hide-on-tablets">
+        <script src="resources/js/lib/angular/angular.js"></script>
+        <script src="resources/js/lib/angular/angular-route.js"></script>
+
+        <!-- AngularJS -->
+        <script src="resources/js/app.js"></script>
+        <script src="resources/js/controllers/CourierController.js"></script>
+    </head>
+
+    <body ng-app="AngularSpringApp">
+
+        <div id="wrapper">
+
+            <ul class="demo-sidebar hide-on-tablets">
                 <li><a href="#/courier">Couriers List</a></li>
             </ul>
 
             <h1 class="demo-headline">AngularJS</h1>
-            <div ng-view></div>-->
+            <div ng-view></div>
 
-            <ul>
-                <li ng-repeat="phone in phones">
-                    <span>{{phone.name}}</span>
-                    <p>{{phone.snippet}}</p>
-                </li>
-            </ul>
-<!--        </div>-->
-
-
+        </div>
 
         <!-- jquery -->
-        <script src="../resources/js/lib/jquery/jquery-1.11.1.js"></script>
-        <script src="../resources/js/lib/jquery/jquery-ui.js"></script>
-
-        <!-- AngularJS -->
-
-        <script src="../resources/js/lib/angular/angular-resource.js"></script>
-        <script src="../resources/js/lib/angular/angular-route.js"></script>
-        <script src="../resources/js/lib/angular/angular-dragdrop.min.js"></script>
-        <script src="../resources/js/lib/angular/ui-bootstrap-tpls-0.11.0.js"></script>
-        <script src="../resources/js/lib/angular/angular-animate.min.js"></script>
-        <script src="../resources/js/lib/angular/angular-cookies.js"></script>
+        <script src="resources/js/lib/jquery/jquery-1.11.1.js"></script>
+        <script src="resources/js/lib/jquery/jquery-ui.js"></script>
+        <script src="resources/js/lib/angular/angular-resource.js"></script>
+        <script src="resources/js/lib/angular/angular-dragdrop.min.js"></script>
+        <script src="resources/js/lib/angular/ui-bootstrap-tpls-0.11.0.js"></script>
+        <script src="resources/js/lib/angular/angular-animate.min.js"></script>
+        <script src="resources/js/lib/angular/angular-cookies.js"></script>
 
         <!-- bootstrap -->
-        <script src="../resources/js/lib/bootstrap/bootstrap.js"></script>
+        <script src="resources/js/lib/bootstrap/bootstrap.js"></script>
 
         <!-- xeditable -->
-        <script src="../resources/js/lib/xeditable.js"></script>
+        <script src="resources/js/lib/xeditable.js"></script>
     </body>
 </html>
