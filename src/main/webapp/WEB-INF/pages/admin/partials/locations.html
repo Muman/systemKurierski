@@ -1,0 +1,119 @@
+<div id="container">
+
+    <div class="row">
+        <h2 class="sub-header row">Dodaj lokalizacje</h2>
+        <div class="col-md-6">
+            <form ng-submit="addLocation(newLocation)">
+                <div class=" form-group"><!--  col-lg-8-->
+                    <div class=" form-group"> <input class="form-control" placeholder="Enter address" type="text" ng-model="newLocation.address" required min="1" /> </div>
+                    <div class=" form-group"> <input class="form-control" placeholder="Enter Postal Code" type="text" ng-model="newLocation.postalCode" ng-pattern="/(^\d{2,3}-\d{2,3}$)/" required min="1"  /> </div>
+                    <div class=" form-group">  <input class="form-control" placeholder="Enter city" type="text" ng-model="newLocation.city" required min="3" />  </div>
+                    <div class=" form-group">  <input class="form-control" placeholder="Enter location name" type="text" ng-model="newLocation.name" required min="3" />  </div>                 
+                </div>
+
+                <button class="btn btn-success " ng-disabled="!newLocation" >Dodaj</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 class="sub-header">Lista Lokalizacji</h2>
+        <div>
+            <table id="mytable" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1 col-md-1 col-lg-1">#id</th>
+                        <th class="col-sm-3 col-md-3 col-lg-3">Adres</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">City</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Postal Code</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Name</th>
+                        <th class="col-sm-1 col-md-1 col-lg-1">Edit</th>
+                        <th class="col-sm-1 col-md-1 col-lg-1">Delete</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="location in locations">
+                    <tr>
+                        <td class="col-sm-1 col-md-1 col-lg-1">{{location.id}}</td>
+                        <td class="col-sm-3 col-md-3 col-lg-3">{{location.address}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{location.city}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{location.postalCode}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{location.name}}</td>
+
+                        <td class="col-sm-1 col-md-1 col-lg-1"><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="selectLocation(location)" data-toggle="modal" data-target="#edit" >
+                                    <span class="glyphicon glyphicon-pencil"></span></button></p>
+                        </td>
+
+                        <td class="col-sm-1 col-md-1 col-lg-1"><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="selectLocation(location)" data-toggle="modal" data-target="#delete" >
+                                    <span class="glyphicon glyphicon-trash"></span></button></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title custom_align" id="Heading1">Edit Your Detail</h4>
+                </div>
+                <div class="modal-body" ng-model="selectedLocation">
+                    <div class="form-group">
+                        <input class="form-control " ng-model="selectedLocation.id" type="text">
+                    </div>
+                    <div class="form-group">
+
+                        <input class="form-control " ng-model="selectedLocation.address" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control " ng-model="selectedLocation.city" type="text">
+                    </div>
+                    <div class="form-group" >
+                        <input class="form-control " ng-model="selectedLocation.postalCode"  type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control " ng-model="selectedLocation.name" type="text">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateLocation(selectedLocation)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                </div> 
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+    </div>
+
+
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" ng-model="selectedLocation">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success"  ng-click="deleteLocation(selectedLocation)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    <div class="form-group">
+
+                        <input class="form-control " ng-model="selectedLocation.address" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content --> 
+    </div>
+</div>
+

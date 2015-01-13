@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 
 public class Parcel {
     private int id;
-    
+    PackageOption packageType;
+    PackageWeight packageWeight;
     
 }

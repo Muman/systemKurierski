@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.pgs.mapcreator">
+	<logger name="com.muciek.systemkurierski">
 		<level value="info" />
 	</logger>
 	

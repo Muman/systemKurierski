@@ -16,17 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Muman
  */
 @Controller
-@RequestMapping({"/","/content"})
+@RequestMapping({"/"})
 public class HomeController {
-	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public ModelAndView welcomePage() {
 
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "This is welcome page!");
-		model.setViewName("index");
+		model.setViewName("guest/index");
 		return model;
-
 	}
 
 	@RequestMapping(value = "/admin**", method = RequestMethod.GET)
@@ -36,20 +35,7 @@ public class HomeController {
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "This is admin page!");
 		
-		model.setViewName("admin");
-
-		return model;
-
-	}
-	
-	@RequestMapping(value = "/adminprofile**", method = RequestMethod.GET)
-	public ModelAndView adminProfile() {
-
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Hello World");
-		model.addObject("message", "This is admin profile page!");
-		
-		model.setViewName("adminprofile");
+		model.setViewName("admin/index");
 
 		return model;
 
@@ -61,11 +47,8 @@ public class HomeController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "This is guest  page!");
-		
-		model.setViewName("guest");
-
+		model.setViewName("guest/index");
 		return model;
-
 	}
 	
 	@RequestMapping(value = "/user**", method = RequestMethod.GET)
@@ -75,7 +58,7 @@ public class HomeController {
 		model.addObject("title", "Spring Security Hello World");
 		model.addObject("message", "This is user  page!");
 		
-		model.setViewName("user");
+		model.setViewName("user/index");
 		return model;
 	}
 }

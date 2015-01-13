@@ -17,15 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
-	
 	@RequestMapping(value = "/login**", method = RequestMethod.GET)
 	public ModelAndView dologin() {
-
 		ModelAndView model = new ModelAndView();
-		
 		model.setViewName("login");
 		return model;
-
 	}
 
 }

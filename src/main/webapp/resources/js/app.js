@@ -9,14 +9,19 @@
  
 var AngularSpringApp = {};
  
-var App = angular.module('AngularSpringApp', ['ngRoute']);
+var App = angular.module('App', ['ngRoute','phonecatControllers']);
  
 // Declare app level module which depends on filters, and services
  
 App.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/courier', {
-        templateUrl: '/couriers.html',
+        templateUrl: 'courier/layout',
         controller: 'CourierController'
-    });
+    }).when('/location', {
+        templateUrl: 'location/layout',
+        controller: 'LocationController'
+    }).when('/packageOption', {
+        templateUrl: 'packageOption/layout',
+        controller: 'PackageOptionController'
+    }).otherwise({redirectTo: '/courier'});
 }]);
- 

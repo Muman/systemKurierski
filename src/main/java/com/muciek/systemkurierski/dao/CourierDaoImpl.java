@@ -25,7 +25,7 @@ public class CourierDaoImpl implements CourierDao{
     
     @Override
     public void addCourier(Courier courier) {
-        getSessionFactory().getCurrentSession().persist(courier);
+        getSessionFactory().getCurrentSession().save(courier);
     }
 
     @Override
