@@ -31,4 +31,8 @@ public class UserViewController {
         return "user/partials/locations";
     }
     
+    @RequestMapping("/profile")
+    public String profile(){
+        return "user/partials/profile";
+    }   
 }

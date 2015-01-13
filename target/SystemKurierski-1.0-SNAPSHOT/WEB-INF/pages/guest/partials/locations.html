@@ -1,0 +1,62 @@
+<div id="container">
+    <div class="row">
+        <h2 class="sub-header">Lista Lokalizacji</h2>
+        <div>
+            <table id="mytable" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1 col-md-1 col-lg-1">#id</th>
+                        <th class="col-sm-3 col-md-3 col-lg-3">Adres</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">City</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Postal Code</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Name</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="location in locations">
+                    <tr>
+                        <td class="col-sm-1 col-md-1 col-lg-1">{{location.id}}</td>
+                        <td class="col-sm-3 col-md-3 col-lg-3">{{location.address}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{location.city}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{location.postalCode}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{location.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title custom_align" id="Heading1">Edit Your Detail</h4>
+                </div>
+                <div class="modal-body" ng-model="selectedLocation">
+                    <div class="form-group">
+                        <input class="form-control " ng-model="selectedLocation.id" type="text">
+                    </div>
+                    <div class="form-group">
+
+                        <input class="form-control " ng-model="selectedLocation.address" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control " ng-model="selectedLocation.city" type="text">
+                    </div>
+                    <div class="form-group" >
+                        <input class="form-control " ng-model="selectedLocation.postalCode"  type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control " ng-model="selectedLocation.name" type="text">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateLocation(selectedLocation)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                </div> 
+            </div>
+            <!-- /.modal-content --> 
+        </div>
+        <!-- /.modal-dialog --> 
+    </div>
+</div>
+

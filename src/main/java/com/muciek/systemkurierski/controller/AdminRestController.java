@@ -7,6 +7,7 @@ package com.muciek.systemkurierski.controller;
 
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.Location;
+import com.muciek.systemkurierski.models.PackageOption;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
@@ -126,5 +127,36 @@ public class AdminRestController {
     void deleteLocation(@RequestBody Location locationToDelete) {
         System.out.print(locationToDelete.getAddress());
         getLocationService().deleteLocation(locationToDelete);
+    }
+    
+    @RequestMapping(value = "/packageOption", method = RequestMethod.GET)
+    public @ResponseBody
+    List<PackageOption> getAllPackageOptions() {
+        return getPackageOptionService().getAllPackageOptions();
+    }
+
+    @RequestMapping(value = "/packageOption", method = RequestMethod.POST)
+    public @ResponseBody
+    void addPackageOption(@RequestBody PackageOption newPackageOption) {
+        getPackageOptionService().addPackageOption(newPackageOption);
+    }
+    
+    @RequestMapping(value = "/packageOption", method = RequestMethod.DELETE)
+    public @ResponseBody
+    void deletePackageOption(@RequestBody PackageOption packageOption) {
+        getPackageOptionService().deletePackageOption(packageOption);
+    }    
+
+    @RequestMapping(value = "/packageOption", method = RequestMethod.PUT)
+    public @ResponseBody
+    void updatePackageOption(@RequestBody PackageOption packageOption) {
+        getPackageOptionService().updatePackageOption(packageOption);
+    }    
+
+    @RequestMapping(value = "/packageOption/{id}")
+    public @ResponseBody
+    PackageOption getPackageOptionById(@PathVariable("id") String id) {
+        PackageOption packageOption = getPackageOptionService().getPackageOptionById(Integer.valueOf(id));
+        return packageOption;
     }
 }
