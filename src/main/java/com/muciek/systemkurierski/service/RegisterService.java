@@ -5,6 +5,7 @@
  */
 package com.muciek.systemkurierski.service;
 
+import com.muciek.systemkurierski.models.NewUserWrapper;
 import com.muciek.systemkurierski.models.User;
 
 /**
@@ -12,5 +13,5 @@ import com.muciek.systemkurierski.models.User;
  * @author Muman
  */
 public interface RegisterService {
-    public void register(User user);
+    public void register(NewUserWrapper newUserWrapper);
 }

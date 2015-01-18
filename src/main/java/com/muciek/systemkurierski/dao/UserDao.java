@@ -6,11 +6,22 @@
 package com.muciek.systemkurierski.dao;
 
 import com.muciek.systemkurierski.models.User;
+import java.util.List;
 
 /**
  *
  * @author Muman
  */
 public interface UserDao {
-    User findByUserName(String username);
+    public User findByUserName(String username);
+    
+    public void addUser(User newUser);
+    
+    public List<User> getAllUsers();
+    
+    public List<User> getAllActiveUsers();
+    
+    public void deleteUser(User user);
+
+    public void updateUser(User user);
 }

@@ -21,49 +21,63 @@ import javax.persistence.UniqueConstraint;
  * @author Muman
  */
 @Entity
-@Table(name = "user_roles", uniqueConstraints = @UniqueConstraint( columnNames = {"role", "username"}))
+@Table(name = "user_roles", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "username"}))
 public class UserRole {
 
-	private Integer userRoleId;
-	private User user;
-	public String role;
+    private Integer userRoleId;
+    private User user;
+    public String role;
 
-	public UserRole() {
-	}
+    public enum USER_ROLE {
 
-	public UserRole(User user, String role) {
-		this.user = user;
-		this.role = role;
-	}
+        ROLE_ADMIN("ROLE_ADMIN"), ROLE_USER("ROLE_USER"), ROLE_GUEST("ROLE_GUEST");
+        private final String text;
 
-        @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(name = "user_role_id", unique = true, nullable = false)
-	public Integer getUserRoleId() {
-		return this.userRoleId;
-	}
+        private USER_ROLE(final String text) {
+            this.text = text;
+        }
 
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
-	}
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "username", nullable = false)
-	public User getUser() {
-		return this.user;
-	}
+    public UserRole() {
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public UserRole(User user, String role) {
+        this.user = user;
+        this.role = role;
+    }
 
-        @Column(name = "role", nullable = false, length = 45)
-	public String getRole() {
-		return this.role;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "user_role_id", unique = true, nullable = false)
+    public Integer getUserRoleId() {
+        return this.userRoleId;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setUserRoleId(Integer userRoleId) {
+        this.userRoleId = userRoleId;
+    }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "username", nullable = false)
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Column(name = "role", nullable = false, length = 45)
+    public String getRole() {
+        return this.role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

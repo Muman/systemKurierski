@@ -15,24 +15,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminViewController {
-    
+
     @RequestMapping("/")
-    public String getAdminView(){
+    public String getAdminView() {
         return "admin/index";
     }
-    
+
     @RequestMapping("/locations")
-    public String getLocationsView(){
+    public String getLocationsView() {
         return "admin/partials/locations";
     }
-    
+
     @RequestMapping("/packageOptions")
-    public String getPackageOptionsView(){
+    public String getPackageOptionsView() {
         return "admin/partials/packageOptions";
-    } 
-    
+    }
+
     @RequestMapping("/couriers")
-    public String getCouriersView(){
+    public String getCouriersView() {
         return "admin/partials/couriers";
-    }      
+    }
+
+    @RequestMapping("/users")
+    public String getUsersView() {
+        return "admin/partials/users";
+    }
 }

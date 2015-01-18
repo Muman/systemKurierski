@@ -148,3 +148,58 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
 
         $scope.getAllPackageOptions();
     }]);
+
+
+AdminControllers.controller('AdminUserController', ['$scope', '$http', function ($scope, $http) {
+
+        $scope.selectUser = function () {
+            $scope.selectedUser = this.user;
+            console.log($scope.selectedUser);
+        };
+
+        $scope.getAllUsers = function () {
+
+            $http.get('user/').success(function (response) {
+                $scope.users = response;
+                console.log(response);
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+
+        $scope.addUser = function (newUser) {
+            
+//            var newUserWrapper = {};
+//            newUserWrapper.user = newUser;
+//            newUserWrapper.userInfo = newUserInfo;
+//            
+            newUser.enabled = true;
+            newUser.userInfo.company = false;
+            
+            console.log(newUser);
+            
+            $http.post('user/', newUser).success(function (response) {
+                $scope.getAllUsers();
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+        
+        $scope.updateUser = function (user) {
+            $http.put('user/', user).success(function (response) {
+                $scope.getAllUsers()();
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+        
+        $scope.deleteUser = function (user) {
+            $http.delete('user/', user).success(function (response) {
+                $scope.getAllUsers()();
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+
+        $scope.getAllUsers();
+    }]);

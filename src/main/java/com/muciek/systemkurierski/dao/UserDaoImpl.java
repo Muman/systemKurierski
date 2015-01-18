@@ -9,6 +9,7 @@ import com.muciek.systemkurierski.models.User;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,31 +17,58 @@ import org.springframework.stereotype.Repository;
  * @author Muman
  */
 @Repository
-public class UserDaoImpl implements UserDao{
-    	private SessionFactory sessionFactory;
+public class UserDaoImpl implements UserDao {
 
-        @Override
-        @SuppressWarnings("unchecked")
-	public User findByUserName(String username) {
+    @Autowired
+    private SessionFactory sessionFactory;
 
-		List<User> users = new ArrayList<>();
+    @Override
+    @SuppressWarnings("unchecked")
+    public User findByUserName(String username) {
 
-		users = getSessionFactory().getCurrentSession().createQuery("from User where username=?")
-				.setParameter(0, username).list();
+        List<User> users = new ArrayList<>();
 
-		if (users.size() > 0) {
-			return users.get(0);
-		} else {
-			return null;
-		}
+        users = getSessionFactory().getCurrentSession().createQuery("from User where username=?")
+                .setParameter(0, username).list();
 
-	}
+        if (users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
+    public void addUser(User newUser) {
+        getSessionFactory().getCurrentSession().save(newUser);
+    }
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        List list = getSessionFactory().getCurrentSession().createQuery("from User").list();
+        return list;
+    }
+
+    @Override
+    public List<User> getAllActiveUsers() { //todo
+        List list = getSessionFactory().getCurrentSession().createQuery("from User where enabled = true").list();
+        return list;
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        getSessionFactory().getCurrentSession().delete(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        getSessionFactory().getCurrentSession().update(user);
+    }
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://getbootstrap.com/examples/signin/ -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Zaloguj się</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <script src="resources/js/ie-emulation-modes-warning.js"></script><style type="text/css"></style>
+  <style type="text/css">.fancybox-margin{margin-right:0px;}</style></head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" action="j_spring_security_check" method="POST">
+        <h2 class="form-signin-heading">Zaloguj sie</h2>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="text" id="inputEmail" class="form-control" name="j_username" placeholder="Email" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Haslo</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Haslo" required="" name="j_password">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Zapamietaj mnie
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" >Zaloguj sie</button>
+      </form>
+        
+        <div class="row">
+            <p>Nie masz konta? <a href="/register">Zostan klientem KurierX!</a></p>
+        </div>
+
+    </div>
+  
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="resources/js/ie10-viewport-bug-workaround.js"></script>
+</body></html>

@@ -1,0 +1,174 @@
+body {
+  background-color: #fff;
+  background-image: url(../img/racingFlag.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid #ccc;
+}
+.panel-default {
+  border-color: #aaa;
+}
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+border-color: #f0ad4e;
+color: #fff;
+background-color: #f0ad4e;
+}
+
+.panel-yellow a {
+color: #f0ad4e;
+}
+
+.panel-blue {
+border-color: #428bca;
+}
+
+.panel-blue .panel-heading {
+border-color: #428bca;
+color: #fff;
+background-color: #428bca;
+}
+
+.panel-blue a {
+color: #428bca;
+}
+
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+	background-color: #a5f09a;
+}	
+
+#progress-bar {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.banner-preview {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border: 2px solid #ccc;
+	-webkit-border-radius: 5px;
+}
+
+.banner-preview-modal {
+	margin-right: 10px;
+	display: inline;
+	line-height: 6;
+}
+
+.banner-preview-modal img {
+	border: 2px solid #ccc;
+	-webkit-border-radius: 5px;
+	max-width: 70px;
+	cursor: pointer;
+}
+
+.banner-preview-header {
+	background-color: #ccc;
+}
+
+.banner-preview-header .remove-icon {
+	padding: 5px;
+	cursor: pointer;
+}
+
+.banner {
+	max-height: 230px;
+	padding: 5px;
+}
+
+#modal-select-image {
+	width: 70%;
+	height: 200px;
+	overflow-y: auto;
+	float: left;
+	list-style: none;
+}
+
+#modal-upload-image {
+	width: 30%;
+	height: 200px;
+	overflow-y: auto;
+	padding-left: 30px;
+	text-align: center;
+}
+
+#banner-gallery {
+	margin-top: 10px;
+}
+
+#select-image-button {
+	margin-top: 10px;
+}
+
+/* Effects that can be used below, are presented on this site: http://daneden.github.io/animate.css/  */
+
+.alert-frame.ng-enter {
+	-webkit-animation: fadeIn 1s;
+	-moz-animation: fadeIn 1s;
+	-ms-animation: fadeIn 1s;
+	animation: fadeIn 1s;
+}
+
+.alert-frame.ng-leave {
+	-webkit-animation: fadeOut 1s;
+	-moz-animation: fadeOut 1s;
+	-ms-animation: fadeOut 1s;
+	animation: fadeOut 1s;
+}
+
+.aspect-ratio-options {
+	float: left;
+	text-align: center;
+}
+
+.crop-preview {
+    float: left;
+    margin-top: 15px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.crop-preview-none {
+	display: none !important;
+}
+
+.crop-preview:hover {
+    border-color: #ccf;
+    box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.crop-preview img {
+    width: 100%;
+}
+
+.aspect-ratio-settings select {
+	margin-top: 10px;
+	margin-right: 10px;
+	float: left;
+}

@@ -56,9 +56,5 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
         
-        <bean id="courierController" class="com.muciek.systemkurierski.controller.CourierController">
-            <property name="courierService" ref="courierService"></property>
-        </bean>
-        
         <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

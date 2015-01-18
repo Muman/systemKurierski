@@ -6,10 +6,15 @@
 package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.dao.UserDao;
+import com.muciek.systemkurierski.dao.UserInfoDao;
 import com.muciek.systemkurierski.dao.UserRoleDAO;
+import com.muciek.systemkurierski.models.NewUserWrapper;
 import com.muciek.systemkurierski.models.User;
+import com.muciek.systemkurierski.models.UserInfo;
+import com.muciek.systemkurierski.models.UserRole;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,7 +30,18 @@ public class RegisterServiceImpl implements RegisterService{
     
     @Autowired  
     private UserDao userDao;
+    
+    @Autowired
+    private UserInfoDao userInfoDao;
 
+    public UserInfoDao getUserInfoDao() {
+        return userInfoDao;
+    }
+
+    public void setUserInfoDao(UserInfoDao userInfoDao) {
+        this.userInfoDao = userInfoDao;
+    }
+    
     public UserRoleDAO getUserRoleDAO() {
         return userRoleDAO;
     }
@@ -41,12 +57,26 @@ public class RegisterServiceImpl implements RegisterService{
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-    
+
     @Override
-    public void register(User user) {
-       //check if username is not used
+    public void register(NewUserWrapper newUserWrapper) {
         
-       //check if email is not already used
+        //create new UserInfo object
+        UserInfo userInfo = newUserWrapper.getUserInfo();
+        
+        //save user Info
+        getUserInfoDao().addUserInfo(userInfo);
+        
+        //create newUser object
+        User newUser = newUserWrapper.getUser();
+        String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
+        newUser.setPassword(hashedPassword);
+        newUser.setUserInfo(userInfo);
+        getUserDao().addUser(newUser);
+        
+                //create userRole
+        UserRole userRole = new UserRole(newUser, UserRole.USER_ROLE.ROLE_USER.toString());
+        getUserRoleDAO().addUserRole(userRole);
+        
     }
-    
 }
