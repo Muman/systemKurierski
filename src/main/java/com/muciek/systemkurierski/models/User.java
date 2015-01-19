@@ -31,25 +31,12 @@ public class User {
 
     @JsonIgnore
     private Set<UserRole> userRole = new HashSet<>(0);
+    
+    @JsonIgnore
+    private Set<Shipment> shipment = new HashSet<>();
+
     private UserInfo userInfo;
-
-    public User() {
-    }
-
-    public User(String username, String password, boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-    }
-
-    public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.userRole = userRole;
-    }
-
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    
     @OneToOne
     @JoinColumn(name = "USER_INFO_ID")
     public UserInfo getUserInfo() {
@@ -96,5 +83,14 @@ public class User {
 
     public void setUserRole(Set<UserRole> userRole) {
         this.userRole = userRole;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public Set<Shipment> getShipment() {
+        return shipment;
+    }
+
+    public void setShipment(Set<Shipment> shipment) {
+        this.shipment = shipment;
     }
 }

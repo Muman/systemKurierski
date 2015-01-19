@@ -8,6 +8,7 @@ package com.muciek.systemkurierski.service;
 import com.muciek.systemkurierski.dao.LocationDao;
 import com.muciek.systemkurierski.models.Location;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Muman
  */
 @Service
+@Transactional
 public class LocationServiceImpl implements LocationService{
 
     @Autowired
@@ -31,27 +33,27 @@ public class LocationServiceImpl implements LocationService{
     
     @Override
     public void addLocation(Location location) {
-        getLocationDao().addLocation(location);
+        getLocationDao().add(location);
     }
 
     @Override
     public void deleteLocation(Location location) {
-        getLocationDao().deleteLocation(location);
+        getLocationDao().delete(location);
     }
 
     @Override
     public void updateLocation(Location location) {
-        getLocationDao().updateLocation(location);
+        getLocationDao().update(location);
     }
 
     @Override
     public Location getLocationById(int id) {
-        return getLocationDao().getLocationById(id);
+        return getLocationDao().getById(id);
     }
 
     @Override
     public List<Location> getAllLocations() {
-       return getLocationDao().getAllLocations();
+       return getLocationDao().getAll();
     }
     
 }

@@ -13,13 +13,13 @@ import java.util.List;
  * @author Muman
  */
 public interface CourierDao {
-    public void addCourier(Courier courier);
+    public void add(Courier courier);
 
-    public void deleteCourier(Courier courier);
+    public void delete(Courier courier);
 
-    public void updateCourier(Courier courier);
+    public void update(Courier courier);
 
-    public Courier getCourierById(int id);
+    public Courier getById(int id);
     
-    public List<Courier> getAllCouriers();
+    public List<Courier> getAll();
 }

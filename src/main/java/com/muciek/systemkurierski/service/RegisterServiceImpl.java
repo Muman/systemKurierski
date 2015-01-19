@@ -65,7 +65,7 @@ public class RegisterServiceImpl implements RegisterService{
         UserInfo userInfo = newUserWrapper.getUserInfo();
         
         //save user Info
-        getUserInfoDao().addUserInfo(userInfo);
+        getUserInfoDao().add(userInfo);
         
         //create newUser object
         User newUser = newUserWrapper.getUser();
@@ -76,7 +76,7 @@ public class RegisterServiceImpl implements RegisterService{
         
                 //create userRole
         UserRole userRole = new UserRole(newUser, UserRole.USER_ROLE.ROLE_USER.toString());
-        getUserRoleDAO().addUserRole(userRole);
+        getUserRoleDAO().add(userRole);
         
     }
 }

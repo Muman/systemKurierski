@@ -5,7 +5,6 @@
  */
 package com.muciek.systemkurierski.controller;
 
-import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.PackageOption;
 import com.muciek.systemkurierski.service.PackageOptionService;
 import java.util.List;

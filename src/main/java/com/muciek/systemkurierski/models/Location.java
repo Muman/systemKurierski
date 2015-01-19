@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,18 +26,22 @@ public class Location {
     private String postalCode;
     private String city;
     private String name;
+    private PackageStatus packageStatus;
+    
 
     public Location() {
     }
 
-    public Location(int id, String address, String postalCode, String city,String name) {
-        this.id = id;
-        this.address = address;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.name = name;
+    @OneToOne(mappedBy = "location")
+    public PackageStatus getPackageStatus() {
+        return packageStatus;
     }
 
+    public void setPackageStatus(PackageStatus packageStatus) {
+        this.packageStatus = packageStatus;
+    }
+
+    @Column(name = "name",nullable = false,unique = true)
     public String getName() {
         return name;
     }
@@ -45,7 +50,6 @@ public class Location {
         this.name = name;
     }
 
-    
     @Column(name="postal_code",nullable = false, unique = false,length = 10)
     public String getPostalCode() {
         return postalCode;

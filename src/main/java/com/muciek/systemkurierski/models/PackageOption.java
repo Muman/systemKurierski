@@ -34,6 +34,7 @@ public class PackageOption {
     public PackageOption() {
     }
 
+    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }

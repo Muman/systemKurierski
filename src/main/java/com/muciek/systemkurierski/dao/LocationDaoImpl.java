@@ -32,29 +32,29 @@ public class LocationDaoImpl implements LocationDao{
     }
 
     @Override
-    public void addLocation(Location location) {
+    public void add(Location location) {
             getSessionFactory().getCurrentSession().save(location);
     }
 
     @Override
-    public void deleteLocation(Location location) {
+    public void delete(Location location) {
                getSessionFactory().getCurrentSession().delete(location);
     }
 
     @Override
-    public void updateLocation(Location location) {
+    public void update(Location location) {
          getSessionFactory().getCurrentSession().update(location);
     }
 
     @Override
-    public Location getLocationById(int id) {
+    public Location getById(int id) {
         Location location = null;
         location = (Location)sessionFactory.getCurrentSession().get(Location.class, id);
         return location;   
     }
 
     @Override
-    public List<Location> getAllLocations() {
+    public List<Location> getAll() {
         List list = getSessionFactory().getCurrentSession().createQuery("from Location").list();
         return list;
     }

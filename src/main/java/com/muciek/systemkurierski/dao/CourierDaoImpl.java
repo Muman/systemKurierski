@@ -24,29 +24,29 @@ public class CourierDaoImpl implements CourierDao{
     private SessionFactory sessionFactory;
     
     @Override
-    public void addCourier(Courier courier) {
+    public void add(Courier courier) {
         getSessionFactory().getCurrentSession().save(courier);
     }
 
     @Override
-    public void deleteCourier(Courier courier) {
+    public void delete(Courier courier) {
         getSessionFactory().getCurrentSession().delete(courier);
     }
 
     @Override
-    public void updateCourier(Courier courier) {
+    public void update(Courier courier) {
         getSessionFactory().getCurrentSession().update(courier);
     }
 
     @Override
-    public Courier getCourierById(int id) {
+    public Courier getById(int id) {
         Courier courier = null;
         courier = (Courier)sessionFactory.getCurrentSession().get(Courier.class, id);
         return courier;   
     }
 
     @Override
-    public List<Courier> getAllCouriers() {
+    public List<Courier> getAll() {
         List list = getSessionFactory().getCurrentSession().createQuery("from Courier").list();
         return list;
     }

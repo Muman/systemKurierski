@@ -8,6 +8,7 @@ package com.muciek.systemkurierski.service;
 import com.muciek.systemkurierski.dao.CourierDao;
 import com.muciek.systemkurierski.models.Courier;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Muman
  */
 @Service
+@Transactional
 public class CourierServiceImpl implements CourierService{
     
     @Autowired
@@ -37,27 +39,27 @@ public class CourierServiceImpl implements CourierService{
 
     @Override
     public void addCourier(Courier courier) {
-        getCourierDao().addCourier(courier);
+        getCourierDao().add(courier);
     }
 
     @Override
     public void deleteCourier(Courier courier) {
-        getCourierDao().deleteCourier(courier);
+        getCourierDao().delete(courier);
     }
 
     @Override
     public void updateCourier(Courier courier) {
-        getCourierDao().updateCourier(courier);
+        getCourierDao().update(courier);
     }
 
     @Override
     public Courier getCourierById(int id) {
-        return getCourierDao().getCourierById(id);
+        return getCourierDao().getById(id);
     }
 
     @Override
     public List<Courier> getAllCouriers() {
-        List<Courier> allCouriers = getCourierDao().getAllCouriers();
+        List<Courier> allCouriers = getCourierDao().getAll();
         
         return allCouriers;
     }

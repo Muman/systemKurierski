@@ -8,16 +8,12 @@ package com.muciek.systemkurierski.controller;
 import com.muciek.systemkurierski.exception.EmailAlreadyInUseException;
 import com.muciek.systemkurierski.exception.UsernameAlreadyInUseException;
 import com.muciek.systemkurierski.models.NewUserWrapper;
-import com.muciek.systemkurierski.models.User;
-import com.muciek.systemkurierski.models.UserInfo;
 import com.muciek.systemkurierski.service.RegisterService;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**

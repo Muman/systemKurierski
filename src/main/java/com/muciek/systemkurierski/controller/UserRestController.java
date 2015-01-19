@@ -7,12 +7,15 @@ package com.muciek.systemkurierski.controller;
 
 import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.PackageOption;
+import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
+import com.muciek.systemkurierski.service.ShipmentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +37,18 @@ public class UserRestController {
 
     @Autowired
     PackageOptionService packageOptionService;
+    
+    @Autowired
+    ShipmentService shipmentService;
 
+    public ShipmentService getShipmentService() {
+        return shipmentService;
+    }
+
+    public void setShipmentService(ShipmentService shipmentService) {
+        this.shipmentService = shipmentService;
+    }
+    
     public CourierService getCourierService() {
         return courierService;
     }
@@ -84,5 +98,10 @@ public class UserRestController {
         PackageOption packageOption = getPackageOptionService().getPackageOptionById(Integer.valueOf(id));
         return packageOption;
     }
-
+    
+    @RequestMapping(value = "/newPackage", method = RequestMethod.POST)
+    public @ResponseBody
+    void registerShipment(@RequestBody Shipment shipment) {
+        getShipmentService().add(shipment);
+    }
 }

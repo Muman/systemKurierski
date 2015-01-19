@@ -8,6 +8,7 @@ package com.muciek.systemkurierski.service;
 import com.muciek.systemkurierski.dao.UserInfoDao;
 import com.muciek.systemkurierski.models.UserInfo;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Muman
  */
 @Service
+@Transactional
 public class UserInfoServiceImpl implements UserInfoService{
 
     @Autowired
@@ -31,26 +33,26 @@ public class UserInfoServiceImpl implements UserInfoService{
     
     @Override
     public void addUserInfo(UserInfo userInfo) {
-        getUserInfoDao().addUserInfo(userInfo);
+        getUserInfoDao().add(userInfo);
     }
 
     @Override
     public void deleteUserInfo(UserInfo userInfo) {
-        getUserInfoDao().deleteUserInfo(userInfo);
+        getUserInfoDao().delete(userInfo);
     }
 
     @Override
     public void updateUserInfo(UserInfo userInfo) {
-        getUserInfoDao().updateUserInfo(userInfo);
+        getUserInfoDao().update(userInfo);
     }
 
     @Override
     public UserInfo getUserInfoById(int id) {
-        return getUserInfoDao().getUserInfoById(id);
+        return getUserInfoDao().getById(id);
     }
 
     @Override
     public List<UserInfo> getAllUserInfos() {
-        return getUserInfoDao().getAllUserInfos();
+        return getUserInfoDao().getAll();
     }
 }

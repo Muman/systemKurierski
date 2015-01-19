@@ -5,21 +5,21 @@
  */
 package com.muciek.systemkurierski.dao;
 
-import com.muciek.systemkurierski.models.UserInfo;
+import com.muciek.systemkurierski.models.Shipment;
 import java.util.List;
 
 /**
  *
  * @author Muman
  */
-public interface UserInfoDao {
-    public void add(UserInfo userInfo);
+public interface ShipmentDao {
+    public void add(Shipment shipment);
 
-    public void delete(UserInfo userInfo);
+    public void delete(Shipment shipment);
 
-    public void update(UserInfo userInfo);
+    public void update(Shipment shipment);
 
-    public UserInfo getById(int id);
+    public Shipment getById(int id);
 
-    public List<UserInfo> getAll();
+    public List<Shipment> getAll();
 }

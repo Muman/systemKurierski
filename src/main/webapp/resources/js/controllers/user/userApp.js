@@ -21,5 +21,8 @@ UserApp.config(['$routeProvider', function($routeProvider){
     }).when('/packageOption', {
         templateUrl: 'packageOptions',
         controller: 'UserPackageOptionController'
+    }).when('/newPackage',{
+        templateUrl: 'newPackage',
+        controller: 'UserNewPackageController'
     }).otherwise({redirectTo: '/location'});
 }]);

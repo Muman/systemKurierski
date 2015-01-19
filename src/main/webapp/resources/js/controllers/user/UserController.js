@@ -41,6 +41,36 @@ UserControllers.controller('UserPackageOptionController', ['$scope', '$http', fu
                 console.log('so sad');
             })
         };
-        
+
+        $scope.getAllPackageOptions();
+    }]);
+
+UserControllers.controller('UserNewPackageController', ['$scope', '$http', function ($scope, $http) {
+
+        $scope.selectPackageOption = function (packageOption) {
+            $scope.selectedPackageOption = packageOption;
+            console.log($scope.selectedPackageOption);
+        };
+
+        $scope.getAllPackageOptions = function () {
+
+            $http.get('packageOption/').success(function (response) {
+                $scope.packageOptions = response;
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+
+        $scope.registerNewPackage = function (newPackage) {
+
+            console.log(newPackage);
+            
+            $http.post('newPackage/',newPackage).success(function (response) {
+                $scope.packageOptions = response;
+            }).error(function () {
+                console.log('so sad');
+            })
+        }
+
         $scope.getAllPackageOptions();
     }]);

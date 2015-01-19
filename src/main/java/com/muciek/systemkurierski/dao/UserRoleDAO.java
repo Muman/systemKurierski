@@ -29,24 +29,24 @@ public class UserRoleDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public void addUserRole(UserRole userRole) {
+    public void add(UserRole userRole) {
         getSessionFactory().getCurrentSession().save(userRole);
     }
 
-    public void deleteUserRole(UserRole userRole) {
+    public void delete(UserRole userRole) {
         getSessionFactory().getCurrentSession().delete(userRole);
     }
 
-    public void updateUserRole(UserRole userRole) {
+    public void update(UserRole userRole) {
         getSessionFactory().getCurrentSession().update(userRole);
     }
 
-    public UserRole getUserRoleById(int id) {
+    public UserRole getById(int id) {
         UserRole userRole = (UserRole) sessionFactory.getCurrentSession().get(UserRole.class, id);
         return userRole;
     }
 
-    public List<UserRole> getAllUserRoles() {
+    public List<UserRole> getAll() {
         List list = getSessionFactory().getCurrentSession().createQuery("from UserRole").list();
         return list;
     }

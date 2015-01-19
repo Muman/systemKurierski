@@ -14,13 +14,13 @@ import java.util.List;
  */
 public interface PackageOptionDao {
 
-    public void addPackageOption(PackageOption packageOption);
+    public void add(PackageOption packageOption);
 
-    public void deletePackageOption(PackageOption packageOption);
+    public void delete(PackageOption packageOption);
 
-    public void updatePackageOption(PackageOption packageOption);
+    public void update(PackageOption packageOption);
 
-    public PackageOption getPackageOptionById(int id);
+    public PackageOption getById(int id);
 
-    public List<PackageOption> getAllPackageOptions();
+    public List<PackageOption> getAll();
 }

@@ -13,13 +13,13 @@ import java.util.List;
  * @author Muman
  */
 public interface LocationDao {
-    public void addLocation(Location location);
+    public void add(Location location);
 
-    public void deleteLocation(Location location);
+    public void delete(Location location);
 
-    public void updateLocation(Location location);
+    public void update(Location location);
 
-    public Location getLocationById(int id);
+    public Location getById(int id);
 
-    public List<Location> getAllLocations();
+    public List<Location> getAll();
 }

@@ -34,5 +34,10 @@ public class UserViewController {
     @RequestMapping("/profile")
     public String profile(){
         return "user/partials/profile";
-    }   
+    }
+    
+    @RequestMapping("/newPackage")
+    public String newPackage(){
+        return "user/partials/newPackage";
+    } 
 }

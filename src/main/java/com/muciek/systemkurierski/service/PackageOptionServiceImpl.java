@@ -33,27 +33,27 @@ public class PackageOptionServiceImpl implements PackageOptionService {
 
     @Override
     public void addPackageOption(PackageOption packageOption) {
-        getPackageOptionDao().addPackageOption(packageOption);
+        getPackageOptionDao().add(packageOption);
     }
 
     @Override
     public void deletePackageOption(PackageOption packageOption) {
-        getPackageOptionDao().deletePackageOption(packageOption);
+        getPackageOptionDao().delete(packageOption);
     }
 
     @Override
     public void updatePackageOption(PackageOption packageOption) {
-        getPackageOptionDao().updatePackageOption(packageOption);
+        getPackageOptionDao().update(packageOption);
     }
 
     @Override
     public PackageOption getPackageOptionById(int id) {
-        return getPackageOptionDao().getPackageOptionById(id);
+        return getPackageOptionDao().getById(id);
     }
 
     @Override
     public List<PackageOption> getAllPackageOptions() {
-        return getPackageOptionDao().getAllPackageOptions();
+        return getPackageOptionDao().getAll();
     }
 
 }

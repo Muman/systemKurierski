@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
  * @author Muman
  */
 @Repository
-public class PackageOptionDaoImpl implements PackageOptionDao{
-    
+public class PackageOptionDaoImpl implements PackageOptionDao {
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -28,30 +28,33 @@ public class PackageOptionDaoImpl implements PackageOptionDao{
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
-    public void addPackageOption(PackageOption packageOption) {
+    public void add(PackageOption packageOption) {
         getSessionFactory().getCurrentSession().save(packageOption);
     }
 
     @Override
-    public void deletePackageOption(PackageOption packageOption) {
+    public void delete(PackageOption packageOption) {
         getSessionFactory().getCurrentSession().delete(packageOption);
     }
 
     @Override
-    public void updatePackageOption(PackageOption packageOption) {
+    public void update(PackageOption packageOption) {
         getSessionFactory().getCurrentSession().update(packageOption);
     }
 
     @Override
-    public PackageOption getPackageOptionById(int id) {
-        PackageOption packageOption = (PackageOption)sessionFactory.getCurrentSession().get(PackageOption.class, id);
-        return packageOption;   
+    public PackageOption getById(int id) {
+        PackageOption packageOption = (PackageOption) sessionFactory.
+                getCurrentSession().get(PackageOption.class, id);
+        return packageOption;
     }
 
     @Override
-    public List<PackageOption> getAllPackageOptions() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from PackageOption").list();
+    public List<PackageOption> getAll() {
+        List list = getSessionFactory().getCurrentSession().
+                createQuery("from PackageOption").list();
         return list;
     }
 }

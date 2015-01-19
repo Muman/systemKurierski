@@ -33,8 +33,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRoleDAO userRoleDAO;
     
-    
-
     public UserDao getUserDao() {
         return userDao;
     }
@@ -56,7 +54,7 @@ public class UserServiceImpl implements UserService {
         getUserDao().addUser(newUser);
         
         UserRole userRole = new UserRole(newUser, UserRole.USER_ROLE.ROLE_USER.toString());
-        getUserRoleDAO().addUserRole(userRole);
+        getUserRoleDAO().add(userRole);
     }
 
     @Override
@@ -77,7 +75,7 @@ public class UserServiceImpl implements UserService {
         
         //todo update user role
 //        UserRole userRole = new UserRole(newUser, UserRole.USER_ROLE.ROLE_USER.toString());
-//        getUserRoleDAO().addUserRole(userRole);
+//        getUserRoleDAO().add(userRole);
     }
 
     @Override

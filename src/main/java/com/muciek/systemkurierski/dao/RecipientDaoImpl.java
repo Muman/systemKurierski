@@ -5,7 +5,7 @@
  */
 package com.muciek.systemkurierski.dao;
 
-import com.muciek.systemkurierski.models.UserInfo;
+import com.muciek.systemkurierski.models.Recipient;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author Muman
  */
 @Repository
-public class UserInfoDaoImpl implements UserInfoDao {
+public class RecipientDaoImpl implements RecipientDao{
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -28,32 +28,32 @@ public class UserInfoDaoImpl implements UserInfoDao {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
+    
     @Override
-    public void add(UserInfo userInfo) {
-        getSessionFactory().getCurrentSession().save(userInfo);
+    public void add(Recipient recipient) {
+        getSessionFactory().getCurrentSession().save(recipient);
     }
 
     @Override
-    public void delete(UserInfo userInfo) {
-        getSessionFactory().getCurrentSession().delete(userInfo);
+    public void delete(Recipient recipient) {
+        getSessionFactory().getCurrentSession().delete(recipient);
     }
 
     @Override
-    public void update(UserInfo userInfo) {
-        getSessionFactory().getCurrentSession().update(userInfo);
+    public void update(Recipient recipient) {
+        getSessionFactory().getCurrentSession().update(recipient);
     }
 
     @Override
-    public UserInfo getById(int id) {
-        UserInfo userInfo = (UserInfo)sessionFactory.getCurrentSession().get(UserInfo.class, id);
-        return userInfo;   
+    public Recipient getById(int id) {
+        Recipient recipient = (Recipient)getSessionFactory().getCurrentSession().get(Recipient.class,id);
+        return recipient;
     }
 
     @Override
-    public List<UserInfo> getAll() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from UserInfo").list();
+    public List<Recipient> getAll() {
+        List list = getSessionFactory().getCurrentSession().createQuery("from Recipient").list();
         return list;
     }
-
+    
 }
