@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -37,7 +38,7 @@ public class UserRestController {
 
     @Autowired
     PackageOptionService packageOptionService;
-    
+
     @Autowired
     ShipmentService shipmentService;
 
@@ -48,7 +49,7 @@ public class UserRestController {
     public void setShipmentService(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }
-    
+
     public CourierService getCourierService() {
         return courierService;
     }
@@ -98,10 +99,17 @@ public class UserRestController {
         PackageOption packageOption = getPackageOptionService().getPackageOptionById(Integer.valueOf(id));
         return packageOption;
     }
-    
+
     @RequestMapping(value = "/newPackage", method = RequestMethod.POST)
-    public @ResponseBody
-    void registerShipment(@RequestBody Shipment shipment) {
+    public ModelAndView
+            registerShipment(@RequestBody Shipment shipment) {
         getShipmentService().add(shipment);
+
+        Shipment newShipment = getShipmentService().getById(shipment.getId());
+
+        ModelAndView mav = new ModelAndView("/pdf", "shipment", newShipment);
+
+        return mav;
+
     }
 }

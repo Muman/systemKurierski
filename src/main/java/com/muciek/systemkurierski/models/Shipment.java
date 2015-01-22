@@ -5,6 +5,7 @@
  */
 package com.muciek.systemkurierski.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -52,7 +53,7 @@ public class Shipment {
     public void setRecipient(Recipient recipient) {
         this.recipient = recipient;
     }
-    
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "username", nullable = false)
     public User getUser() {
@@ -73,6 +74,7 @@ public class Shipment {
         this.packageOption = packageOption;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shipment")
     public Set<PackageStatus> getPackageStatuses() {
         return packageStatuses;

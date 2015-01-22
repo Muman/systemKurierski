@@ -45,7 +45,8 @@ UserControllers.controller('UserPackageOptionController', ['$scope', '$http', fu
         $scope.getAllPackageOptions();
     }]);
 
-UserControllers.controller('UserNewPackageController', ['$scope', '$http', function ($scope, $http) {
+UserControllers.controller('UserNewPackageController', ['$scope', '$http','$location', function ($scope, $http,$location) {
+        $scope.idik = 1;
 
         $scope.selectPackageOption = function (packageOption) {
             $scope.selectedPackageOption = packageOption;
@@ -60,13 +61,20 @@ UserControllers.controller('UserNewPackageController', ['$scope', '$http', funct
                 console.log('so sad');
             })
         };
+        
+            $scope.showPdf = function(){
+                $http.get('/SystemKurierski/user/newPackage/pdf/1');
+                        
+                        console.log("Showing new pdf");
+                        $location.url("//newPackage/pdf/1");
+            }
 
         $scope.registerNewPackage = function (newPackage) {
 
             console.log(newPackage);
             
             $http.post('newPackage/',newPackage).success(function (response) {
-                $scope.packageOptions = response;
+
             }).error(function () {
                 console.log('so sad');
             })
@@ -74,3 +82,4 @@ UserControllers.controller('UserNewPackageController', ['$scope', '$http', funct
 
         $scope.getAllPackageOptions();
     }]);
+

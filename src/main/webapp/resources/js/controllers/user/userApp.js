@@ -24,5 +24,8 @@ UserApp.config(['$routeProvider', function($routeProvider){
     }).when('/newPackage',{
         templateUrl: 'newPackage',
         controller: 'UserNewPackageController'
+    }).when('/viewPdf',{
+        templateUrl: '/newPackage/pdf/1',
+        controller: 'UserNewPackageController'
     }).otherwise({redirectTo: '/location'});
 }]);

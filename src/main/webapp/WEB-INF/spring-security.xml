@@ -18,7 +18,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <form-login login-page="/login" always-use-default-target="true"   authentication-failure-url="/login" authentication-success-handler-ref="myAuthenticationSuccessHandler"/>
     
         <logout delete-cookies="JSESSIONID" logout-success-url="/"
-                        invalidate-session="true" />
+                invalidate-session="true" />
     </http>
         
     <beans:bean id="myAuthenticationSuccessHandler" class="com.muciek.systemkurierski.security.CustomUrlAuthenticationSuccessHandler" />
