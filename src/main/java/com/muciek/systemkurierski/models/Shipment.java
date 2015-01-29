@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -32,6 +33,7 @@ public class Shipment {
     private User user;
     private PackageOption packageOption;
     private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
+    private Date registerDate;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +46,15 @@ public class Shipment {
         this.id = id;
     }
 
+    @Column(name = "register_date",nullable = false)
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
     @ManyToOne
     @JoinColumn(name = "recipient_id")
     public Recipient getRecipient() {
@@ -54,7 +65,7 @@ public class Shipment {
         this.recipient = recipient;
     }
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username", nullable = false)
     public User getUser() {
         return user;

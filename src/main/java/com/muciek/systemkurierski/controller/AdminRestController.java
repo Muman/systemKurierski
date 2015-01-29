@@ -8,14 +8,19 @@ package com.muciek.systemkurierski.controller;
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.PackageOption;
+import com.muciek.systemkurierski.models.PackageStatus;
+import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.models.User;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
+import com.muciek.systemkurierski.service.PackageStatusService;
+import com.muciek.systemkurierski.service.ShipmentService;
 import com.muciek.systemkurierski.service.UserInfoService;
 import com.muciek.systemkurierski.service.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,9 +49,31 @@ public class AdminRestController {
 
     @Autowired
     UserInfoService userInfoService;
-    
+
     @Autowired
     UserService userService;
+
+    @Autowired
+    ShipmentService shipmentService;
+
+    @Autowired
+    PackageStatusService packageStatusService;
+
+    public ShipmentService getShipmentService() {
+        return shipmentService;
+    }
+
+    public void setShipmentService(ShipmentService shipmentService) {
+        this.shipmentService = shipmentService;
+    }
+
+    public PackageStatusService getPackageStatusService() {
+        return packageStatusService;
+    }
+
+    public void setPackageStatusService(PackageStatusService packageStatusService) {
+        this.packageStatusService = packageStatusService;
+    }
 
     public UserInfoService getUserInfoService() {
         return userInfoService;
@@ -110,9 +137,10 @@ public class AdminRestController {
         getCourierService().addCourier(newCourier);
     }
 
-    @RequestMapping(value = "/courier", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/courier/{id}", method = RequestMethod.DELETE)
     public @ResponseBody
-    void deleteCourier(@RequestBody Courier courierToDelete) {
+    void deleteCourier(@PathVariable("id") String id) {
+        Courier courierToDelete = getCourierService().getCourierById(Integer.valueOf(id));
         getCourierService().deleteCourier(courierToDelete);
     }
 
@@ -154,10 +182,10 @@ public class AdminRestController {
         return getLocationService().getLocationById(Integer.valueOf(id));
     }
 
-    @RequestMapping(value = "/location", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/location/{id}", method = RequestMethod.DELETE)
     public @ResponseBody
-    void deleteLocation(@RequestBody Location locationToDelete) {
-        System.out.print(locationToDelete.getAddress());
+    void deleteLocation(@PathVariable("id") String id) {
+        Location locationToDelete = getLocationService().getLocationById(Integer.parseInt(id));
         getLocationService().deleteLocation(locationToDelete);
     }
 
@@ -176,9 +204,10 @@ public class AdminRestController {
         getPackageOptionService().addPackageOption(newPackageOption);
     }
 
-    @RequestMapping(value = "/packageOption", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/packageOption/{id}", method = RequestMethod.DELETE)
     public @ResponseBody
-    void deletePackageOption(@RequestBody PackageOption packageOption) {
+    void deletePackageOption(@PathVariable("id") String id) {
+        PackageOption packageOption = getPackageOptionService().getPackageOptionById(Integer.valueOf(id));
         getPackageOptionService().deletePackageOption(packageOption);
     }
 
@@ -198,11 +227,10 @@ public class AdminRestController {
     /**
      * Users *
      */
-    
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public @ResponseBody
     List<User> getAllUsers() {
-            return getUserService().getAllUsers();
+        return getUserService().getAllUsers();
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
@@ -211,9 +239,10 @@ public class AdminRestController {
         getUserService().addUser(newUser);
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/user/{username}", method = RequestMethod.DELETE)
     public @ResponseBody
-    void deleteUser(@RequestBody User user) {
+    void deleteUser(@PathVariable("username") String name) {
+        User user = getUserService().getUserByName(name);
         getUserService().deleteUser(user);
     }
 
@@ -228,5 +257,27 @@ public class AdminRestController {
     User getUserByName(@PathVariable("username") String name) {
         User user = getUserService().getUserByName(name);
         return user;
+    }
+
+    @RequestMapping(value = "/package/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    Shipment getPackage(@PathVariable("id") String id) {
+        Shipment shipment = getShipmentService().getById(Integer.valueOf(id));
+        return shipment;
+    }
+
+    @RequestMapping(value = "/package", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Shipment> getUserPackages() {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Shipment> userPackages = getShipmentService().getAllPackagesForUser(userName);
+        return userPackages;
+    }
+
+    @RequestMapping(value = "/package/{id}/packageStatus", method = RequestMethod.GET)
+    public @ResponseBody
+    List<PackageStatus> getPackageStatusesForPAckageWithId(@PathVariable("id") String id) {
+        List<PackageStatus> packageStatuses = getPackageStatusService().getAllWithPackageId(Integer.valueOf(id));
+        return packageStatuses;
     }
 }

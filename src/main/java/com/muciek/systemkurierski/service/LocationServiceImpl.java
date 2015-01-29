@@ -55,5 +55,10 @@ public class LocationServiceImpl implements LocationService{
     public List<Location> getAllLocations() {
        return getLocationDao().getAll();
     }
+
+    @Override
+    public Location getByName(String name) {
+        return getLocationDao().getByName(name);
+    }
     
 }

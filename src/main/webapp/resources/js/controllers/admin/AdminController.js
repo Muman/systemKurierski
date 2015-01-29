@@ -50,7 +50,7 @@ AdminControllers.controller('AdminCourierController', ['$scope', '$http','$filte
         $scope.deleteCourier = function (courierToDelete) {
             if (!courierToDelete)
                 alert("delete null!!");
-            $http.delete('courier/', courierToDelete).success(function (response) {
+            $http.delete('courier/'+courierToDelete.id).success(function (response) {
                 $scope.getAllCouriers();
             }).error(function () {
                 console.log('so sad');
@@ -94,9 +94,12 @@ AdminControllers.controller('AdminLocationController', ['$scope', '$http', funct
         }
 
         $scope.deleteLocation = function (locationToDelete) {
+            console.log("deleting location ");
+            console.log(locationToDelete);
+            
             if (!locationToDelete)
                 alert("delete null!!");
-            $http.delete('location/', locationToDelete).success(function (response) {
+            $http.delete('location/'+locationToDelete.id).success(function (response) {
                 $scope.getAllLocations();
             }).error(function () {
                 console.log('so sad');
@@ -139,7 +142,7 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
         };
         
         $scope.deletePackageOption = function (packageOption) {
-            $http.delete('packageOption/', packageOption).success(function (response) {
+            $http.delete('packageOption/'+packageOption.id).success(function (response) {
                 $scope.getAllPackageOptions();
             }).error(function () {
                 console.log('so sad');
@@ -194,7 +197,7 @@ AdminControllers.controller('AdminUserController', ['$scope', '$http', function 
         };
         
         $scope.deleteUser = function (user) {
-            $http.delete('user/', user).success(function (response) {
+            $http.delete('user/'+user.name).success(function (response) {
                 $scope.getAllUsers()();
             }).error(function () {
                 console.log('so sad');
@@ -202,4 +205,26 @@ AdminControllers.controller('AdminUserController', ['$scope', '$http', function 
         };
 
         $scope.getAllUsers();
+    }]);
+
+AdminControllers.controller('AdminMonitorPackageController', ['$scope', '$http', function ($scope, $http) {
+
+    $scope.monitorPackage = function (packageToMonitorId) {
+
+            $http.get('package/' + packageToMonitorId).success(function (response) {
+                $scope.packageToMonitor = response;
+                console.log(response);
+            }).error(function () {
+
+            });
+
+            $http.get('package/' + packageToMonitorId + '/packageStatus').success(function (response) {
+                $scope.packageStatuses = response;
+                console.log(response);
+            }).error(function () {
+
+            });
+        }
+        $scope.packageId = 0;
+    
     }]);

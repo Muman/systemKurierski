@@ -22,4 +22,6 @@ public interface PackageStatusDao {
     public PackageStatus getById(int id);
 
     public List<PackageStatus> getAll();
+    
+    public List<PackageStatus> getAllWithPackageId(int id);
 }

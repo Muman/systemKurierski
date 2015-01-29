@@ -7,11 +7,16 @@ package com.muciek.systemkurierski.controller;
 
 import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.PackageOption;
+import com.muciek.systemkurierski.models.PackageStatus;
+import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
+import com.muciek.systemkurierski.service.PackageStatusService;
+import com.muciek.systemkurierski.service.ShipmentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +39,28 @@ public class GuestRestController {
 
     @Autowired
     PackageOptionService packageOptionService;
+
+    @Autowired
+    ShipmentService shipmentService;
+
+    @Autowired
+    PackageStatusService packageStatusService;
+
+    public ShipmentService getShipmentService() {
+        return shipmentService;
+    }
+
+    public void setShipmentService(ShipmentService shipmentService) {
+        this.shipmentService = shipmentService;
+    }
+
+    public PackageStatusService getPackageStatusService() {
+        return packageStatusService;
+    }
+
+    public void setPackageStatusService(PackageStatusService packageStatusService) {
+        this.packageStatusService = packageStatusService;
+    }
 
     public CourierService getCourierService() {
         return courierService;
@@ -83,5 +110,27 @@ public class GuestRestController {
     PackageOption getPackageOptionById(@PathVariable("id") String id) {
         PackageOption packageOption = getPackageOptionService().getPackageOptionById(Integer.valueOf(id));
         return packageOption;
+    }
+    
+        @RequestMapping(value = "/package/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    Shipment getPackage(@PathVariable("id") String id) {
+        Shipment shipment = getShipmentService().getById(Integer.valueOf(id));
+        return shipment;
+    }
+
+    @RequestMapping(value = "/package", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Shipment> getUserPackages() {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<Shipment> userPackages = getShipmentService().getAllPackagesForUser(userName);
+        return userPackages;
+    }
+
+    @RequestMapping(value = "/package/{id}/packageStatus", method = RequestMethod.GET)
+    public @ResponseBody
+    List<PackageStatus> getPackageStatusesForPAckageWithId(@PathVariable("id") String id) {
+        List<PackageStatus> packageStatuses = getPackageStatusService().getAllWithPackageId(Integer.valueOf(id));
+        return packageStatuses;
     }
 }

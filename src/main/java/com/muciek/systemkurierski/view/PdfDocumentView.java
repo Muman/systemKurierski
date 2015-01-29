@@ -22,8 +22,11 @@ import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
+import com.muciek.systemkurierski.models.UserInfo;
 import java.io.IOException;
+import java.text.DateFormat;
 
 /**
  *
@@ -40,8 +43,10 @@ public class PdfDocumentView extends AbstractItextPdfView {
 
         PdfPTable table = buildShipmentDocument(shipment);
 
-        Paragraph paragraph = new Paragraph("NALEPKA ADRESPWA / ODCINEK DLA ADRESATA");
-
+        Paragraph paragraph = new Paragraph("NALEPKA ADRESOWA / ODCINEK DLA ADRESATA");
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        paragraph.setSpacingAfter(10.f);
+        document.add(paragraph);
         document.add(table);
     }
 
@@ -49,29 +54,32 @@ public class PdfDocumentView extends AbstractItextPdfView {
         PdfPCell recipientCell = new PdfPCell();
         recipientCell.setFixedHeight(144f);
 
-        Paragraph senderParagraph = new Paragraph("Adresat:");
-
+        Recipient recipient = shipment.getRecipient();
+        
+        Paragraph recipientParagraph = new Paragraph("Adresat:");
         Paragraph phoneNumberParagraph = new Paragraph();
         Chunk phoneNumberLAbelChunk = new Chunk("\nNr. tel. ");
-        Chunk phoneNumberChunk = new Chunk("123123123");
+        Chunk phoneNumberChunk = new Chunk(recipient.getPhoneNumber());
         phoneNumberParagraph.add(phoneNumberLAbelChunk);
         phoneNumberParagraph.add(phoneNumberChunk);
         phoneNumberParagraph.setAlignment(Element.ALIGN_CENTER);
-
-//        Paragraph senderNameParagraph = new Paragraph(shipment.getUser().getUserInfo().getFirstName());
-        Paragraph recipientNameParagraph = new Paragraph("Tutaj imie i nazwisko");
+        
+        Paragraph recipientNameParagraph = new Paragraph(recipient.getName());
         recipientNameParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph recipientCompanyNameParagraph = new Paragraph("Tutaj nazwa firmy");
-        recipientCompanyNameParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph recipientAddressParagraph = new Paragraph("Tutaj adres");
+
+//        Paragraph recipientCompanyNameParagraph = new Paragraph("Tutaj nazwa firmy");
+//        recipientCompanyNameParagraph.setAlignment(Element.ALIGN_CENTER);
+        Paragraph recipientAddressParagraph = new Paragraph(recipient.getAddress());
         recipientAddressParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph recipientCityPostalCode = new Paragraph("postal code city");
+
+        Paragraph recipientCityPostalCode = new Paragraph(recipient.getCity());
         recipientCityPostalCode.setAlignment(Element.ALIGN_CENTER);
 
-        recipientCell.addElement(senderParagraph);
+
+        recipientCell.addElement(recipientParagraph);
         recipientCell.addElement(phoneNumberParagraph);
         recipientCell.addElement(recipientNameParagraph);
-        recipientCell.addElement(recipientCompanyNameParagraph);
+//        recipientCell.addElement(recipientCompanyNameParagraph);
         recipientCell.addElement(recipientAddressParagraph);
         recipientCell.addElement(recipientCityPostalCode);
         recipientCell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -115,23 +123,25 @@ public class PdfDocumentView extends AbstractItextPdfView {
         PdfPCell senderCell = new PdfPCell();
         senderCell.setFixedHeight(144f);
 
+        UserInfo userInfo = shipment.getUser().getUserInfo();
+        
         Paragraph senderParagraph = new Paragraph("Nadawca:");
 
         Paragraph phoneNumberParagraph = new Paragraph();
         Chunk phoneNumberLAbelChunk = new Chunk("\nNr. tel. ");
-        Chunk phoneNumberChunk = new Chunk("123123123");
+        Chunk phoneNumberChunk = new Chunk(userInfo.getPhoneNumber());
         phoneNumberParagraph.add(phoneNumberLAbelChunk);
         phoneNumberParagraph.add(phoneNumberChunk);
         phoneNumberParagraph.setAlignment(Element.ALIGN_CENTER);
 
 //        Paragraph senderNameParagraph = new Paragraph(shipment.getUser().getUserInfo().getFirstName());
-        Paragraph senderNameParagraph = new Paragraph("Tutaj imie i nazwisko");
+        Paragraph senderNameParagraph = new Paragraph(userInfo.getFirstName() + " " + userInfo.getLastName());
         senderNameParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph senderCompanyNameParagraph = new Paragraph("Tutaj nazwa firmy");
+        Paragraph senderCompanyNameParagraph = new Paragraph(userInfo.getCompanyName());
         senderCompanyNameParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph senderAddressParagraph = new Paragraph("Tutaj adres");
+        Paragraph senderAddressParagraph = new Paragraph(userInfo.getAddress());
         senderAddressParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph senderCityPostalCode = new Paragraph("postal code city");
+        Paragraph senderCityPostalCode = new Paragraph(userInfo.getPostalCode());
         senderCityPostalCode.setAlignment(Element.ALIGN_CENTER);
 
         senderCell.addElement(senderParagraph);
@@ -147,11 +157,14 @@ public class PdfDocumentView extends AbstractItextPdfView {
     private PdfPCell buildAdditionalInfoSection(Shipment shipment) throws BadElementException, IOException {
         PdfPCell additionalnfoCell = new PdfPCell();
         additionalnfoCell.setFixedHeight(144f);
-        Paragraph senderNameParagraph = new Paragraph("Typ paczki");
+        
+        Paragraph senderNameParagraph = new Paragraph("Typ paczki: " + shipment.getPackageOption().getName());
         senderNameParagraph.setAlignment(Element.ALIGN_CENTER);
         Paragraph logoParagraph = new Paragraph("Logo KurierX");
         logoParagraph.setAlignment(Element.ALIGN_CENTER);
-        Paragraph dateParagraph = new Paragraph("\nNadano dnia 21.01.2014");
+//        DateFormat.getDateInstance().format(shipment.getRegisterDate());
+        Paragraph dateParagraph = new Paragraph("\nNadano dnia: " + DateFormat.getDateInstance().format(shipment.getRegisterDate()));
+        
         dateParagraph.setAlignment(Element.ALIGN_CENTER);
         //Image image1 = Image.getInstance("resources/img/kurierX.png");
         additionalnfoCell.addElement(senderNameParagraph);

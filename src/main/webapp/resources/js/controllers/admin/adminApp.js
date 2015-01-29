@@ -24,5 +24,8 @@ AdminApp.config(['$routeProvider', function ($routeProvider) {
         }).when('/user', {
             templateUrl: 'users',
             controller: 'AdminUserController'
+        }).when('/monitorPackage', {
+            templateUrl: 'monitorPackage',
+            controller: 'AdminMonitorPackageController'
         }).otherwise({redirectTo: '/courier'});
     }]);

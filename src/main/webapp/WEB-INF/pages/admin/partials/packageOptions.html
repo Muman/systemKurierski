@@ -15,8 +15,8 @@
                         <th class="col-md-3">Nazwa </th>
                         <th class="col-md-3">Opis</th>
                         <th class="col-md-1">Cena</th>
-                        <th class="col-sm-1 col-md-2 col-lg-1">Edit</th>
-                        <th class="col-sm-1 col-md-2 col-lg-1">Delete</th>
+                        <th class="col-sm-1 col-md-2 col-lg-1">Edytuj</th>
+                        <th class="col-sm-1 col-md-2 col-lg-1">Usuñ</th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="packageOption in packageOptions">
@@ -88,7 +88,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading1">Edit Your Detail</h4>
+                    <h4 class="modal-title custom_align" id="Heading1">Edytuj Dane</h4>
                 </div>
                 <div class="modal-body" ng-model="selectedPackageOption">
                     <div class="form-group">
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updatePackageOption(selectedPackageOption)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updatePackageOption(selectedPackageOption)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Aktualizuj</button>
                 </div> 
             </div>
             <!-- /.modal-content --> 
@@ -116,20 +116,16 @@
             <div class="modal-content" ng-model="selectedPackageOption">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                    <h4 class="modal-title text-center" id="Heading">Usuñ: {{selectedPackageOption.name}}</h4>
                 </div>
                 <div class="modal-body">
 
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy na pewno chcesz usun¹æ?</div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success"  ng-click="deletePackageOption(selectedPackageOption)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-                    <div class="form-group">
-
-                        <input class="form-control " ng-model="selectedPackageOption.name" type="text">
-                    </div>
+                    <button type="button" class="btn btn-success"  ng-click="deletePackageOption(selectedPackageOption)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span> Tak</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Nie</button>
                 </div>
             </div>
         </div>

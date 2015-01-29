@@ -55,4 +55,11 @@ public class PackageStatusDaoImpl implements PackageStatusDao{
         List list = getSessionFactory().getCurrentSession().createQuery("from PackageStatus").list();
         return list;
     }
+
+    @Override
+    public List<PackageStatus> getAllWithPackageId(int id) {
+        List<PackageStatus> packageStatuses = getSessionFactory().getCurrentSession().createQuery("from PackageStatus where shipment_id = ?").setParameter(0, id).list();
+        
+        return packageStatuses;
+    }
 }

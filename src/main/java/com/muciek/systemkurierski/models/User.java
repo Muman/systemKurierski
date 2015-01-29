@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -37,7 +38,7 @@ public class User {
 
     private UserInfo userInfo;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_INFO_ID")
     public UserInfo getUserInfo() {
         return userInfo;

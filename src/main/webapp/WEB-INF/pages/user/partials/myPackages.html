@@ -1,0 +1,25 @@
+<div class="row">
+        <h2 class="sub-header">Moje paczki</h2>
+        <div>
+            <table id="mytable" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1 col-md-1 col-lg-1">#id</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Typ paczki</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Data nadania</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Adresat</th>
+                        <th class="col-sm-2 col-md-2 col-lg-2">Drukuj</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="myPackage in myPackages">
+                    <tr>
+                        <td class="col-sm-1 col-md-1 col-lg-1">{{myPackage.id}}</td>
+                        <td class="col-sm-3 col-md-3 col-lg-3">{{myPackage.packageOption.name}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{myPackage.registerDate| date: 'dd-MM-yyyy'}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2">{{myPackage.recipient.name}}</td>
+                        <td class="col-sm-2 col-md-2 col-lg-2"><a target="_blank" href="newPackage/pdf/{{myPackage.id}}">pdf</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

@@ -22,4 +22,6 @@ public interface ShipmentDao {
     public Shipment getById(int id);
 
     public List<Shipment> getAll();
+    
+    public List<Shipment> getAllPackagesForUser(String username);
 }

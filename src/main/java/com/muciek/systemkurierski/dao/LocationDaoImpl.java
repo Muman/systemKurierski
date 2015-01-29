@@ -58,4 +58,9 @@ public class LocationDaoImpl implements LocationDao{
         List list = getSessionFactory().getCurrentSession().createQuery("from Location").list();
         return list;
     }
+
+    @Override
+    public Location getByName(String name) {
+        return (Location)getSessionFactory().getCurrentSession().createQuery("from Location where name = :name ").setString("name", name).uniqueResult();
+    }
 }

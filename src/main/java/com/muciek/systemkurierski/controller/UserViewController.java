@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/user")
 public class UserViewController {
-    
+
     @Autowired
     ShipmentService ShipmentService;
 
@@ -35,39 +35,52 @@ public class UserViewController {
     public void setShipmentService(ShipmentService ShipmentService) {
         this.ShipmentService = ShipmentService;
     }
-    
-    
-    
+
     @RequestMapping("/")
-    public String user(){
+    public String user() {
         return "user/index";
     }
-    
+
     @RequestMapping("/packageOptions")
-    public String packageOptions(){
+    public String packageOptions() {
         return "user/partials/packageOptions";
     }
-    
+
     @RequestMapping("/locations")
-    public String locations(){
+    public String locations() {
         return "user/partials/locations";
     }
-    
+
     @RequestMapping("/profile")
-    public String profile(){
+    public String profile() {
         return "user/partials/profile";
     }
-    
+
     @RequestMapping("/newPackage")
-    public String newPackage(){
+    public String newPackage() {
         return "user/partials/newPackage";
-    } 
-    
-    @RequestMapping(value = "/newPackage/pdf/{id}",method = RequestMethod.GET)
-    public ModelAndView getPdfView(@PathVariable("id") String id){ 
-        
+    }
+
+    @RequestMapping(value = "/newPackage/pdf/{id}", method = RequestMethod.GET)
+    public ModelAndView getPdfView(@PathVariable("id") String id) {
+
         Shipment shipment = getShipmentService().getById(Integer.parseInt(id));
         ModelAndView mav = new ModelAndView("pdfView", "shipment", shipment);
         return mav;
-    } 
+    }
+
+    @RequestMapping(value = "/monitorPackage")
+    public String monitorPackageView() {
+        return "user/partials/monitorPackage";
+    }
+
+    @RequestMapping("/myPackages")
+    public String getUserPackages() {
+        return "user/partials/myPackages";
+    }
+
+    @RequestMapping("/myProfile")
+    public String getUserProfileView() {
+        return "user/partials/myProfile";
+    }
 }

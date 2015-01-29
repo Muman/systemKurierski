@@ -23,4 +23,6 @@ public interface LocationService {
     public Location getLocationById(int id);
 
     public List<Location> getAllLocations();
+    
+    public Location getByName(String name);
 }

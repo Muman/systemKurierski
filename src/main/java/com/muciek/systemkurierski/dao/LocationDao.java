@@ -22,4 +22,6 @@ public interface LocationDao {
     public Location getById(int id);
 
     public List<Location> getAll();
+
+    public Location getByName(String name);
 }

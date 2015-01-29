@@ -44,3 +44,25 @@ GuestControllers.controller('GuestPackageOptionController', ['$scope', '$http', 
         
         $scope.getAllPackageOptions();
     }]);
+
+GuestControllers.controller('GuestMonitorPackageController', ['$scope', '$http', function ($scope, $http) {
+
+    $scope.monitorPackage = function (packageToMonitorId) {
+
+            $http.get('package/' + packageToMonitorId).success(function (response) {
+                $scope.packageToMonitor = response;
+                console.log(response);
+            }).error(function () {
+
+            });
+
+            $http.get('package/' + packageToMonitorId + '/packageStatus').success(function (response) {
+                $scope.packageStatuses = response;
+                console.log(response);
+            }).error(function () {
+
+            });
+        }
+        $scope.packageId = 0;
+    
+    }]);

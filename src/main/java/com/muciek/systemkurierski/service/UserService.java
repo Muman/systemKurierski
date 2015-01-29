@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.models.User;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,4 +25,6 @@ public interface UserService {
     public List<User> getAllUsers();
     
     public List<User> getAllActiveUsers();
+    
+    public void changePassword(HashMap<String, Object> map);
 }

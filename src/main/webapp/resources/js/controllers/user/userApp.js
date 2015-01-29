@@ -14,7 +14,7 @@ var UserApp = angular.module('UserApp', ['ngRoute','UserControllers']);
 UserApp.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/monitorPackage', {
         templateUrl: 'monitorPackage',
-        controller: 'UserLocationContorller'
+        controller: 'UserMonitorPackageController'
     }).when('/location', {
         templateUrl: 'locations',
         controller: 'UserLocationController'
@@ -27,5 +27,11 @@ UserApp.config(['$routeProvider', function($routeProvider){
     }).when('/viewPdf',{
         templateUrl: '/newPackage/pdf/1',
         controller: 'UserNewPackageController'
+    }).when('/myPackages',{
+        templateUrl: 'myPackages',
+        controller: 'UserMyPackagesController'
+    }).when('/myProfile',{
+        templateUrl: 'myProfile',
+        controller: 'UserMyProfileController'
     }).otherwise({redirectTo: '/location'});
 }]);

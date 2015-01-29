@@ -18,5 +18,8 @@ GuestApp.config(['$routeProvider', function($routeProvider){
     }).when('/packageOption', {
         templateUrl: 'packageOptions',
         controller: 'GuestPackageOptionController'
+    }).when('/monitorPackage', {
+        templateUrl: 'monitorPackage',
+        controller: 'GuestMonitorPackageController'
     }).otherwise({redirectTo: '/location'});
 }]);

@@ -55,4 +55,11 @@ public class ShipmentDaoImpl implements ShipmentDao{
     public void setSessionFactory(SessionFactory SessionFactory) {
         this.SessionFactory = SessionFactory;
     }
+
+    @Override
+    public List<Shipment> getAllPackagesForUser(String username) {
+        List<Shipment> userPackages = getSessionFactory().getCurrentSession().createQuery("from Shipment where username =:username").setString("username", username).list();
+        
+        return userPackages;
+    }
 }

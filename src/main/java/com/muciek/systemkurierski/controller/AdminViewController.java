@@ -40,4 +40,10 @@ public class AdminViewController {
     public String getUsersView() {
         return "admin/partials/users";
     }
+    
+    @RequestMapping("/monitorPackage")
+    public String getMonitorPackageView() {
+        return "admin/partials/monitorPackage";
+    }
+    
 }

@@ -5,11 +5,16 @@
  */
 package com.muciek.systemkurierski.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,19 +31,16 @@ public class Location {
     private String postalCode;
     private String city;
     private String name;
-    private PackageStatus packageStatus;
+    private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
     
-
-    public Location() {
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+    public Set<PackageStatus> getPackageStatuses() {
+        return packageStatuses;
     }
 
-    @OneToOne(mappedBy = "location")
-    public PackageStatus getPackageStatus() {
-        return packageStatus;
-    }
-
-    public void setPackageStatus(PackageStatus packageStatus) {
-        this.packageStatus = packageStatus;
+    public void setPackageStatuses(Set<PackageStatus> packageStatuses) {
+        this.packageStatuses = packageStatuses;
     }
 
     @Column(name = "name",nullable = false,unique = true)

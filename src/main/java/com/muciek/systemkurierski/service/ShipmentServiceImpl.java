@@ -6,9 +6,13 @@
 package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.dao.ShipmentDao;
+import com.muciek.systemkurierski.models.Location;
+import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.models.User;
+import com.muciek.systemkurierski.utils.DatabaseUtils;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +35,29 @@ public class ShipmentServiceImpl implements ShipmentService {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private PackageStatusService packageStatusService;
+    
+    @Autowired
+    private LocationService locationService;
 
+    public LocationService getLocationService() {
+        return locationService;
+    }
+
+    public void setLocationService(LocationService locationService) {
+        this.locationService = locationService;
+    }
+
+    public PackageStatusService getPackageStatusService() {
+        return packageStatusService;
+    }
+
+    public void setPackageStatusService(PackageStatusService packageStatusService) {
+        this.packageStatusService = packageStatusService;
+    }
+    
     public UserService getUserService() {
         return userService;
     }
@@ -69,8 +95,20 @@ public class ShipmentServiceImpl implements ShipmentService {
         Shipment newShipment = shipment;
         newShipment.setRecipient(recipient);
         newShipment.setUser(user);
+        newShipment.setRegisterDate(new Date());
         
         getShipmentDao().add(shipment);
+        
+        Location statusLocation = getLocationService().getByName(DatabaseUtils.BASE_LOCATION_NAME);
+        
+        PackageStatus packageStatus = new PackageStatus();
+        
+        packageStatus.setName(PackageStatus.Type.READY_FOR_KURIERX.getStatus());
+        packageStatus.setShipment(newShipment);
+        packageStatus.setLocation(statusLocation);
+        packageStatus.setStatusDate(new Date());
+        
+        getPackageStatusService().add(packageStatus);   
     }
 
     @Override
@@ -91,5 +129,10 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public List<Shipment> getAll() {
         return getShipmentDao().getAll();
+    }
+
+    @Override
+    public List<Shipment> getAllPackagesForUser(String username) {
+        return getShipmentDao().getAllPackagesForUser(username);
     }
 }

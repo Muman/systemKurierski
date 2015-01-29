@@ -10,6 +10,7 @@ import com.muciek.systemkurierski.dao.UserRoleDAO;
 import com.muciek.systemkurierski.models.User;
 import com.muciek.systemkurierski.models.UserInfo;
 import com.muciek.systemkurierski.models.UserRole;
+import java.util.HashMap;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRoleDAO userRoleDAO;
-    
+
     public UserDao getUserDao() {
         return userDao;
     }
@@ -43,16 +44,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        
+
         UserInfo userInfo = user.getUserInfo();
         getUserInfoService().addUserInfo(userInfo);
-        
+
         User newUser = user;
         String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
         newUser.setPassword(hashedPassword);
         newUser.setUserInfo(userInfo);
         getUserDao().addUser(newUser);
-        
+
         UserRole userRole = new UserRole(newUser, UserRole.USER_ROLE.ROLE_USER.toString());
         getUserRoleDAO().add(userRole);
     }
@@ -66,13 +67,11 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user) {
         UserInfo userInfo = user.getUserInfo();
         getUserInfoService().updateUserInfo(userInfo);
-        
+
         User newUser = user;
-        String hashedPassword = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
-        newUser.setPassword(hashedPassword);
         newUser.setUserInfo(userInfo);
         getUserDao().updateUser(newUser);
-        
+
         //todo update user role
 //        UserRole userRole = new UserRole(newUser, UserRole.USER_ROLE.ROLE_USER.toString());
 //        getUserRoleDAO().add(userRole);
@@ -119,6 +118,24 @@ public class UserServiceImpl implements UserService {
      */
     public void setUserRoleDAO(UserRoleDAO userRoleDAO) {
         this.userRoleDAO = userRoleDAO;
+    }
+
+    @Override
+    public void changePassword(HashMap<String, Object> map) {
+
+        // get data from map
+        String username = (String) map.get("username");
+        String newPassword = (String) map.get("password");
+
+        // hash new password 
+        newPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+        User userToUpdate = getUserByName(username);
+
+        if (null != userToUpdate) {
+            userToUpdate.setPassword(newPassword);
+            updateUser(userToUpdate);
+        }
     }
 
 }

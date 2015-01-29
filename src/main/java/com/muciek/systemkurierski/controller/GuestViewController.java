@@ -30,4 +30,9 @@ public class GuestViewController {
     public String guestPackageOptions(){
         return "guest/partials/packageOptions";
     }
+    
+    @RequestMapping("/monitorPackage")
+    public String guestMonitorPackageView(){
+        return "guest/partials/monitorPackage";
+    }
 }
