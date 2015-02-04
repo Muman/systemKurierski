@@ -11,6 +11,8 @@ import com.muciek.systemkurierski.models.PackageOption;
 import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.models.User;
+import com.muciek.systemkurierski.models.UserInfo;
+import com.muciek.systemkurierski.models.UserRole;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
@@ -18,7 +20,10 @@ import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.ShipmentService;
 import com.muciek.systemkurierski.service.UserInfoService;
 import com.muciek.systemkurierski.service.UserService;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -279,5 +284,45 @@ public class AdminRestController {
     List<PackageStatus> getPackageStatusesForPAckageWithId(@PathVariable("id") String id) {
         List<PackageStatus> packageStatuses = getPackageStatusService().getAllWithPackageId(Integer.valueOf(id));
         return packageStatuses;
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
+    public @ResponseBody
+    void changeUserPassword(@RequestBody HashMap<String, Object> map) {
+        getUserService().changePassword(map);
+    }
+
+    @RequestMapping(value = "/update/{name}", method = RequestMethod.PUT)
+    public @ResponseBody
+    void updateUserWithId(@PathVariable("name") String name, @RequestBody UserInfo userInfo) {
+        //todo
+        User userWithName = getUserService().getUserByName(name);
+        if(null == userWithName.getUserInfo()){
+             getUserInfoService().addUserInfo(userInfo);
+             userWithName.setUserInfo(userInfo);
+             getUserService().updateUser(userWithName);
+        }
+        else{
+             getUserInfoService().updateUserInfo(userInfo);
+        }
+    }
+
+    @RequestMapping(value = "/myData", method = RequestMethod.GET)
+    public @ResponseBody
+    User getCurrentUserData() {
+        User userWithId = getUserService().getUserByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        return userWithId;
+    }
+    
+    @RequestMapping(value = "/allUserRoles", method = RequestMethod.GET)
+    public @ResponseBody List<String> getAllPossibleUserRoles(){
+        List<String> allPossibleUserRoles = new ArrayList<String>();
+        UserRole.USER_ROLE[] userRoles = UserRole.getAllPosibleUserRoles();
+      
+        for(UserRole.USER_ROLE role:userRoles){
+            allPossibleUserRoles.add(role.toString());
+        }
+        
+        return allPossibleUserRoles;
     }
 }

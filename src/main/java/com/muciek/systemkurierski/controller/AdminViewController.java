@@ -46,4 +46,8 @@ public class AdminViewController {
         return "admin/partials/monitorPackage";
     }
     
+    @RequestMapping("/myProfile")
+    public String getProfileView() {
+        return "admin/partials/myProfile";
+    }
 }

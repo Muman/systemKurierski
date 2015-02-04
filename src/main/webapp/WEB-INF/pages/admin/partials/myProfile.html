@@ -1,0 +1,120 @@
+<div id="page-wrapper">
+    <div class="alert-container">
+        <alert class="alert-frame" ng-repeat="alert in alerts"
+               type="{{alert.type}}" close="alertService.closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+    <div class="row">
+        <h2 class="sub-header">Edytuj dane</h2>
+        <form class="form-horizontal" ng-submit="updateUserInfo(updatedUserInfo)">
+            <div class="row form-group">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Imie</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="firstName"
+                               placeholder="Imie" ng-model="updatedUserInfo.firstName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Nazwisko</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lastName"
+                               placeholder="Nazwisko" ng-model="updatedUserInfo.lastName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">email</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">@</span>
+                            <input type="email" class="form-control" placeholder="email" ng-model="updatedUserInfo.email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="isCompany" class="col-sm-2 control-label">Firma</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-sm">
+                            <!--                                                                                            <span class="input-group-addon">@</span>-->
+                            <input type="checkbox" class="form-control" id="isCompany" ng-model="updatedUserInfo.company" checked="false">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="companyName" class="col-sm-2 control-label">Nazwa firmy</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-sm">
+                            <!--                                                                    <span class="input-group-addon">@</span>-->
+                            <input type="text" class="form-control" id="companyName" ng-model="updatedUserInfo.companyName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">Nr telefonu</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="flat" ng-model="updatedUserInfo.phoneNumber">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="city" class="col-sm-2 control-label">Miasto</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="city" ng-model="updatedUserInfo.city">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">Ulica i numer domu</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="street" ng-model="updatedUserInfo.address">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label">Kod pocztwoy</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="flat" ng-model="updatedUserInfo.postalCode">
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-sm"  >Submit</button>
+                    <!--                            <button type="submit" class="btn btn-default btn-sm">Cancel</button>-->
+                </div>
+            </div>  
+        </form>
+    </div>
+
+    <div class="row"> 
+        <h2 class="sub-header">Zmieñ Has³o</h2>
+        <form class="form-horizontal" ng-submit="changePassword()">
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">Login</label>
+                <div class="col-sm-10">
+                    {{currentUser.username}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Haslo</label>
+                <p class="col-sm-10">
+                    <input type="password" class="form-control" id="pass" ng-model="newAdminPassword">
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Potwierdz haslo
+                </label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirmpass" ng-model="newAdminPasswordConfirm">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-sm"  >Zmieñ Has³o</button>
+                    <!--                            <button type="submit" class="btn btn-default btn-sm">Cancel</button>-->
+                </div>
+            </div>  
+        </form>
+    </div>
+</div>

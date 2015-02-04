@@ -111,8 +111,8 @@ public class GuestRestController {
         PackageOption packageOption = getPackageOptionService().getPackageOptionById(Integer.valueOf(id));
         return packageOption;
     }
-    
-        @RequestMapping(value = "/package/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/package/{id}", method = RequestMethod.GET)
     public @ResponseBody
     Shipment getPackage(@PathVariable("id") String id) {
         Shipment shipment = getShipmentService().getById(Integer.valueOf(id));

@@ -9,9 +9,6 @@ package com.muciek.systemkurierski.models;
  *
  * @author Muman
  */
-public class Role {
-    Integer id;
-    String name;
-    
+public class TrackPoint {
     
 }

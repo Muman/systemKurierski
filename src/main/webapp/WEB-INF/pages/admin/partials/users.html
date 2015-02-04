@@ -59,22 +59,22 @@
                             <form class="form-horizontal" ng-submit="addUser(newUser)">
                                 <div class="row form-group">
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-2 control-label">Imiê</label>
-                                        <div class="col-sm-10">
+                                        <label for="name" class="col-sm-3 control-label">Imiê</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="firstName"
                                                    placeholder="Imie" ng-model="newUser.userInfo.firstName">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-2 control-label">Nazwisko</label>
-                                        <div class="col-sm-10">
+                                        <label for="name" class="col-sm-3 control-label">Nazwisko</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="lastName"
                                                    placeholder="Nazwisko" ng-model="newUser.userInfo.lastName">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email" class="col-sm-2 control-label">email</label>
-                                        <div class="col-sm-10">
+                                        <label for="email" class="col-sm-3 control-label">email</label>
+                                        <div class="col-sm-8">
                                             <div class="input-group input-group-sm">
                                                 <span class="input-group-addon">@</span>
                                                 <input type="email" class="form-control" placeholder="email" ng-model="newUser.userInfo.email">
@@ -83,9 +83,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="isCompany" class="col-sm-2 control-label">Firma</label>
-                                        <div class="col-sm-10">
-                                            <div class="input-group input-group-sm">
+                                        <label for="isCompany" class="col-sm-3 control-label">Firma</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group input-group-sm checkbox">
                                                 <!--                                                                                            <span class="input-group-addon">@</span>-->
                                                 <input type="checkbox" class="form-control" id="isCompany" ng-model="newUser.userInfo.company" checked="false">
                                             </div>
@@ -93,65 +93,70 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="companyName" class="col-sm-2 control-label">Nazwa firmy</label>
-                                        <div class="col-sm-10">
-                                            <div class="input-group input-group-sm">
-                                                <!--                                                                    <span class="input-group-addon">@</span>-->
+                                        <label for="companyName" class="col-sm-3 control-label">Nazwa firmy</label>
+                                        <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="companyName" ng-model="newUser.userInfo.companyName">
-                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="username" class="col-sm-2 control-label">Login</label>
-                                        <div class="col-sm-10">
+                                        <label for="username" class="col-sm-3 control-label">Login</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="username" ng-model="newUser.username">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="password" class="col-sm-2 control-label">Has³o</label>
-                                        <div class="col-sm-10">
+                                        <label for="password" class="col-sm-3 control-label">Has³o</label>
+                                        <div class="col-sm-8">
                                             <input type="password" class="form-control" id="pass" ng-model="newUser.password">
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="password" class="col-sm-2 control-label">PotwierdŸ has³o
+                                        <label for="password" class="col-sm-3 control-label">PotwierdŸ has³o
                                         </label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-8">
                                             <input type="password" class="form-control" id="confirmpass">
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label  class="col-sm-2 control-label">Nr telefonu</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-3 control-label">Nr telefonu</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="flat" ng-model="newUser.userInfo.phoneNumber">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="city" class="col-sm-2 control-label">Miasto</label>
-                                        <div class="col-sm-10">
+                                        <label for="city" class="col-sm-3 control-label">Miasto</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="city" ng-model="newUser.userInfo.city">
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label  class="col-sm-2 control-label">Ulica i numer domu</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-3 control-label">Ulica i numer domu</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="street" ng-model="newUser.userInfo.address">
                                         </div>
                                     </div>
-                                    <!--                                                <div class="form-group">
-                                                                                        <label  class="col-sm-2 control-label">Nr mieszkania/pomieszczenia</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text" class="form-control" id="flat" ng-model="newUser.userInfo.companyName">
-                                                                                        </div>
-                                                                                    </div>-->
 
                                     <div class="form-group">
-                                        <label  class="col-sm-2 control-label">Kod pocztowy</label>
-                                        <div class="col-sm-10">
+                                        <label  class="col-sm-3 control-label">Kod pocztowy</label>
+                                        <div class="col-sm-8">
                                             <input type="text" class="form-control" id="flat" ng-model="newUser.userInfo.postalCode">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Prawa dostêpu</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="selectedUserRole" class="form-control"> 
+                                                <option ng-repeat="userRole in userRoles">
+                                                      {{userRole}}  
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

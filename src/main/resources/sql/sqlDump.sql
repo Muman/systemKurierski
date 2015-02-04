@@ -21,7 +21,7 @@ INSERT INTO users_info(
             1, 'Akademicka 2', 'Rzeszów', 'true', 'Context', 'context@com.pl', 'Jan', 
             'Kowalski', '789765678', '35-084');
 
-            INSERT INTO users_info(
+INSERT INTO users_info(
             id, address, city, iscompany, companyname, email, firstname, 
             lastname, phonenumber, postalcode)
             VALUES(
@@ -76,27 +76,27 @@ INSERT INTO package_options(
 INSERT INTO package_options(
             id, description, name, price)
     VALUES (4, 'Paczka kurierska o wadze do 10 kilogramów', 'Paczka do 10 kg', 15.00);
-    INSERT INTO package_options(
+INSERT INTO package_options(
             id, description, name, price)
     VALUES (5, 'Paczka kurierska o wadze do 15 kilogramów', 'Paczka do 15 kg', 25.00);
-    INSERT INTO package_options(
+INSERT INTO package_options(
             id, description, name, price)
     VALUES (6, 'Paczka kurierska o wadze do 25 kilogramów', 'Paczka do 25 kg', 50.00);
-    INSERT INTO package_options(
+INSERT INTO package_options(
             id, description, name, price)
     VALUES (7, 'Paleta do 25 kg', 'Paleta do 25 kg', 80.00);
 
-    INSERT INTO locations(
+INSERT INTO locations(
             id, address, city, name, postal_code)
     VALUES (1, 'Genera³a Stanis³awa Maczka 6', 'Rzeszów', 'Oddzia³ 2 Rzeszów', '34-586');
 
 
-    INSERT INTO locations(
+INSERT INTO locations(
             id, address, city, name, postal_code)
     VALUES (2, 'Wielkopolska 5', 'Rzeszów', 'Sortownia G³ówna Rzeszów', '34-586');
 
     
-    INSERT INTO locations(
+INSERT INTO locations(
             id, address, city, name, postal_code)
     VALUES (3, 'Targowa 21', 'Rzeszów', 'Oddzia³ 3 Rzeszów', '34-522');
 

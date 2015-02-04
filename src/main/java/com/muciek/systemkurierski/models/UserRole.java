@@ -80,4 +80,9 @@ public class UserRole {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public static USER_ROLE[] getAllPosibleUserRoles(){
+        USER_ROLE possibleUserRoles[] = USER_ROLE.class.getEnumConstants();
+        return possibleUserRoles;
+    }
 }

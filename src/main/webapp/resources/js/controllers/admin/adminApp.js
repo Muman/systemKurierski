@@ -7,7 +7,9 @@
 
 'use strict';
 
-var AdminApp = angular.module('AdminApp', ['ngRoute', 'AdminControllers']);
+var AdminApp = angular.module('AdminApp', ['ngRoute', 'AdminControllers','ngAnimate','ngCookies']);
+
+
 
 // Declare app level module which depends on filters, and services
 
@@ -27,5 +29,8 @@ AdminApp.config(['$routeProvider', function ($routeProvider) {
         }).when('/monitorPackage', {
             templateUrl: 'monitorPackage',
             controller: 'AdminMonitorPackageController'
+        }).when('/myProfile', {
+            templateUrl: 'myProfile',
+            controller: 'AdminProfileController'
         }).otherwise({redirectTo: '/courier'});
     }]);
