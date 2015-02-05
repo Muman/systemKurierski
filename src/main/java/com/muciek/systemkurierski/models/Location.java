@@ -25,14 +25,25 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "locations")
 public class Location {
-    
+
     private int id;
     private String address;
     private String postalCode;
     private String city;
     private String name;
+    private Set<Courier> couriers = new HashSet<Courier>();
     private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
-    
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "location")
+    public Set<Courier> getCouriers() {
+        return couriers;
+    }
+
+    public void setCouriers(Set<Courier> couriers) {
+        this.couriers = couriers;
+    }
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
     public Set<PackageStatus> getPackageStatuses() {
@@ -43,7 +54,7 @@ public class Location {
         this.packageStatuses = packageStatuses;
     }
 
-    @Column(name = "name",nullable = false,unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -52,7 +63,7 @@ public class Location {
         this.name = name;
     }
 
-    @Column(name="postal_code",nullable = false, unique = false,length = 10)
+    @Column(name = "postal_code", nullable = false, unique = false, length = 10)
     public String getPostalCode() {
         return postalCode;
     }
@@ -61,7 +72,7 @@ public class Location {
         this.postalCode = postalCode;
     }
 
-    @Column(name="city",nullable = false, unique = false,length = 32)
+    @Column(name = "city", nullable = false, unique = false, length = 32)
     public String getCity() {
         return city;
     }
@@ -69,7 +80,7 @@ public class Location {
     public void setCity(String city) {
         this.city = city;
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
@@ -81,7 +92,7 @@ public class Location {
         this.id = id;
     }
 
-    @Column(name = "address", nullable = false,unique = false)
+    @Column(name = "address", nullable = false, unique = false)
     public String getAddress() {
         return address;
     }

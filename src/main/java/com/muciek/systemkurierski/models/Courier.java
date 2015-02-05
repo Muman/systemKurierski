@@ -6,14 +6,20 @@
 package com.muciek.systemkurierski.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +37,8 @@ public class Courier {
     private String email;
     private Date hireDate;
     private Date dismissDate;
+    private Location location;
+    private Set<Track> tracks = new HashSet<Track>();
 
     public Courier() {
     }
@@ -44,7 +52,6 @@ public class Courier {
         this.hireDate = hireDate;
         this.dismissDate = dismissDate;
     }
-
 
     /**
      * @return the id
@@ -125,7 +132,7 @@ public class Courier {
     public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
-    
+
     @Column(name = "email", nullable = false, unique = true)
     public String getEmail() {
         return email;
@@ -134,7 +141,7 @@ public class Courier {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     /**
      * @return the dismissDate
      */
@@ -150,5 +157,25 @@ public class Courier {
 //        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" )
     public void setDismissDate(Date dismissDate) {
         this.dismissDate = dismissDate;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "courier")
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 }

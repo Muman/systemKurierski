@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,13 +28,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "shipment")
 public class Shipment {
-    
+
     private int id;
     private Recipient recipient;
     private User user;
     private PackageOption packageOption;
     private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
     private Date registerDate;
+    private Set<TrackPoint> trackPoints = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +47,18 @@ public class Shipment {
     public void setId(int id) {
         this.id = id;
     }
+    
+    @JsonIgnore
+    @ManyToMany(mappedBy = "shipments")
+    public Set<TrackPoint> getTrackPoints() {
+        return trackPoints;
+    }
 
-    @Column(name = "register_date",nullable = false)
+    public void setTrackPoints(Set<TrackPoint> trackPoints) {
+        this.trackPoints = trackPoints;
+    }
+
+    @Column(name = "register_date", nullable = false)
     public Date getRegisterDate() {
         return registerDate;
     }
@@ -64,6 +76,7 @@ public class Shipment {
     public void setRecipient(Recipient recipient) {
         this.recipient = recipient;
     }
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username", nullable = false)

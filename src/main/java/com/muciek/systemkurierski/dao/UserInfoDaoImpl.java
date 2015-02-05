@@ -41,7 +41,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
     @Override
     public void update(UserInfo userInfo) {
-        getSessionFactory().getCurrentSession().update(userInfo);
+        getSessionFactory().getCurrentSession().saveOrUpdate(userInfo);
     }
 
     @Override

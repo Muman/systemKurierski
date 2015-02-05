@@ -1,19 +1,4 @@
 
-CREATE  TABLE users (
-  username VARCHAR(45) NOT NULL ,
-  password VARCHAR(60) NOT NULL ,
-  enabled TINYINT NOT NULL DEFAULT 1 ,
-  PRIMARY KEY (username));
- 
-CREATE TABLE user_roles (
-  user_role_id INT(11) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(45) NOT NULL,
-  ROLE VARCHAR(45) NOT NULL,
-  PRIMARY KEY (user_role_id),
-  UNIQUE KEY uni_username_role (ROLE,username),
-  KEY fk_username_idx (username),
-  CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
- 
 INSERT INTO users_info(
             id, address, city, iscompany, companyname, email, firstname, 
             lastname, phonenumber, postalcode)
@@ -102,4 +87,45 @@ INSERT INTO locations(
 
   INSERT INTO locations(
             id, address, city, name, postal_code)
-    VALUES (4, 'POLSKA', 'POLSKA', 'POLSKA', '00-000');    
+    VALUES (4, 'POLSKA', 'POLSKA', 'POLSKA', '00-000');
+
+INSERT INTO recipient(
+            id, address, city, name, phonenumber, postalcode)
+    VALUES (1, 'Cienista 12', 'Rzeszów', 'Karol Karolak', '456789123', '56-456');
+
+    INSERT INTO recipient(
+            id, address, city, name, phonenumber, postalcode)
+    VALUES (2, 'Matuszczaka 20', 'Rzeszów', 'Karol Iwiñski', '456712123', '56-436');
+
+    INSERT INTO recipient(
+            id, address, city, name, phonenumber, postalcode)
+    VALUES (3, 'Piastów 5', 'Rzeszów', 'Adam Witek', '459989123', '56-256');
+
+INSERT INTO shipment(
+            id, register_date, packageoption_id, recipient_id, username)
+    VALUES (1, '2015-02-02', 7, 1, 'jank');
+
+INSERT INTO shipment(
+            id, register_date, packageoption_id, recipient_id, username)
+    VALUES (2, '2015-02-01', 4, 2, 'jank');
+
+INSERT INTO shipment(
+            id, register_date, packageoption_id, recipient_id, username)
+    VALUES (3, '2015-02-01', 2, 3, 'jank');
+
+INSERT INTO couriers(
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id)
+    VALUES (1, '2015-04-23','d.davids@kurierx.pl', '2012-04-23', 'David', '87898787876', 'Davids', 1);
+
+INSERT INTO couriers(
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id)
+    VALUES (2, '2016-04-23','p.jhonson@kurierx.pl', '2011-04-23', 'Piotr', '84898787876', 'Jhonson', 1);
+
+
+INSERT INTO couriers(
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id)
+    VALUES (3, '2015-07-23','j.fergusson@kurierx.pl', '2013-04-23', 'Jan', '83898787876', 'Fergusson', 2);
+
+INSERT INTO package_status(
+            id, name, status_date, courier_id, location_id, shipment_id)
+    VALUES (1, 'Gotowe dla KurierX','2015-02-02', 1, 1, 1);

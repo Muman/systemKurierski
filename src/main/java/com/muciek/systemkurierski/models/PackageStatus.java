@@ -27,10 +27,11 @@ import javax.persistence.Table;
 public class PackageStatus {
 
     private int id;
-    private Location location;
     private String name;
     private Shipment shipment;
+    private Courier courier;
     private Date statusDate;
+    private Location location;
 
     public enum Type {
 
@@ -53,6 +54,27 @@ public class PackageStatus {
         }
     }
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "courier_id", nullable = false)
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "location_id", nullable = false)
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
@@ -71,16 +93,6 @@ public class PackageStatus {
     public void setStatusDate(Date statusDate) {
         this.statusDate = statusDate;
     }
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "location_id", nullable = false)
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
     @Column(name = "name", nullable = false, length = 45)
     public String getName() {
@@ -90,7 +102,7 @@ public class PackageStatus {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipment_id", nullable = false)
