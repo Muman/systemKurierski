@@ -13,7 +13,7 @@
 		destroy-method="close">
 
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://postgres-mmuman.jelastic.dogado.eu/postgres" />
+		<property name="url" value="jdbc:postgresql://postgres119203-mmuman.jelastic.dogado.eu/postgres" />
 		<property name="username" value="webadmin" />
 		<property name="password" value="LF2cpD48wo" /> 
 	</bean>  
