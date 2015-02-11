@@ -191,7 +191,7 @@ public class UserRestController {
 
     }
     
-    @RequestMapping(value = "/changePassword", method = RequestMethod.PUT)
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public @ResponseBody void changeUserPassword(@RequestBody HashMap<String,Object> map ){
         getUserService().changePassword(map);
     }

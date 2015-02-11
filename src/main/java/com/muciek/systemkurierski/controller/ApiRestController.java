@@ -7,6 +7,7 @@ package com.muciek.systemkurierski.controller;
 
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.Location;
+import com.muciek.systemkurierski.models.MobileAppConfiguration;
 import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
@@ -16,11 +17,14 @@ import com.muciek.systemkurierski.service.PackageOptionService;
 import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.RecipientService;
 import com.muciek.systemkurierski.service.ShipmentService;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -99,7 +103,7 @@ public class ApiRestController {
         this.recipientService = recipientService;
     }
     
-    @RequestMapping("/locations")
+    @RequestMapping(value = "/locations", method = RequestMethod.GET )
     public List<Location> getAllLocations(){
         return getLocationService().getAllLocations();
     }
@@ -119,28 +123,37 @@ public class ApiRestController {
         return getCourierService().getCourierById(Integer.valueOf(id));
     }
     
-    @RequestMapping("/packages")
-    public List<Courier> getAllPackages(){
-        return getCourierService().getAllCouriers();
+    @RequestMapping("/shipments")
+    public List<Shipment> getAllShipments(){
+        return getShipmentService().getAll();
     }
     
-    @RequestMapping("/packages/{id}")
-    public Shipment getPackageWithId(@PathVariable("id") String id){
+    @RequestMapping("/shipments/{id}")
+    public Shipment getShipmentWithId(@PathVariable("id") String id){
         return getShipmentService().getById(Integer.valueOf(id));
     }
     
-    @RequestMapping("/packages/{id}/packageStatuses")
-    public List<PackageStatus> getAllPackageStatusesForPackageWithId(@PathVariable("id") String id){
+    @RequestMapping(value = "/shipments/{id}/shipmentStatuses", method = RequestMethod.GET)
+    public List<PackageStatus> getAllShipmentStatusesForShipmentWithId(@PathVariable("id") String id){
         List<PackageStatus> packageStatses = getPackageStatusService().getAllWithPackageId(Integer.valueOf(id));
         return packageStatses;
     }
     
-    @RequestMapping("/packages/{packageId}/packageStatuses/{id}")
-    public PackageStatus getPackageStatusWithId(@PathVariable("id") String id,@PathVariable("packageId") String packageId){
+    @RequestMapping(value = "/shipments/{id}/shipmentStatuses", method = RequestMethod.POST)
+    public void addShipmentStatusesForShipmentWithId(@PathVariable("id") String id,@RequestBody PackageStatus packageStatus){
+        getPackageStatusService().add(packageStatus);
+    }
+    
+    @RequestMapping("/shipments/{shipmentId}/shipmentStatuses/{id}")
+    public PackageStatus getShipmentStatusWithId(@PathVariable("id") String id,@PathVariable("shipmentId") String shipmentId){
         PackageStatus packageStatus = getPackageStatusService().getById(Integer.valueOf(id));
         return packageStatus;
     }
     
+    @RequestMapping("/authenticateCourier")
+    public MobileAppConfiguration authenticateCourier(@RequestBody HashMap<String,Object> credentialsMap){
+        return null;
+    }
     
 //    @RequestMapping("/users")
 //    public @ResponseBody List<Courier> getAllCouriers(){

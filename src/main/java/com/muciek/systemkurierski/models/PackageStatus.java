@@ -64,7 +64,7 @@ public class PackageStatus {
     public void setCourier(Courier courier) {
         this.courier = courier;
     }
-
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id", nullable = false)
     public Location getLocation() {

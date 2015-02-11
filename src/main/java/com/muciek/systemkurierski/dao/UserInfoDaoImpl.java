@@ -55,5 +55,4 @@ public class UserInfoDaoImpl implements UserInfoDao {
         List list = getSessionFactory().getCurrentSession().createQuery("from UserInfo").list();
         return list;
     }
-
 }

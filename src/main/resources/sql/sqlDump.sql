@@ -12,9 +12,7 @@ INSERT INTO users_info(
             VALUES(
             2, 'Piastów 3', 'Rzeszów', 'true', 'Comarch', 'comarch@comarch.pl', 'Janusz', 
             'Filipiak', '345897771', '35-024');
-/**
-Dodaj uzytkownikow
-**/
+
 INSERT INTO users(username,password,enabled)
 VALUES ('admin','$2a$06$xYTm9Xf5expg9p39V6kVEuHCgT5kPAMXAIVoWjFyOvhq0BYdAlEDW', TRUE);
 INSERT INTO users(username,password,enabled)
@@ -25,13 +23,7 @@ INSERT INTO users(username,password,enabled,user_info_id)
 VALUES ('jank','$2a$12$RAaQ1PLiODjC41bEJpIQd.K5rjkHQzbhN2GDFUk5BZUNjk2ehdmSS', TRUE,1);
 INSERT INTO users(username,password,enabled,user_info_id)
 VALUES ('filip','$2a$12$hCjr3HtF3W8C4LmIjyznHOX/RABCWj4tYOL2UaoLwdcscR.XMT.O6', TRUE,2);
-/**
-Dodaj detale uzytwkonikow
-**/
 
-/**
-Dodanie ról u¿ytkownika	
-**/
 
 INSERT INTO user_roles (username, ROLE)
 VALUES ('admin', 'ROLE_USER');
@@ -45,9 +37,6 @@ INSERT INTO user_roles (username, ROLE)
 VALUES ('jank', 'ROLE_USER');
 INSERT INTO user_roles (username, ROLE)
 VALUES ('filip', 'ROLE_USER');
-/**
-Dodanie opcji paczki	
-**/
 
 INSERT INTO package_options(
             id, description, name, price)
