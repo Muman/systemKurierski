@@ -11,15 +11,19 @@ import com.muciek.systemkurierski.models.MobileAppConfiguration;
 import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
+import com.muciek.systemkurierski.service.CourierAuthenticateService;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
+import com.muciek.systemkurierski.service.MobileAppConfigurationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
 import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.RecipientService;
 import com.muciek.systemkurierski.service.ShipmentService;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +31,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import scala.util.parsing.json.JSONObject;
 
 /**
  *
@@ -54,6 +60,28 @@ public class ApiRestController {
     
     @Autowired
     private RecipientService recipientService;
+    
+    @Autowired
+    private CourierAuthenticateService courierAuthenticateService;
+    
+    @Autowired
+    private MobileAppConfigurationService mobileAppConfigurationService;
+
+    public MobileAppConfigurationService getMobileAppConfigurationService() {
+        return mobileAppConfigurationService;
+    }
+
+    public void setMobileAppConfigurationService(MobileAppConfigurationService mobileAppConfigurationService) {
+        this.mobileAppConfigurationService = mobileAppConfigurationService;
+    }
+
+    public CourierAuthenticateService getCourierAuthenticateService() {
+        return courierAuthenticateService;
+    }
+
+    public void setCourierAuthenticateService(CourierAuthenticateService courierAuthenticateService) {
+        this.courierAuthenticateService = courierAuthenticateService;
+    }
 
     public LocationService getLocationService() {
         return locationService;
@@ -150,20 +178,33 @@ public class ApiRestController {
         return packageStatus;
     }
     
-    @RequestMapping("/authenticateCourier")
-    public MobileAppConfiguration authenticateCourier(@RequestBody HashMap<String,Object> credentialsMap){
-        return null;
+    @RequestMapping(value = "/authenticateCourier" , method = RequestMethod.POST)
+    public Map<String,Object> authenticateCourier(@RequestBody HashMap<String,Object> credentialsMap){
+        
+        if(null != credentialsMap){
+            String login = (String)credentialsMap.get("login");
+            String password = (String)credentialsMap.get("password");
+        
+            boolean userAuthenticated = getCourierAuthenticateService().authenticateCourier(login, password);
+            
+            if(userAuthenticated){
+                
+                MobileAppConfiguration appConfig = 
+                        getMobileAppConfigurationService().getAppConfigForCourier(getCourierService().getCourierByLogin(login));
+                
+                Map<String,Object> responseMap = new HashMap<>();
+                responseMap.put("response","true");
+                responseMap.put("appConfig",appConfig);
+                
+                return responseMap;
+            }
+        }
+        
+        throw new ResourceNotFoundException();
     }
     
-//    @RequestMapping("/users")
-//    public @ResponseBody List<Courier> getAllCouriers(){
-//        return getCourierService().getAllCouriers();
-//    }
-//    
-//    @RequestMapping("/couriers/{id}")
-//    public @ResponseBody Courier getCourierWithId(@RequestParam("id") String id){
-//        return getCourierService().getCourierById(Integer.valueOf(id));
-//    }
-    
-    
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public class ResourceNotFoundException extends RuntimeException {
+            
+    }
 }

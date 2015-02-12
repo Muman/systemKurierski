@@ -103,17 +103,16 @@ INSERT INTO shipment(
     VALUES (3, '2015-02-01', 2, 3, 'jank');
 
 INSERT INTO couriers(
-            id, dismiss_date, email, hire_date, name, pesel, surname, location_id)
-    VALUES (1, '2015-04-23','d.davids@kurierx.pl', '2012-04-23', 'David', '87898787876', 'Davids', 1);
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password)
+    VALUES (1, '2015-04-23','d.davids@kurierx.pl', '2012-04-23', 'David', '87898787876', 'Davids', 1,'d.davids','qaz');
 
 INSERT INTO couriers(
-            id, dismiss_date, email, hire_date, name, pesel, surname, location_id)
-    VALUES (2, '2016-04-23','p.jhonson@kurierx.pl', '2011-04-23', 'Piotr', '84898787876', 'Jhonson', 1);
-
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password)
+    VALUES (2, '2016-04-23','p.jhonson@kurierx.pl', '2011-04-23', 'Piotr', '84898737876', 'Jhonson', 1,'p.jhonson','qaz');
 
 INSERT INTO couriers(
-            id, dismiss_date, email, hire_date, name, pesel, surname, location_id)
-    VALUES (3, '2015-07-23','j.fergusson@kurierx.pl', '2013-04-23', 'Jan', '83898787876', 'Fergusson', 2);
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password)
+    VALUES (3, '2015-07-23','j.fergusson@kurierx.pl', '2013-04-23', 'Jan', '83898787876', 'Fergusson', 2,'j.fergusson','qaz');
 
 INSERT INTO package_status(
             id, name, status_date, courier_id, location_id, shipment_id)

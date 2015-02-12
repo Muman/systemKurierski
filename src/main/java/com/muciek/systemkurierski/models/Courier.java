@@ -37,6 +37,8 @@ public class Courier {
     private String email;
     private Date hireDate;
     private Date dismissDate;
+    private String login;
+    private String passwod;
     private Location location;
     private Set<Track> tracks = new HashSet<Track>();
 
@@ -68,6 +70,24 @@ public class Courier {
      */
     public void setId(int id) {
         this.id = id;
+    }
+    
+    @Column(name = "login", nullable = false, unique = true)
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @Column(name = "password", nullable = false, unique = false)
+    public String getPasswod() {
+        return passwod;
+    }
+
+    public void setPasswod(String passwod) {
+        this.passwod = passwod;
     }
 
     /**

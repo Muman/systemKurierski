@@ -15,5 +15,20 @@ public class MobileAppConfiguration {
     
     private Courier courier;
     private List<String> avaliablePackageStatuses;
-    
+
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
+
+    public List<String> getAvaliablePackageStatuses() {
+        return avaliablePackageStatuses;
+    }
+
+    public void setAvaliablePackageStatuses(List<String> avaliablePackageStatuses) {
+        this.avaliablePackageStatuses = avaliablePackageStatuses;
+    }
 }

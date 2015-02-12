@@ -63,4 +63,9 @@ public class CourierServiceImpl implements CourierService{
         
         return allCouriers;
     }
+
+    @Override
+    public Courier getCourierByLogin(String login) {
+        return getCourierDao().getCourierByLogin(login);
+    }
 }

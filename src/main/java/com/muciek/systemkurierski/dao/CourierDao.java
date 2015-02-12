@@ -21,5 +21,7 @@ public interface CourierDao {
 
     public Courier getById(int id);
     
+    public Courier getCourierByLogin(String login);
+    
     public List<Courier> getAll();
 }

@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.dao;
 
 import com.muciek.systemkurierski.models.Courier;
+import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
@@ -64,5 +65,18 @@ public class CourierDaoImpl implements CourierDao{
     public void setSessionFactory(SessionFactory SessionFactory) {
         this.sessionFactory = SessionFactory;
     }
-    
+
+    @Override
+    public Courier getCourierByLogin(String login) {
+        List<Courier> couriers = new ArrayList<>();
+
+        couriers = getSessionFactory().getCurrentSession().createQuery("from Courier where login=?")
+                .setParameter(0, login).list();
+
+        if (couriers.size() > 0) {
+            return couriers.get(0);
+        } else {
+            return null;
+        }
+    }
 }

@@ -37,7 +37,9 @@ public class PackageStatus {
 
         READY_FOR_KURIERX("Gotowe dla KurierX"),
         RECEPTION_SCAN("Odbiór paczki od klienta"),
-        INITIATED("Nadejscie przesy³ki");
+        INITIATED("Nadejscie przesy³ki"),
+        RECIPIENT_ABSENT("Nieudane dorêczenie");
+        
 
         private String s;
 

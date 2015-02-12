@@ -7,12 +7,19 @@ package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.MobileAppConfiguration;
+import com.muciek.systemkurierski.models.PackageStatus;
+import java.util.ArrayList;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Muman
  */
+@Service
+@Transactional
 public class MobileAppConfigurationService {
     
     @Autowired
@@ -38,7 +45,21 @@ public class MobileAppConfigurationService {
     }
     
     public MobileAppConfiguration getAppConfigForCourier(Courier courier){
-        return null;
+        if(null == courier){         
+            return null;
+        }
+        
+        PackageStatus.Type[] packageStatusTypes = PackageStatus.Type.values();
+        List<String> allPackageStatusTypes = new ArrayList<String>();
+        
+        for(PackageStatus.Type packageStatusType : packageStatusTypes){
+            allPackageStatusTypes.add(packageStatusType.getStatus());
+        }
+        
+        MobileAppConfiguration newAppConfig = new MobileAppConfiguration();
+        newAppConfig.setCourier(courier);
+        newAppConfig.setAvaliablePackageStatuses(allPackageStatusTypes);
+        
+        return newAppConfig;
     }
-    
 }

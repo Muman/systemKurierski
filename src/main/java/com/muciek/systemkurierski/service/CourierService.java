@@ -21,5 +21,7 @@ public interface CourierService {
 
     public Courier getCourierById(int id);
     
+    public Courier getCourierByLogin(String login);
+    
     public List<Courier> getAllCouriers();
 }
