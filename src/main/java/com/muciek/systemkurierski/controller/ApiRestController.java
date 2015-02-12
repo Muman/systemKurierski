@@ -193,7 +193,6 @@ public class ApiRestController {
                         getMobileAppConfigurationService().getAppConfigForCourier(getCourierService().getCourierByLogin(login));
                 
                 Map<String,Object> responseMap = new HashMap<>();
-                responseMap.put("response","true");
                 responseMap.put("appConfig",appConfig);
                 
                 return responseMap;
