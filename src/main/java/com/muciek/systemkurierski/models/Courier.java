@@ -72,6 +72,7 @@ public class Courier {
         this.id = id;
     }
     
+    @JsonIgnore
     @Column(name = "login", nullable = false, unique = true)
     public String getLogin() {
         return login;
@@ -81,6 +82,7 @@ public class Courier {
         this.login = login;
     }
 
+    @JsonIgnore
     @Column(name = "password", nullable = false, unique = false)
     public String getPasswod() {
         return passwod;

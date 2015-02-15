@@ -179,7 +179,7 @@ public class ApiRestController {
     }
     
     @RequestMapping(value = "/authenticateCourier" , method = RequestMethod.POST)
-    public Map<String,Object> authenticateCourier(@RequestBody HashMap<String,Object> credentialsMap){
+    public MobileAppConfiguration authenticateCourier(@RequestBody HashMap<String,Object> credentialsMap){
         
         if(null != credentialsMap){
             String login = (String)credentialsMap.get("login");
@@ -188,14 +188,9 @@ public class ApiRestController {
             boolean userAuthenticated = getCourierAuthenticateService().authenticateCourier(login, password);
             
             if(userAuthenticated){
-                
                 MobileAppConfiguration appConfig = 
                         getMobileAppConfigurationService().getAppConfigForCourier(getCourierService().getCourierByLogin(login));
-                
-                Map<String,Object> responseMap = new HashMap<>();
-                responseMap.put("appConfig",appConfig);
-                
-                return responseMap;
+                return appConfig;
             }
         }
         
