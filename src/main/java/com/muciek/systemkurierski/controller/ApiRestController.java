@@ -19,6 +19,8 @@ import com.muciek.systemkurierski.service.PackageOptionService;
 import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.RecipientService;
 import com.muciek.systemkurierski.service.ShipmentService;
+import com.muciek.systemkurierski.utils.DatabaseUtils;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,7 +170,14 @@ public class ApiRestController {
     }
     
     @RequestMapping(value = "/shipments/{id}/shipmentStatuses", method = RequestMethod.POST)
-    public void addShipmentStatusesForShipmentWithId(@PathVariable("id") String id,@RequestBody PackageStatus packageStatus){
+    public void addShipmentStatusesForShipmentWithId(@PathVariable("id") String id,@RequestBody Map<String,Object> params){
+       
+        PackageStatus packageStatus = buildShipmentStatus(params);
+        
+        if(null == packageStatus){
+            throw new BadRequestException();
+        }
+
         getPackageStatusService().add(packageStatus);
     }
     
@@ -196,9 +205,46 @@ public class ApiRestController {
         
         throw new ResourceNotFoundException();
     }
+
+    private PackageStatus buildShipmentStatus(Map<String, Object> params) {
+        //get params 
+        if(null == params){
+            return null;
+        }
+        
+        String statusName = (String)params.get(DatabaseUtils.STATUS_NAME);
+        int locationId = (int)params.get(DatabaseUtils.LOCATION_ID);
+        int courierId = (int)params.get(DatabaseUtils.COURIER_ID);
+        int shipmentId = (int)params.get(DatabaseUtils.SHIPMENT_ID);
+        
+        if(null == statusName || statusName.isEmpty()){
+            return null;
+        }
+        
+        Courier courier = getCourierService().getCourierById(courierId);
+        Shipment shipment = getShipmentService().getById(shipmentId);
+        Location location = getLocationService().getLocationById(locationId);
+        
+        if(null != courier && null != shipment && null != location){
+            PackageStatus newPackageStatus = new PackageStatus();
+            newPackageStatus.setCourier(courier);
+            newPackageStatus.setLocation(location);
+            newPackageStatus.setShipment(shipment);
+            newPackageStatus.setStatusDate(new Date());
+            newPackageStatus.setName(statusName);
+            
+            return newPackageStatus;
+        }
+        return null;
+    }
     
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public class ResourceNotFoundException extends RuntimeException {
-            
+        
     }
+    
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public class BadRequestException extends RuntimeException {
+        
+    } 
 }
