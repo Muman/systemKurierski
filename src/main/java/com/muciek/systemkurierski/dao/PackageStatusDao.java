@@ -24,4 +24,6 @@ public interface PackageStatusDao {
     public List<PackageStatus> getAll();
     
     public List<PackageStatus> getAllWithPackageId(int id);
+    
+    public PackageStatus getLastWithPackageId(int id);
 }

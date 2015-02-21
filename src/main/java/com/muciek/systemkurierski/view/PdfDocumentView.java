@@ -89,12 +89,9 @@ public class PdfDocumentView extends AbstractItextPdfView {
 
     private PdfPCell buildBarCodeSection(Shipment shipment) throws JsonProcessingException, BadElementException {
         PdfPCell barcodeSection = new PdfPCell();
-
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonOfShipment = mapper.writeValueAsString(shipment);
-//                String.valueOf(shipment.getId())
-        BarcodeQRCode qrCode = new BarcodeQRCode(jsonOfShipment, 1, 1, null);
         
+        String shipmentId = String.valueOf(shipment.getId());
+        BarcodeQRCode qrCode = new BarcodeQRCode(shipmentId, 1, 1, null);
         
         Image qrImage = qrCode.getImage();
         barcodeSection.addElement(qrImage);

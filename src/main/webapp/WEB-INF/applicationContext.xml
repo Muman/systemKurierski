@@ -12,9 +12,9 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://postgres119443-kurierx-dev1.jelastic.dogado.eu/postgres" />
-		<property name="username" value="webadmin" />
-		<property name="password" value="cFqai3MOTy" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/courier_system_db" />
+		<property name="username" value="postgres" />
+		<property name="password" value="password" /> 
 	</bean>  
 
         <!-- list mapping resources -->

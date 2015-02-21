@@ -61,4 +61,9 @@ public class PackageStatusServiceImpl implements PackageStatusService {
         return getPackageStatusDao().getAllWithPackageId(id);
     }
 
+    @Override
+    public PackageStatus getLastWithPackageId(int id) {
+        return getPackageStatusDao().getLastWithPackageId(id);
+    }
+
 }

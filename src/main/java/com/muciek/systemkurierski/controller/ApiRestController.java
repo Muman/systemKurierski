@@ -20,6 +20,7 @@ import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.RecipientService;
 import com.muciek.systemkurierski.service.ShipmentService;
 import com.muciek.systemkurierski.utils.DatabaseUtils;
+import com.muciek.systemkurierski.utils.PackageStatusValidator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -172,13 +173,22 @@ public class ApiRestController {
     @RequestMapping(value = "/shipments/{id}/shipmentStatuses", method = RequestMethod.POST)
     public void addShipmentStatusesForShipmentWithId(@PathVariable("id") String id,@RequestBody Map<String,Object> params){
        
-        PackageStatus packageStatus = buildShipmentStatus(params);
+        PackageStatus newPackageStatus = buildShipmentStatus(params);
         
-        if(null == packageStatus){
+        if(null == newPackageStatus){
             throw new BadRequestException();
         }
-
-        getPackageStatusService().add(packageStatus);
+        
+        PackageStatus lastPackageStatus = getPackageStatusService().getLastWithPackageId(Integer.valueOf(id));
+        
+        boolean validationResult = PackageStatusValidator.getInstance().validate(lastPackageStatus, newPackageStatus);
+        
+        if(validationResult){  
+            getPackageStatusService().add(newPackageStatus);
+        }
+        else{
+            throw new BadRequestException();
+        }
     }
     
     @RequestMapping("/shipments/{shipmentId}/shipmentStatuses/{id}")
