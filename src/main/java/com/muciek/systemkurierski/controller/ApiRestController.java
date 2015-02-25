@@ -171,7 +171,7 @@ public class ApiRestController {
     }
     
     @RequestMapping(value = "/shipments/{id}/shipmentStatuses", method = RequestMethod.POST)
-    public void addShipmentStatusesForShipmentWithId(@PathVariable("id") String id,@RequestBody Map<String,Object> params){
+    public Map<String,Object> addShipmentStatusesForShipmentWithId(@PathVariable("id") String id,@RequestBody Map<String,Object> params){
        
         PackageStatus newPackageStatus = buildShipmentStatus(params);
         
@@ -185,15 +185,29 @@ public class ApiRestController {
         
         if(validationResult){  
             getPackageStatusService().add(newPackageStatus);
+            
+            Map<String,Object> result = new HashMap<>();
+            result.put("status_name", newPackageStatus.getName());
+            result.put("location_id", newPackageStatus.getLocation().getId());
+            result.put("shipment_id", newPackageStatus.getShipment().getId());
+            result.put("courier_id", newPackageStatus.getCourier().getId());
+            result.put("shipment_status_id", newPackageStatus.getId());
+            return result;
         }
         else{
             throw new BadRequestException();
         }
     }
     
-    @RequestMapping("/shipments/{shipmentId}/shipmentStatuses/{id}")
+    @RequestMapping(value = "/shipments/{shipmentId}/shipmentStatuses/{id}",method = RequestMethod.GET)
     public PackageStatus getShipmentStatusWithId(@PathVariable("id") String id,@PathVariable("shipmentId") String shipmentId){
         PackageStatus packageStatus = getPackageStatusService().getById(Integer.valueOf(id));
+        return packageStatus;
+    }
+
+    @RequestMapping(value = "/shipments/{shipmentId}/shipmentStatuses/{id}",method = RequestMethod.PUT)
+    public PackageStatus updateShipmentStatusWithId(@PathVariable("id") String id,@PathVariable("shipmentId") String shipmentId, @RequestBody PackageStatus packageStatus){
+        getPackageStatusService().add(packageStatus);
         return packageStatus;
     }
     

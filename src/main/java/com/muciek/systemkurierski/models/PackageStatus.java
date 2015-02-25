@@ -58,7 +58,7 @@ public class PackageStatus {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "courier_id", nullable = false)
+    @JoinColumn(name = "courier_id", nullable = true)
     public Courier getCourier() {
         return courier;
     }
