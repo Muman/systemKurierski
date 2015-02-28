@@ -9,51 +9,53 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://postgres119443-kurierx-dev1.jelastic.dogado.eu/postgres" />
-		<property name="username" value="webadmin" />
-		<property name="password" value="cFqai3MOTy" />
-	</bean>  
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" 
+                  value="org.postgresql.Driver" />
+        <property name="url"
+                  value="jdbc:postgresql://postgres119965-muman-dev.jelastic.dogado.eu/postgres" />
+        <property name="username" value="webadmin" />
+        <property name="password" value="bhq6gaH5C6" />
+    </bean>  
 
-        <!-- list mapping resources -->
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-                <property name="packagesToScan" value="com.muciek.systemkurierski.models" />
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.show_sql">true</prop>
-                                <prop key="hibernate.hbm2ddl.auto">update</prop>
-			</props>
-		</property>
-	</bean>
+    <!-- list mapping resources -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.muciek.systemkurierski.models" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+            </props>
+        </property>
+    </bean>
 
     <!-- - Dependency injection of user dao -->
-	<bean id="userDao" class="com.muciek.systemkurierski.dao.UserDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+    <bean id="userDao" class="com.muciek.systemkurierski.dao.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
 
-	<bean id="myUserDetailsService" class="com.muciek.systemkurierski.service.UserDetailsServiceImpl">
-		<property name="userDao" ref="userDao" />
-	</bean>
+    <bean id="myUserDetailsService" class="com.muciek.systemkurierski.service.UserDetailsServiceImpl">
+        <property name="userDao" ref="userDao" />
+    </bean>
         
-        <bean id="courierDao" class="com.muciek.systemkurierski.dao.CourierDaoImpl">
-            <property name="sessionFactory" ref="sessionFactory"/>
-        </bean>
+    <bean id="courierDao" class="com.muciek.systemkurierski.dao.CourierDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
         
-        <bean id="courierService" class="com.muciek.systemkurierski.service.CourierServiceImpl">
-            <property name="courierDao" ref="courierDao" />
-        </bean>
+    <bean id="courierService" class="com.muciek.systemkurierski.service.CourierServiceImpl">
+        <property name="courierDao" ref="courierDao" />
+    </bean>
 
     <!-- define transaction manager -->
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
         
-        <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
