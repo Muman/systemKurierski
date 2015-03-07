@@ -314,6 +314,12 @@ public class AdminRestController {
         return userWithId;
     }
     
+    @RequestMapping(value = "/scheduleTracks", method = RequestMethod.GET)
+    public @ResponseBody
+    void scheduleTracks() {
+        User userWithId = getUserService().getUserByName(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+    
     @RequestMapping(value = "/allUserRoles", method = RequestMethod.GET)
     public @ResponseBody List<String> getAllPossibleUserRoles(){
         List<String> allPossibleUserRoles = new ArrayList<String>();

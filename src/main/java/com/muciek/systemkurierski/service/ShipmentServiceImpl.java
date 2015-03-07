@@ -12,6 +12,7 @@ import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.models.User;
 import com.muciek.systemkurierski.utils.DatabaseUtils;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -134,5 +135,42 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public List<Shipment> getAllPackagesForUser(String username) {
         return getShipmentDao().getAllPackagesForUser(username);
+    }
+
+    @Override
+    public List<Shipment> getAllShipmentsReadyToProcessInLocation(Location location) {
+        
+        List<Shipment> resultList = new ArrayList<Shipment>();
+        
+        //get ell shipments arrived to location
+        List<Shipment> initiatedStatuses = getAllShipmentsWithStatus(PackageStatus.Type.INITIATED);
+
+        // get all shiments assigned to location to be received by courier
+        List<Shipment> readyForKurierx = getAllShipmentsWithStatus(PackageStatus.Type.READY_FOR_KURIERX);
+        
+        // return them
+        resultList.addAll(initiatedStatuses);
+        resultList.addAll(readyForKurierx);
+        
+        return resultList;
+    }
+
+    @Override
+    public List<Shipment> getAllShipmentsWithStatus(PackageStatus.Type type) {
+         List<Shipment> shipmentsWithStatus = new ArrayList<>();
+         //create sql query     
+         
+         List<Shipment> allShipments = getShipmentDao().getAll();
+         
+         for(Shipment shipment:allShipments){
+             /** get last status for package **/
+             PackageStatus lastStatusForPackage = packageStatusService.getLastWithPackageId(shipment.getId());
+             
+             if(null != lastStatusForPackage && lastStatusForPackage.getName().equals(type.getStatus())){
+                 shipmentsWithStatus.add(shipment);
+             }
+         }
+         
+         return shipmentsWithStatus;
     }
 }

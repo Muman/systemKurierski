@@ -5,6 +5,8 @@
  */
 package com.muciek.systemkurierski.service;
 
+import com.muciek.systemkurierski.models.Location;
+import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Shipment;
 import java.util.List;
 
@@ -24,4 +26,8 @@ public interface ShipmentService {
     public List<Shipment> getAll();
     
     public List<Shipment> getAllPackagesForUser(String username);
+    
+    public List<Shipment> getAllShipmentsReadyToProcessInLocation(Location location);
+    
+    public List<Shipment> getAllShipmentsWithStatus(PackageStatus.Type type);
 }
