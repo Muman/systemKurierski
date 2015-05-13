@@ -27,7 +27,9 @@ public interface ShipmentService {
     
     public List<Shipment> getAllPackagesForUser(String username);
     
-    public List<Shipment> getAllShipmentsReadyToProcessInLocation(Location location);
+    public List<Shipment> getAllShipmentsReadyToScheduleForLocation(Location location);
     
     public List<Shipment> getAllShipmentsWithStatus(PackageStatus.Type type);
+    
+    public List<Shipment> getAllShipmentsWithStatusFromLocation(PackageStatus.Type type,Location location);
 }

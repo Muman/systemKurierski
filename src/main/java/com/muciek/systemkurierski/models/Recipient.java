@@ -82,4 +82,10 @@ public class Recipient {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+    
+    public String buildFullAddress(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(getAddress()).append(" ").append(getCity());
+        return sb.toString();
+    }
 }

@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Shipment {
     private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
     private Date registerDate;
     private Set<TrackPoint> trackPoints = new HashSet<>();
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -49,7 +50,7 @@ public class Shipment {
     }
     
     @JsonIgnore
-    @ManyToMany(mappedBy = "shipments")
+    @ManyToMany(mappedBy = "shipments",fetch = FetchType.EAGER)
     public Set<TrackPoint> getTrackPoints() {
         return trackPoints;
     }

@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.dao;
 
 import com.muciek.systemkurierski.models.Courier;
+import com.muciek.systemkurierski.models.Location;
 import java.util.List;
 
 /**
@@ -24,4 +25,6 @@ public interface CourierDao {
     public Courier getCourierByLogin(String login);
     
     public List<Courier> getAll();
+    
+    public List<Courier> getAllForLocation(Location location);
 }

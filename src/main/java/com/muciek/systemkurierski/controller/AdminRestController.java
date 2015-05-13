@@ -10,6 +10,7 @@ import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.PackageOption;
 import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Shipment;
+import com.muciek.systemkurierski.models.Track;
 import com.muciek.systemkurierski.models.User;
 import com.muciek.systemkurierski.models.UserInfo;
 import com.muciek.systemkurierski.models.UserRole;
@@ -18,12 +19,17 @@ import com.muciek.systemkurierski.service.LocationService;
 import com.muciek.systemkurierski.service.PackageOptionService;
 import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.ShipmentService;
+import com.muciek.systemkurierski.service.TrackScheduleService;
 import com.muciek.systemkurierski.service.UserInfoService;
 import com.muciek.systemkurierski.service.UserService;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.lang.ArrayUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -63,6 +69,17 @@ public class AdminRestController {
 
     @Autowired
     PackageStatusService packageStatusService;
+
+    @Autowired
+    TrackScheduleService trackScheduleService;
+
+    public TrackScheduleService getTrackScheduleService() {
+        return trackScheduleService;
+    }
+
+    public void setTrackScheduleService(TrackScheduleService trackScheduleService) {
+        this.trackScheduleService = trackScheduleService;
+    }
 
     public ShipmentService getShipmentService() {
         return shipmentService;
@@ -138,8 +155,12 @@ public class AdminRestController {
 
     @RequestMapping(value = "/courier", method = RequestMethod.POST)
     public @ResponseBody
-    void addCourier(@RequestBody Courier newCourier) {
-        getCourierService().addCourier(newCourier);
+    void addCourier(@RequestBody Map<String, Object> params) {
+        Courier courier = buildCourierFromParams(params);
+       
+        if(null != courier){            
+            getCourierService().addCourier(courier);
+        }
     }
 
     @RequestMapping(value = "/courier/{id}", method = RequestMethod.DELETE)
@@ -151,8 +172,13 @@ public class AdminRestController {
 
     @RequestMapping(value = "/courier", method = RequestMethod.PUT)
     public @ResponseBody
-    void updateCourier(@RequestBody Courier courierToUpdate) {
-        getCourierService().updateCourier(courierToUpdate);
+    void updateCourier(@RequestBody Map<String, Object> params) {
+        
+        Courier courier = getCourierToUpdateFromParams(params);
+       
+        if(null != courier){            
+            getCourierService().updateCourier(courier);
+        }
     }
 
     /**
@@ -297,13 +323,12 @@ public class AdminRestController {
     void updateUserWithId(@PathVariable("name") String name, @RequestBody UserInfo userInfo) {
         //todo
         User userWithName = getUserService().getUserByName(name);
-        if(null == userWithName.getUserInfo()){
-             getUserInfoService().addUserInfo(userInfo);
-             userWithName.setUserInfo(userInfo);
-             getUserService().updateUser(userWithName);
-        }
-        else{
-             getUserInfoService().updateUserInfo(userInfo);
+        if (null == userWithName.getUserInfo()) {
+            getUserInfoService().addUserInfo(userInfo);
+            userWithName.setUserInfo(userInfo);
+            getUserService().updateUser(userWithName);
+        } else {
+            getUserInfoService().updateUserInfo(userInfo);
         }
     }
 
@@ -313,22 +338,91 @@ public class AdminRestController {
         User userWithId = getUserService().getUserByName(SecurityContextHolder.getContext().getAuthentication().getName());
         return userWithId;
     }
-    
-    @RequestMapping(value = "/scheduleTracks", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/scheduleTracks", method = RequestMethod.POST)
     public @ResponseBody
-    void scheduleTracks() {
-        User userWithId = getUserService().getUserByName(SecurityContextHolder.getContext().getAuthentication().getName());
+    List<Track> scheduleTracks(@RequestBody Map<String, Object> params) {
+        int locationId = (int) params.get("location_id");
+
+        Location selectedLocation = getLocationService().getLocationById(locationId);
+        List<Track> generatedTracks = getTrackScheduleService().generateTracksForLocation(selectedLocation);
+        
+        return generatedTracks;
     }
-    
+
     @RequestMapping(value = "/allUserRoles", method = RequestMethod.GET)
-    public @ResponseBody List<String> getAllPossibleUserRoles(){
+    public @ResponseBody
+    List<String> getAllPossibleUserRoles() {
         List<String> allPossibleUserRoles = new ArrayList<String>();
         UserRole.USER_ROLE[] userRoles = UserRole.getAllPosibleUserRoles();
-      
-        for(UserRole.USER_ROLE role:userRoles){
+
+        for (UserRole.USER_ROLE role : userRoles) {
             allPossibleUserRoles.add(role.toString());
         }
-        
+
         return allPossibleUserRoles;
+    }
+    
+    private Courier buildCourierFromParams(Map<String,Object> params){
+        Courier courier = null;
+        
+        if(null != params && !params.isEmpty()){
+            try{
+                courier = new Courier();
+                courier.setHireDate(new Date((Long) params.get("hireDate")));
+                courier.setDismissDate(new Date((Long) params.get("dismissDate")));
+                courier.setEmail((String) params.get("email"));
+                courier.setLogin((String) params.get("login"));
+                courier.setPasswod((String) params.get("password"));  
+                courier.setPesel((String) params.get("pesel"));                
+                courier.setSurname((String) params.get("surname"));  
+                courier.setName((String) params.get("name"));                  
+                ObjectMapper mapper = new ObjectMapper();
+                int locationId = (Integer) (params.get("location_id"));
+                Location location = getLocationService().getLocationById(locationId);
+               
+                courier.setLocation(location);
+                return courier;
+                
+            }catch(NullPointerException e){
+                
+            }
+        }
+        
+        return null;
+    }
+
+    private Courier getCourierToUpdateFromParams(Map<String, Object> params) {
+        Courier courier = null;
+        
+        if(null != params && !params.isEmpty()){
+            try{
+                courier = courierService.getCourierById((Integer)params.get("id"));
+                
+                if(null == courier){
+                    return null;
+                }
+                
+                courier.setHireDate(new Date((Long) params.get("hireDate")));
+                courier.setDismissDate(new Date((Long) params.get("dismissDate")));
+                courier.setEmail((String) params.get("email"));
+                courier.setLogin((String) params.get("login"));
+                courier.setPasswod((String) params.get("password"));  
+                courier.setPesel((String) params.get("pesel"));                
+                courier.setSurname((String) params.get("surname"));  
+                courier.setName((String) params.get("name"));                  
+                ObjectMapper mapper = new ObjectMapper();
+                int locationId = (Integer) (params.get("location_id"));
+                Location location = getLocationService().getLocationById(locationId);
+               
+                courier.setLocation(location);
+                return courier;
+                
+            }catch(NullPointerException e){
+                
+            }
+        }
+        
+        return null;
     }
 }

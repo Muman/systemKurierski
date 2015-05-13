@@ -6,10 +6,13 @@
 package com.muciek.systemkurierski.dao;
 
 import com.muciek.systemkurierski.models.Courier;
+import com.muciek.systemkurierski.models.Location;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,11 +22,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Transactional
-public class CourierDaoImpl implements CourierDao{
-    
+public class CourierDaoImpl implements CourierDao {
+
     @Autowired
     private SessionFactory sessionFactory;
-    
+
     @Override
     public void add(Courier courier) {
         getSessionFactory().getCurrentSession().save(courier);
@@ -42,8 +45,8 @@ public class CourierDaoImpl implements CourierDao{
     @Override
     public Courier getById(int id) {
         Courier courier = null;
-        courier = (Courier)sessionFactory.getCurrentSession().get(Courier.class, id);
-        return courier;   
+        courier = (Courier) sessionFactory.getCurrentSession().get(Courier.class, id);
+        return courier;
     }
 
     @Override
@@ -78,5 +81,14 @@ public class CourierDaoImpl implements CourierDao{
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<Courier> getAllForLocation(Location location) {
+        List<Courier> couriersInLocation = new ArrayList<>();
+
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Courier.class).add(Restrictions.eq("location_id", location.getId()));
+        couriersInLocation = criteria.list();
+        return couriersInLocation;
     }
 }

@@ -8,6 +8,7 @@ package com.muciek.systemkurierski.service;
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.MobileAppConfiguration;
 import com.muciek.systemkurierski.models.PackageStatus;
+import com.muciek.systemkurierski.models.Track;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -27,7 +28,18 @@ public class MobileAppConfigurationService {
     
     @Autowired
     private ShipmentService shipmentService;
+    
+    @Autowired
+    private TrackService trackService;
 
+    public TrackService getTrackService() {
+        return trackService;
+    }
+
+    public void setTrackService(TrackService trackService) {
+        this.trackService = trackService;
+    }
+    
     public CourierService getCourierService() {
         return courierService;
     }
@@ -56,9 +68,12 @@ public class MobileAppConfigurationService {
             allPackageStatusTypes.add(packageStatusType.getStatus());
         }
         
+        List<Track> courierTracks = getTrackService().getByCourier(courier);
+        
         MobileAppConfiguration newAppConfig = new MobileAppConfiguration();
         newAppConfig.setCourier(courier);
         newAppConfig.setAvaliablePackageStatuses(allPackageStatusTypes);
+        newAppConfig.setTracks(courierTracks);
         
         return newAppConfig;
     }

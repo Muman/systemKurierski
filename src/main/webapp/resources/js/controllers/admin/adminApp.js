@@ -32,5 +32,8 @@ AdminApp.config(['$routeProvider', function ($routeProvider) {
         }).when('/myProfile', {
             templateUrl: 'myProfile',
             controller: 'AdminProfileController'
+        }).when('/track', {
+            templateUrl: 'tracks',
+            controller: 'AdminTracksController'
         }).otherwise({redirectTo: '/courier'});
     }]);

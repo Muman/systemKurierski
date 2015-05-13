@@ -7,6 +7,7 @@ package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.dao.CourierDao;
 import com.muciek.systemkurierski.models.Courier;
+import com.muciek.systemkurierski.models.Location;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,10 @@ public class CourierServiceImpl implements CourierService{
     @Override
     public Courier getCourierByLogin(String login) {
         return getCourierDao().getCourierByLogin(login);
+    }
+
+    @Override
+    public List<Courier> getAllCouriersForLocation(Location location) {
+        return getCourierDao().getAllForLocation(location);
     }
 }

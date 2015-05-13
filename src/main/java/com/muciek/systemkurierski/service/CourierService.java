@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.models.Courier;
+import com.muciek.systemkurierski.models.Location;
 import java.util.List;
 
 /**
@@ -24,4 +25,6 @@ public interface CourierService {
     public Courier getCourierByLogin(String login);
     
     public List<Courier> getAllCouriers();
+    
+    public List<Courier> getAllCouriersForLocation(Location location);
 }

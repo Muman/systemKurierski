@@ -5,6 +5,7 @@
  */
 package com.muciek.systemkurierski.dao;
 
+import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.Shipment;
 import java.util.List;
 

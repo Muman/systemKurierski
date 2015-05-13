@@ -1,4 +1,4 @@
-var AdminControllers = angular.module('AdminControllers', ['ngAnimate','xeditable','ui.bootstrap']);
+var AdminControllers = angular.module('AdminControllers', ['ngAnimate', 'xeditable', 'ui.bootstrap']);
 
 AdminControllers.factory('alertService', ['$timeout', '$filter',
     function ($timeout, $filter) {
@@ -92,7 +92,18 @@ AdminControllers.controller('AdminCourierController', ['$scope', '$http', '$filt
                 console.log('so sad');
             })
         }
+        
+        $scope.getAllLocations = function () {
 
+            $http.get('location/').success(function (response) {
+                $scope.locations = response;
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+        
+        
+        $scope.getAllLocations();
         $scope.getAllCouriers();
     }]);
 
@@ -189,7 +200,6 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
         $scope.getAllPackageOptions();
     }]);
 
-
 AdminControllers.controller('AdminUserController', ['$scope', '$http', function ($scope, $http) {
 
         $scope.selectUser = function () {
@@ -276,7 +286,7 @@ AdminControllers.controller('AdminMonitorPackageController', ['$scope', '$http',
 
     }]);
 
-AdminControllers.controller('AdminProfileController', ['$scope', '$http', 'alertService', function ($scope, $http, alertService,$timeout) {
+AdminControllers.controller('AdminProfileController', ['$scope', '$http', 'alertService', function ($scope, $http, alertService, $timeout) {
 
         $scope.newAdminPassword = '';
         $scope.newAdminPasswordConfirm = '';
@@ -323,4 +333,46 @@ AdminControllers.controller('AdminProfileController', ['$scope', '$http', 'alert
         }
 
         $scope.getUserData();
+    }]);
+
+AdminControllers.controller('AdminTracksController', ['$scope', '$http', 'alertService', function ($scope, $http, alertService, $timeout) {
+
+        $scope.alerts = alertService.alerts;
+
+        $scope.selectLocation = function (location) {
+            $scope.selectedLocation = location;
+            console.log($scope.selectedLocation);
+        };
+
+        $scope.getAllLocations = function () {
+
+            $http.get('location/').success(function (response) {
+                $scope.locations = response;
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+        
+        $scope.getAllTracks = function () {
+
+            $http.get('track/').success(function (response) {
+                $scope.tracks = response;
+            }).error(function () {
+                console.log('so sad');
+            })
+        };
+        
+        $scope.generateTracks = function () {
+            
+          $scope.params = new Object();
+          $scope.params["location_id"] = $scope.selectedLocation.id;
+            
+          $http.post('scheduleTracks/',$scope.params).success(function (response) {
+              $scope.generatedTracks = response;
+          }).error(function () {
+              console.log('Errror while generating tracks');
+          })       
+        };
+       
+        $scope.getAllLocations();
     }]);

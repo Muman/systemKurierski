@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -29,7 +30,36 @@ public class Track {
     private int id;
     private Courier courier;
     private Set<TrackPoint> trackPoints = new HashSet<>();
+    private Date created;
+    private boolean active;
+    private String encodedPoyline;
 
+    @Column(length = 10000,name = "encoded_polyline", nullable = false, updatable = true)
+    public String getEncodedPoyline() {
+        return encodedPoyline;
+    }
+
+    public void setEncodedPoyline(String encodedPoyline) {
+        this.encodedPoyline = encodedPoyline;
+    }
+
+    @Column(name = "create_date", nullable = false, updatable = false)
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -61,5 +91,4 @@ public class Track {
     public void setTrackPoints(Set<TrackPoint> trackPoints) {
         this.trackPoints = trackPoints;
     }
-
 }

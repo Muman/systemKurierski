@@ -1,11 +1,11 @@
-<div id="container">
+ï»¿<div id="container">
     <div class="row" >
         <button class="btn btn-success btn-lg" data-title="Add" data-toggle="modal" data-target="#add" >
-            Dodaj u¿ytkownika</button>
+            Dodaj uÅ¼ytkownika</button>
     </div>
 
     <div class = "row">
-        <h2 class="sub-header">Lista u¿ytkowników</h2>
+        <h2 class="sub-header">Lista uÅ¼ytkownikÃ³w</h2>
         <div>
             <table class="table table-hover table-condensed ">
                 <thead>
@@ -13,28 +13,19 @@
                         <th class="col-md-1">#id</th>
                         <th class="col-md-2">Imie </th>
                         <th class="col-md-2">Nazwisko</th>
-                        <!--                            <th class="col-md-3">pesel</th>-->
-                        <!--                            <th class="col-md-1">Data zatr</th>
-                                                    <th class="col-md-1">Data zwol</th>-->
                         <th class="col-sm-1 col-md-1 col-lg-1">Edytuj</th>
-                        <th class="col-sm-1 col-md-1 col-lg-1">Usuñ</th>
+                        <th class="col-sm-1 col-md-1 col-lg-1">UsuÅ„</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-click="selectUser();" ng-repeat="user in users" data-toggle="modal" data-target="#show">
+                    <tr ng-repeat="user in users" data-toggle="modal" data-target="#show">
                         <td>{{user.username}}</td>
                         <td>{{user.userInfo.firstName}}</td>
                         <td>{{user.userInfo.lastName}}</td>
-                        <!--                            <td>{{user.userInfo.surname}}</td>
-                                                    <td>{{user.pesel}}</td>-->
-                        <!--                            <td>{{user.hireDate| date: 'dd-MM-yyyy'}}</td>
-                                                    <td>{{user.dismissDate| date: 'dd-MM-yyyy'}} </td>-->
-
-                        <td class="col-sm-1 col-md-1 col-lg-1"><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="selectCourier(courier)" data-toggle="modal" data-target="#edit" >
+                        <td class="col-sm-1 col-md-1 col-lg-1"><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="selectUser(user)" data-toggle="modal" data-target="#edit" >
                                     <span class="glyphicon glyphicon-pencil"></span></button></p>
                         </td>
-
-                        <td class="col-sm-1 col-md-1 col-lg-1"><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="selectCourier(courier)" data-toggle="modal" data-target="#delete" >
+                        <td class="col-sm-1 col-md-1 col-lg-1"><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="selectUser(user)" data-toggle="modal" data-target="#delete" >
                                     <span class="glyphicon glyphicon-trash"></span></button></p>
                         </td>                       
                     </tr>
@@ -47,19 +38,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading1">Dodaj u¿ytkownika</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
+                    <h4 class="modal-title custom_align" id="Heading1">Dodaj uÅ¼ytkownika</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Dane u¿ytkownika</h3>
+                            <h3 class="panel-title">Dane uÅ¼ytkownika</h3>
                         </div>
                         <div class="panel-body">
                             <form class="form-horizontal" ng-submit="addUser(newUser)">
                                 <div class="row form-group">
                                     <div class="form-group">
-                                        <label for="name" class="col-sm-3 control-label">Imiê</label>
+                                        <label for="name" class="col-sm-3 control-label">ImiÄ™</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" id="firstName"
                                                    placeholder="Imie" ng-model="newUser.userInfo.firstName">
@@ -95,7 +86,7 @@
                                     <div class="form-group">
                                         <label for="companyName" class="col-sm-3 control-label">Nazwa firmy</label>
                                         <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="companyName" ng-model="newUser.userInfo.companyName">
+                                            <input type="text" class="form-control" id="companyName" ng-model="newUser.userInfo.companyName">
                                         </div>
                                     </div>
 
@@ -107,14 +98,14 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="password" class="col-sm-3 control-label">Has³o</label>
+                                        <label for="password" class="col-sm-3 control-label">HasÅ‚o</label>
                                         <div class="col-sm-8">
                                             <input type="password" class="form-control" id="pass" ng-model="newUser.password">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="password" class="col-sm-3 control-label">PotwierdŸ has³o
+                                        <label for="password" class="col-sm-3 control-label">PotwierdÅº hasÅ‚o
                                         </label>
                                         <div class="col-sm-8">
                                             <input type="password" class="form-control" id="confirmpass">
@@ -150,11 +141,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label  class="col-sm-3 control-label">Prawa dostêpu</label>
+                                        <label  class="col-sm-3 control-label">Prawa dostÄ™pu</label>
                                         <div class="col-sm-8">
                                             <select ng-model="selectedUserRole" class="form-control"> 
                                                 <option ng-repeat="userRole in userRoles">
-                                                      {{userRole}}  
+                                                    {{userRole}}  
                                                 </option>
                                             </select>
                                         </div>
@@ -168,195 +159,160 @@
                                 </div>  
                             </form>
                         </div>
-                        <!--            <div class="panel-footer" style="overflow:hidden;text-align:right;">
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" ng-disabled="!newUser" class="btn btn-success btn-sm" >Submit</button>
-                                                <button type="submit" class="btn btn-default btn-sm">Cancel</button>
-                                            </div>
-                                        </div>  
-                                    </div>-->
                     </div>
                 </div>
-                <!--                <div class="modal-footer ">
-                                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateCourier(selectedCourier)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                                </div> -->
             </div>
             <!-- /.modal-content --> 
         </div>
         <!-- /.modal-dialog --> 
     </div>
 
-
-    <!--    //show details-->
-
-    <div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+       <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title custom_align" id="Heading1">Dodaj u¿ytkownika</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
+                    <h4 class="modal-title custom_align" id="Heading1">Edytuj dane uÅ¼ytkownika</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" ng-model="selectedUser">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Dane u¿ytkownika</h3>
+                            <h3 class="panel-title">Dane uÅ¼ytkownika</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="row form-group">
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-2 control-label">Imiê</label>
-                                    <p>
-                                        {{selectedUser.userInfo.firstName}}
-                                    </p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-2 control-label">Nazwisko</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.lastName}}
-                                        </p>
+                            <form class="form-horizontal" ng-submit="updateUser(selectedUser)">
+                                <div class="row form-group">
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">ImiÄ™</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="firstName"
+                                                   placeholder="Imie" ng-model="selectedUser.userInfo.firstName">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="col-sm-2 control-label">email</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.email}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">Nazwisko</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="lastName"
+                                                   placeholder="Nazwisko" ng-model="selectedUser.userInfo.lastName">
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="isCompany" class="col-sm-2 control-label">Firma</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.company}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-3 control-label">email</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group input-group-sm">
+                                                <span class="input-group-addon">@</span>
+                                                <input type="email" class="form-control" placeholder="email" ng-model="selectedUser.userInfo.email">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="companyName" class="col-sm-2 control-label">Nazwa firmy</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.companyName}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="isCompany" class="col-sm-3 control-label">Firma</label>
+                                        <div class="col-sm-8">
+                                            <div class="input-group input-group-sm checkbox">
+                                                <!--                                                                                            <span class="input-group-addon">@</span>-->
+                                                <input type="checkbox" class="form-control" id="isCompany" ng-model="selectedUser.userInfo.company" checked="false">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="username" class="col-sm-2 control-label">Login</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.username}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="companyName" class="col-sm-3 control-label">Nazwa firmy</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="companyName" ng-model="selectedUser.userInfo.companyName">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">Nr telefonu</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.phoneNumber}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-3 control-label">Login</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="username" ng-model="selectedUser.username">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="city" class="col-sm-2 control-label">Miasto</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.city}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-3 control-label">HasÅ‚o</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="pass" ng-model="selectedUser.password">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">Ulica i numer domu</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.address}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-3 control-label">PotwierdÅº hasÅ‚o
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" id="confirmpass">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">Kod pocztowy</label>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            {{selectedUser.userInfo.postalCode}}
-                                        </p>
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Nr telefonu</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="flat" ng-model="selectedUser.userInfo.phoneNumber">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.modal-content --> 
-            </div>
-            <!-- /.modal-dialog --> 
-        </div>
 
-        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title custom_align" id="Heading1">Edytuj Dane</h4>
-                    </div>
-                    <div class="modal-body" ng-model="selectedCourier">
-                        <div class="form-group">
-                            <input class="form-control " ng-model="selectedCourier.name" type="text" ng-pattern="/^([a-zA-Z])*$/" required min="3"/>
-                        </div>
-                        <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="city" class="col-sm-3 control-label">Miasto</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="city" ng-model="selectedUser.userInfo.city">
+                                        </div>
+                                    </div>
 
-                            <input class="form-control " ng-model="selectedCourier.surname" type="text" required min="3" ng-pattern="/^([a-zA-Z])*$/"/>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control " ng-model="selectedCourier.pesel" type="text" required min="11" max="11" ng-pattern="/^([0-9]{11})$/"/>
-                        </div>
-                        <div class="form-group" >
-                            <input class="form-control " ng-model="selectedCourier.hireDate"  type="date"/>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control " ng-model="selectedCourier.dismissDate" type="date"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateCourier(selectedCourier)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Aktualizuj</button>
-                    </div> 
-                </div>
-                <!-- /.modal-content --> 
-            </div>
-            <!-- /.modal-dialog --> 
-        </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Ulica i numer domu</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="street" ng-model="selectedUser.userInfo.address">
+                                        </div>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Kod pocztowy</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="flat" ng-model="selectedUser.userInfo.postalCode">
+                                        </div>
+                                    </div>
 
-
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" ng-model="selectedCourier">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title custom_align" id="Heading">Usuñ u¿ytkownika</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy na pewno chcesz usun¹æ?</div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success"  ng-click="deleteCourier(selectedCourier)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-                        <div class="form-group">
-
-                            <input class="form-control " ng-model="selectedCourier.name" type="text">
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Prawa dostÄ™pu</label>
+                                        <div class="col-sm-8">
+                                            <select ng-model="selectedUserRole" class="form-control"> 
+                                                <option ng-repeat="userRole in userRoles">
+                                                    {{userRole}}  
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>               
+                                <div class="modal-footer ">
+                                    <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Â Aktualizuj</button>
+                                </div>   
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /.modal-content --> 
         </div>
+        <!-- /.modal-dialog --> 
+    </div>
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" ng-model="selectedUser">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
+                    <h4 class="modal-title custom_align" id="Heading">UsuÅ„ uÅ¼ytkownika</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy na pewno chcesz usunÄ…Ä‡?</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success"  ng-click="deleteUser(selectedUser)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span>Â Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Â No</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content --> 
     </div>
 </div>

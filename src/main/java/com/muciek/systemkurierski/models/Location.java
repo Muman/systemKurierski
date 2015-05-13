@@ -35,7 +35,7 @@ public class Location {
     private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location" ,fetch = FetchType.EAGER)
     public Set<Courier> getCouriers() {
         return couriers;
     }
@@ -45,7 +45,7 @@ public class Location {
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
     public Set<PackageStatus> getPackageStatuses() {
         return packageStatuses;
     }
@@ -99,5 +99,15 @@ public class Location {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    
+    /**
+     * 
+     * @return full address containing city name, street, and building number
+     */
+    public String buildFullAddress(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(getAddress()).append(" ").append(getCity());
+        return sb.toString();
     }
 }

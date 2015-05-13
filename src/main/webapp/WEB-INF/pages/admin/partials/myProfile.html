@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+﻿<div id="page-wrapper">
     <div class="alert-container">
         <alert class="alert-frame" ng-repeat="alert in alerts"
                type="{{alert.type}}" close="alertService.closeAlert($index)">{{alert.msg}}</alert>
@@ -8,7 +8,7 @@
         <form class="form-horizontal" ng-submit="updateUserInfo(updatedUserInfo)">
             <div class="row form-group">
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">Imie</label>
+                    <label for="name" class="col-sm-2 control-label">Imię</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="firstName"
                                placeholder="Imie" ng-model="updatedUserInfo.firstName">
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label  class="col-sm-2 control-label">Kod pocztwoy</label>
+                    <label  class="col-sm-2 control-label">Kod pocztowy</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="flat" ng-model="updatedUserInfo.postalCode">
                     </div>
@@ -79,7 +79,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success btn-sm"  >Submit</button>
+                    <button type="submit" class="btn btn-success btn-sm">Edytuj</button>
                     <!--                            <button type="submit" class="btn btn-default btn-sm">Cancel</button>-->
                 </div>
             </div>  
@@ -87,7 +87,7 @@
     </div>
 
     <div class="row"> 
-        <h2 class="sub-header">Zmie� Has�o</h2>
+        <h2 class="sub-header">Zmień hasło</h2>
         <form class="form-horizontal" ng-submit="changePassword()">
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">Login</label>
@@ -97,13 +97,13 @@
             </div>
 
             <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Haslo</label>
+                <label for="password" class="col-sm-2 control-label">Hasło</label>
                 <p class="col-sm-10">
                     <input type="password" class="form-control" id="pass" ng-model="newAdminPassword">
                 </p>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Potwierdz haslo
+                <label for="password" class="col-sm-2 control-label">Potwierdź hasło
                 </label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="confirmpass" ng-model="newAdminPasswordConfirm">
@@ -111,7 +111,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success btn-sm"  >Zmie� Has�o</button>
+                    <button type="submit" class="btn btn-success btn-sm"  >Zmień hasło</button>
                     <!--                            <button type="submit" class="btn btn-default btn-sm">Cancel</button>-->
                 </div>
             </div>  

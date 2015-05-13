@@ -40,7 +40,6 @@ public class PackageStatus {
         INITIATED("Nadejscie przesy³ki"),
         RECIPIENT_ABSENT("Nieudane dorêczenie");
         
-
         private String s;
 
         private Type(String s) {

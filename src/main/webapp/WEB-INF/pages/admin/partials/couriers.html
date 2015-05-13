@@ -1,11 +1,11 @@
-<div id="container">
+﻿<div id="container">
     <div class="row" >
         <button class="btn btn-success btn-lg" data-title="Add" data-toggle="modal" data-target="#add" >
             Dodaj kuriera</button>
     </div>
 
     <div class ="row">
-        <h2 class="sub-header">Lista kurier�w</h2>
+        <h2 class="sub-header">Lista kurierów</h2>
         <div>
             <table class="table table-condensed">
                 <thead>
@@ -17,7 +17,7 @@
                         <th class="col-md-1">Data zatr</th>
                         <th class="col-md-1">Data zwol</th>
                         <th class="col-sm-1 col-md-1 col-lg-1">Edytuj</th>
-                        <th class="col-sm-1 col-md-1 col-lg-1">Usu�</th>
+                        <th class="col-sm-1 col-md-1 col-lg-1">Usuń</th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="courier in couriers">
@@ -46,7 +46,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title custom_align" id="Heading1">Dodaj Kuriera</h4>
                 </div>
                 <div class="modal-body">
@@ -59,7 +59,7 @@
                                 <div class="row form-group">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-md-3 control-label">Imie</label>
-                                        <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Imi�" type="text" ng-model="newCourier.name" ng-pattern="/^([a-zA-Z])*$/" required min="3" /></div>
+                                        <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Imię" type="text" ng-model="newCourier.name" ng-pattern="/^([a-zA-Z])*$/" required min="3" /></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-md-3 control-label">Nazwisko</label>
@@ -80,19 +80,47 @@
 
                                     <div class="form-group">
                                         <label  class="col-sm-2 col-md-3 control-label">Data zatrudnienia</label>
-                                        <div class="col-sm-10 col-md-9"> <input class="form-control"  type="date" ng-model="newCourier.hireDate" required min="1" />      </div>
+                                        <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Data zatrudnienia"  type="date" ng-model="newCourier.hireDate" required min="1" /></div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="city" class="col-sm-2 col-md-3 control-label">Data zwolnienia</label>
-                                        <div class="col-sm-10 col-md-9"> <input class="form-control"  type="date" ng-model="newCourier.dismissDate" required min="1" />  </div>
+                                        <label class="col-sm-2 col-md-3 control-label">Data zwolnienia</label>
+                                        <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Data zwolnienia" type="date" ng-model="newCourier.dismissDate" required min="1" /></div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-md-3 control-label">Login</label>
+                                        <div class="col-sm-10 col-md-9"><input type="text" placeholder="Login" class="form-control" id="username" ng-model="newCourier.login"></div>
+                                    </div>                               
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-md-3 control-label">Hasło</label>
+                                        <div class="col-sm-10 col-md-9"><input type="password"  placeholder="Hasło" class="form-control" id="pass" ng-model="newCourier.password"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-md-3 control-label">Potwierdź hasło
+                                        </label>
+                                        <div class="col-sm-10 col-md-9">
+                                            <input type="password" placeholder="Potwierdź hasło" class="form-control" id="confirmpass">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label  class="col-sm-2 col-md-3 control-label">Oddział</label>
+                                        <div class="col-sm-10 col-md-9">
+                                            <select ng-model="newCourier.location_id" class="form-control" 
+                                                    ng-options="location.id as location.name for location in locations">  
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col-sm-offset-2 col-sm-10 col-md-9">
+                                            <button type="submit" class="btn btn-success btn-sm">Dodaj</button>
+                                        </div>
+                                    </div>      
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col-sm-offset-2 col-sm-10 col-md-9">
-                                        <button type="submit" class="btn btn-success btn-sm"  >Dodaj</button>
-                                    </div>
-                                </div>  
                             </form>
                         </div>
                     </div>
@@ -103,58 +131,98 @@
         <!-- /.modal-dialog --> 
     </div>
 
-
     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title custom_align" id="Heading1">Edytuj Dane</h4>
                 </div>
                 <div class="modal-body" ng-model="selectedCourier">
-                    <div class="form-group">
-                        <input class="form-control " ng-model="selectedCourier.name" type="text" ng-pattern="/^([a-zA-Z])*$/" required min="3"/>
-                    </div>
-                    <div class="form-group">
+                        <div class="row form-group">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Imie</label>
+                                <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Imię" type="text" ng-model="selectedCourier.name" ng-pattern="/^([a-zA-Z])*$/" required min="3" /></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Nazwisko</label>
+                                <div class="col-sm-10 col-md-9"><input class="form-control" placeholder="Nazwisko" type="text" ng-model="selectedCourier.surname" required min="3" ng-pattern="/^([a-zA-Z])*$/"></div>
+                            </div>
 
-                        <input class="form-control " ng-model="selectedCourier.surname" type="text" required min="3" ng-pattern="/^([a-zA-Z])*$/"/>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control " ng-model="selectedCourier.pesel" type="text" required min="11" max="11" ng-pattern="/^([0-9]{11})$/"/>
-                    </div>
-                    <div class="form-group" >
-                        <input class="form-control " ng-model="selectedCourier.hireDate"  type="date"/>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control " ng-model="selectedCourier.dismissDate" type="date"/>
-                    </div>
+                            <div class="form-group">
+                                <label  class="col-sm-2 col-md-3 control-label">Email</label>
+                                <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Email" type="text" ng-model="selectedCourier.email" required min="1" /></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Pesel</label>
+
+                                <div class=" col-sm-10 col-md-9"> <input class="form-control" placeholder="Pesel" type="text" ng-model="selectedCourier.pesel" required min="11" max="11" ng-pattern="/^([0-9]{11})$/"></div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label  class="col-sm-2 col-md-3 control-label">Data zatrudnienia</label>
+                                <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Data zatrudnienia"  type="date" ng-model="selectedCourier.hireDate" required min="1" /></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Data zwolnienia</label>
+                                <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Data zwolnienia" type="date" ng-model="selectedCourier.dismissDate" required min="1" /></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Login</label>
+                                <div class="col-sm-10 col-md-9"><input type="text" placeholder="Login" class="form-control" id="username" ng-model="selectedCourier.login"></div>
+                            </div>                               
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Hasło</label>
+                                <div class="col-sm-10 col-md-9"><input type="password"  placeholder="Hasło" class="form-control" id="pass" ng-model="selectedCourier.password"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label">Potwierdź hasło
+                                </label>
+                                <div class="col-sm-10 col-md-9">
+                                    <input type="password" placeholder="Potwierdź hasło" class="form-control" id="confirmpass">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label  class="col-sm-2 col-md-3 control-label">Oddział</label>
+                                <div class="col-sm-10 col-md-9">
+                                    <select ng-model="selectedCourier.location_id" class="form-control" 
+                                            ng-options="location.id as location.name for location in locations">  
+                                    </select>
+                                </div>
+                            </div>   
+                        </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateCourier(selectedCourier)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span>�Aktualizuj</button>
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateCourier(selectedCourier)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span>Aktualizuj</button>
                 </div> 
             </div>
             <!-- /.modal-content --> 
         </div>
         <!-- /.modal-dialog --> 
     </div>
-
-
-
+    
     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" ng-model="selectedCourier">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
-                    <h4 class="modal-title text-center" id="Heading">Usu� kuriera: {{selectedCourier.name}} {{selectedCourier.surname}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title text-center" id="Heading">Usuń kuriera: {{selectedCourier.name}} {{selectedCourier.surname}}</h4>
                 </div>
                 <div class="modal-body">
 
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy chcesz usun�� tego kuriera?</div>
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy chcesz usunąć tego kuriera?</div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success"  ng-click="deleteCourier(selectedCourier)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span>�Tak</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>�Nie</button>
+                    <button type="button" class="btn btn-success"  ng-click="deleteCourier(selectedCourier)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span> Tak</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Nie</button>
                 </div>
             </div>
         </div>

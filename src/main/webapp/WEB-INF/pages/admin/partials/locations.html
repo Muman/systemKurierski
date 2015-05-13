@@ -1,4 +1,4 @@
-<div id="container">
+ï»¿<div id="container">
 
     <div class="row" >
         <button class="btn btn-success btn-lg" data-title="Add" data-toggle="modal" data-target="#add" >
@@ -17,7 +17,7 @@
                         <th class="col-sm-2 col-md-2 col-lg-2">Postal Code</th>
                         <th class="col-sm-2 col-md-2 col-lg-2">Name</th>
                         <th class="col-sm-1 col-md-1 col-lg-1">Edytuj</th>
-                        <th class="col-sm-1 col-md-1 col-lg-1">Usuñ</th>
+                        <th class="col-sm-1 col-md-1 col-lg-1">UsuÅ„</th>
                     </tr>
                 </thead>
                 <tbody ng-repeat="location in locations">
@@ -45,7 +45,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
                     <h4 class="modal-title custom_align" id="Heading1">Dodaj lokalizacje</h4>
                 </div>
                 <div class="modal-body">
@@ -58,22 +58,22 @@
                                 <div class="row form-group">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-md-3 control-label">Adres</label>
-                                        <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Enter address" type="text" ng-model="newLocation.address" required min="1" /> </div>
+                                        <div class="col-sm-10 col-md-9"> <input class="form-control" type="text" ng-model="newLocation.address" required min="1" /> </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-md-3 control-label">Kod pocztowy</label>
-                                        <div class="col-sm-10 col-md-9"><input class="form-control" placeholder="Enter Postal Code" type="text" ng-model="newLocation.postalCode" ng-pattern="/(^\d{2,3}-\d{2,3}$)/" required min="1"/></div>
+                                        <div class="col-sm-10 col-md-9"><input class="form-control" type="text" ng-model="newLocation.postalCode" ng-pattern="/(^\d{2,3}-\d{2,3}$)/" required min="1"/></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label  class="col-sm-2 col-md-3 control-label">Miasto</label>
-                                        <div class="col-sm-10 col-md-9"> <input class="form-control" placeholder="Enter city" type="text" ng-model="newLocation.city" required min="3" /></div>
+                                        <div class="col-sm-10 col-md-9"> <input class="form-control" type="text" ng-model="newLocation.city" required min="3" /></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 col-md-3 control-label">Nazwa</label>
 
-                                        <div class=" col-sm-10 col-md-9"> <input class="form-control" placeholder="Enter location name" type="text" ng-model="newLocation.name" required min="3" /></div>
+                                        <div class=" col-sm-10 col-md-9"> <input class="form-control" type="text" ng-model="newLocation.name" required min="3" /></div>
 
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
                     <h4 class="modal-title custom_align" id="Heading1">Edytuj</h4>
                 </div>
                 <div class="modal-body" ng-model="selectedLocation">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateLocation(selectedLocation)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span> Aktualizuj</button>
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="updateLocation(selectedLocation)" data-dismiss="modal"><span class="glyphicon glyphicon-ok-sign"></span>Â Aktualizuj</button>
                 </div> 
             </div>
             <!-- /.modal-content --> 
@@ -128,11 +128,11 @@
         <div class="modal-dialog">
             <div class="modal-content" ng-model="selectedLocation">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title text-center" id="Heading">Usuñ ten oddzia³: {{selectedLocation.name}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
+                    <h4 class="modal-title text-center" id="Heading">UsuÅ„ ten oddziaÅ‚: {{selectedLocation.name}}</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy na pewno chcesz usun¹æ ten oddzia³?</div>
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Czy na pewno chcesz usunÄ…Ä‡ ten oddziaÅ‚?</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success"  ng-click="deleteLocation(selectedLocation)" data-dismiss="modal" ><span class="glyphicon glyphicon-ok-sign"></span>Tak</button>

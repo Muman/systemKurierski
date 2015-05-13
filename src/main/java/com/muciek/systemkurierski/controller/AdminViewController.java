@@ -50,4 +50,9 @@ public class AdminViewController {
     public String getProfileView() {
         return "admin/partials/myProfile";
     }
+    
+    @RequestMapping("/tracks")
+    public String getTracksView() {
+        return "admin/partials/tracks";
+    }
 }

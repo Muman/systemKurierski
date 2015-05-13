@@ -42,18 +42,31 @@ public class Courier {
     private Location location;
     private Set<Track> tracks = new HashSet<Track>();
 
-    public Courier() {
-    }
-
-    public Courier(int id, String name, String surname, String pesel, String email, Date hireDate, Date dismissDate) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.pesel = pesel;
-        this.email = email;
-        this.hireDate = hireDate;
-        this.dismissDate = dismissDate;
-    }
+//    public Courier() {
+//    }
+//
+//    public Courier(int id, String name, String surname, String pesel, String email, Date hireDate, Date dismissDate) {
+//        this.id = id;
+//        this.name = name;
+//        this.surname = surname;
+//        this.pesel = pesel;
+//        this.email = email;
+//        this.hireDate = hireDate;
+//        this.dismissDate = dismissDate;
+//    }
+//
+//    public Courier(int id, String name, String surname, String pesel, String email, Date hireDate, Date dismissDate, String login, String passwod, Location location) {
+//        this.id = id;
+//        this.name = name;
+//        this.surname = surname;
+//        this.pesel = pesel;
+//        this.email = email;
+//        this.hireDate = hireDate;
+//        this.dismissDate = dismissDate;
+//        this.login = login;
+//        this.passwod = passwod;
+//        this.location = location;
+//    }
 
     /**
      * @return the id
@@ -72,7 +85,6 @@ public class Courier {
         this.id = id;
     }
     
-    @JsonIgnore
     @Column(name = "login", nullable = false, unique = true)
     public String getLogin() {
         return login;

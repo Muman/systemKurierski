@@ -5,9 +5,13 @@
  */
 package com.muciek.systemkurierski.dao;
 
+import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.Shipment;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,7 +48,7 @@ public class ShipmentDaoImpl implements ShipmentDao{
 
     @Override
     public List<Shipment> getAll() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from Shipment").list();
+        List list = getSessionFactory().getCurrentSession().createCriteria(Shipment.class).list();
         return list;
     }
 
@@ -58,8 +62,11 @@ public class ShipmentDaoImpl implements ShipmentDao{
 
     @Override
     public List<Shipment> getAllPackagesForUser(String username) {
-        List<Shipment> userPackages = getSessionFactory().getCurrentSession().createQuery("from Shipment where username =:username").setString("username", username).list();
         
+        //Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Shipment.class).add(Restrictions.eq("username", username));
+        Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Shipment.class).createAlias("user", "u").add(Restrictions.eq("u.username", username));
+        
+        List<Shipment> userPackages = criteria.list();
         return userPackages;
     }
 }

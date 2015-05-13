@@ -28,10 +28,21 @@ import javax.persistence.ManyToOne;
 public class TrackPoint {
 
     private int id;
+    private int orderIndex;
     private double longitude;
     private double latitude;
+    private boolean visited;
     private Track track;
     private Set<Shipment> shipments = new HashSet<>();
+
+    @Column(name = "order_index",nullable = false,updatable = true)
+    public int getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(int orderIndex) {
+        this.orderIndex = orderIndex;
+    }
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "TrackPoint_Shipment",
@@ -58,6 +69,15 @@ public class TrackPoint {
         this.id = id;
     }
 
+    @Column(name = "visited",nullable = false,updatable = true)
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+    
     @Column(name = "longitude", nullable = false, unique = false)
     public double getLongitude() {
         return longitude;

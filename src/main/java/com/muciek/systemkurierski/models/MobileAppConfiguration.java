@@ -15,6 +15,7 @@ public class MobileAppConfiguration {
     
     private Courier courier;
     private List<String> avaliablePackageStatuses;
+    private List<Track> tracks;
 
     public Courier getCourier() {
         return courier;
@@ -30,5 +31,13 @@ public class MobileAppConfiguration {
 
     public void setAvaliablePackageStatuses(List<String> avaliablePackageStatuses) {
         this.avaliablePackageStatuses = avaliablePackageStatuses;
+    }
+
+    public List<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
     }
 }

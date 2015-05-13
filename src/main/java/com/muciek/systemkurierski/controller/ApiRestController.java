@@ -11,6 +11,7 @@ import com.muciek.systemkurierski.models.MobileAppConfiguration;
 import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
+import com.muciek.systemkurierski.models.Track;
 import com.muciek.systemkurierski.service.CourierAuthenticateService;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
@@ -19,6 +20,8 @@ import com.muciek.systemkurierski.service.PackageOptionService;
 import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.RecipientService;
 import com.muciek.systemkurierski.service.ShipmentService;
+import com.muciek.systemkurierski.service.TrackPointService;
+import com.muciek.systemkurierski.service.TrackService;
 import com.muciek.systemkurierski.utils.DatabaseUtils;
 import com.muciek.systemkurierski.utils.PackageStatusValidator;
 import java.util.Date;
@@ -69,6 +72,28 @@ public class ApiRestController {
     
     @Autowired
     private MobileAppConfigurationService mobileAppConfigurationService;
+    
+    @Autowired
+    private TrackService trackService;
+    
+    @Autowired
+    private TrackPointService trackPointService;
+
+    public TrackService getTrackService() {
+        return trackService;
+    }
+
+    public void setTrackService(TrackService trackService) {
+        this.trackService = trackService;
+    }
+
+    public TrackPointService getTrackPointService() {
+        return trackPointService;
+    }
+
+    public void setTrackPointService(TrackPointService trackPointService) {
+        this.trackPointService = trackPointService;
+    }
 
     public MobileAppConfigurationService getMobileAppConfigurationService() {
         return mobileAppConfigurationService;
@@ -271,4 +296,26 @@ public class ApiRestController {
     public class BadRequestException extends RuntimeException {
         
     } 
+    
+    @RequestMapping("/couriers/{id}/tracks")
+    public List<Track> getAllActiveTracksForCourier(@PathVariable("id") String courierId){
+        Courier courier = getCourierService().getCourierById(Integer.valueOf(courierId));
+        
+        List<Track> courierTracks = getTrackService().getByCourier(courier);
+        return courierTracks;
+    }
+    
+//    @RequestMapping("/couriers/{courier_id}/tracks/{track_id}")
+//    public Track getTrackForCourier(@PathVariable("courier_id") String courierId, @PathVariable("track_id") String trackId){
+//        List<Track> courierTracks = getTrackService().getByCourier(courier);
+//}
+    @RequestMapping("/tracks")
+    public List<Track> getAllTracks(){
+        return getTrackService().getAll();
+    }
+    
+    @RequestMapping("/tracks/{id}")
+    public Track getTrackWithId(@PathVariable("id") String id){
+        return getTrackService().getById(Integer.valueOf(id));
+    }
 }

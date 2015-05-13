@@ -142,13 +142,7 @@ public class UserRestController {
 
     @RequestMapping(value = "/newPackage", method = RequestMethod.POST)
     public void registerShipment(@RequestBody Shipment shipment) {
-
         getShipmentService().add(shipment);
-//        Shipment newShipment = getShipmentService().getById(shipment.getId());
-//
-//        ModelAndView mav = new ModelAndView("/pdf", "shipment", newShipment);
-//
-//        return mav;
     }
     
     @RequestMapping(value = "/package/{id}", method = RequestMethod.GET)
@@ -196,6 +190,4 @@ public class UserRestController {
         getUserService().changePassword(map);
     }
     
-    
-
 }
