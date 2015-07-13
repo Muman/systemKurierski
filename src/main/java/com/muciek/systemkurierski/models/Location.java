@@ -31,6 +31,7 @@ public class Location {
     private String postalCode;
     private String city;
     private String name;
+    private boolean active;
     private Set<Courier> couriers = new HashSet<Courier>();
     private Set<PackageStatus> packageStatuses = new HashSet<PackageStatus>();
 
@@ -63,6 +64,15 @@ public class Location {
         this.name = name;
     }
 
+    @Column(nullable = false)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Column(name = "postal_code", nullable = false, unique = false, length = 10)
     public String getPostalCode() {
         return postalCode;
@@ -82,7 +92,7 @@ public class Location {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false, unique = true)
     public int getId() {
         return id;

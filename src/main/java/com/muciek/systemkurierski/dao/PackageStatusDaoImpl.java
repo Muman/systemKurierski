@@ -39,7 +39,8 @@ public class PackageStatusDaoImpl implements PackageStatusDao{
 
     @Override
     public void delete(PackageStatus packageStatus) {
-        getSessionFactory().getCurrentSession().delete(packageStatus);
+        packageStatus.setActive(false);
+        update(packageStatus);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class PackageStatusDaoImpl implements PackageStatusDao{
 
     @Override
     public List<PackageStatus> getAll() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from PackageStatus").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from PackageStatus where active = true").list();
         return list;
     }
 

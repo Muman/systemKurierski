@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.muciek.systemkurierski.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "package_status")
-public class PackageStatus {
+public class PackageStatus implements Serializable {
 
     private int id;
     private String name;
@@ -32,13 +28,15 @@ public class PackageStatus {
     private Courier courier;
     private Date statusDate;
     private Location location;
+    private boolean active;
 
     public enum Type {
-
-        READY_FOR_KURIERX("Gotowe dla KurierX"),
-        RECEPTION_SCAN("Odbiór paczki od klienta"),
-        INITIATED("Nadejscie przesy³ki"),
-        RECIPIENT_ABSENT("Nieudane dorêczenie");
+        
+        READY_FOR_KURIERX("Oczekuje na odbiór przez KurierX"),
+        COLLECTED("Odebrano od nadawcy"),
+        PACKAGE_ARRIVED("Nadejscie przesy³ki"),
+        RECIPIENT_ABSENT("Nieudane dorêczenie"),
+        DELIVERED("Dostarczono do klienta");
         
         private String s;
 
@@ -71,13 +69,22 @@ public class PackageStatus {
     public Location getLocation() {
         return location;
     }
+    
+    @Column(nullable = false)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public void setLocation(Location location) {
         this.location = location;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public int getId() {
         return id;
     }

@@ -5,9 +5,7 @@
  */
 package com.muciek.systemkurierski.dao;
 
-import com.muciek.systemkurierski.models.Location;
 import com.muciek.systemkurierski.models.Shipment;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -63,9 +61,7 @@ public class ShipmentDaoImpl implements ShipmentDao{
     @Override
     public List<Shipment> getAllPackagesForUser(String username) {
         
-        //Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Shipment.class).add(Restrictions.eq("username", username));
         Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Shipment.class).createAlias("user", "u").add(Restrictions.eq("u.username", username));
-        
         List<Shipment> userPackages = criteria.list();
         return userPackages;
     }

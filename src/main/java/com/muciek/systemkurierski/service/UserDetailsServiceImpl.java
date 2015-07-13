@@ -32,14 +32,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-
-		
 		com.muciek.systemkurierski.models.User user = userDao.findByUserName(username);
 		List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
-
 		return buildUserForAuthentication(user, authorities);
-		
-
 	}
 
 	
@@ -68,6 +63,4 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
-
 }

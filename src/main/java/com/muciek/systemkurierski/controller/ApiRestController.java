@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.muciek.systemkurierski.controller;
 
 import com.muciek.systemkurierski.models.Courier;
@@ -12,6 +7,7 @@ import com.muciek.systemkurierski.models.PackageStatus;
 import com.muciek.systemkurierski.models.Recipient;
 import com.muciek.systemkurierski.models.Shipment;
 import com.muciek.systemkurierski.models.Track;
+import com.muciek.systemkurierski.models.TrackPoint;
 import com.muciek.systemkurierski.service.CourierAuthenticateService;
 import com.muciek.systemkurierski.service.CourierService;
 import com.muciek.systemkurierski.service.LocationService;
@@ -28,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -217,6 +214,15 @@ public class ApiRestController {
             result.put("shipment_id", newPackageStatus.getShipment().getId());
             result.put("courier_id", newPackageStatus.getCourier().getId());
             result.put("shipment_status_id", newPackageStatus.getId());
+            
+            Shipment shipment = shipmentService.getById(Integer.valueOf(id));
+            Set<TrackPoint> trackPoints = shipment.getTrackPoints();
+            
+            for(TrackPoint trackPoint:trackPoints){
+                trackPoint.setVisited(true);
+                trackPointService.update(trackPoint);
+            }
+            
             return result;
         }
         else{
@@ -284,6 +290,7 @@ public class ApiRestController {
             
             return newPackageStatus;
         }
+        
         return null;
     }
     

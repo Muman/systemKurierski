@@ -10,6 +10,7 @@ import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.TravelMode;
 import com.muciek.systemkurierski.models.Courier;
 import com.muciek.systemkurierski.models.Location;
@@ -123,21 +124,26 @@ public class TrackScheduleService {
         int[] waypointOrder = response[BEST_ROUTE_INDEX].waypointOrder;
 
         for (int i = 0; i < waypointOrder.length; ++i) {
-            DirectionsLeg directionsLeg = response[BEST_ROUTE_INDEX].legs[i];
-
+            //get order of shipment
+            int trackPointOrderIndex = getOrderIndexFromWaypointsOrder(i,waypointOrder);
+            DirectionsLeg directionsLeg = response[BEST_ROUTE_INDEX].legs[trackPointOrderIndex];
+            
             Shipment shipment = shipments.get(i);
+            Set<Shipment> shipmentsForTrackPoint = new HashSet<Shipment>();  //todo: we should group shipments that have the same address!
+            shipmentsForTrackPoint.add(shipment);                        // otherwise if we have N shiments for one addresss we user one waypoint for each so it is a huge wayste
 
-            Set<Shipment> shipmentsForTrackPoint = new HashSet<Shipment>();
-            shipmentsForTrackPoint.add(shipment);
-
+            String pathToNextPoint = buildPathToNextPoint(directionsLeg);
+            
             TrackPoint newTrackPoint = new TrackPoint();
             newTrackPoint.setTrack(newTrack);
             newTrackPoint.setLatitude(directionsLeg.endLocation.lat);
             newTrackPoint.setLongitude(directionsLeg.endLocation.lng);
             newTrackPoint.setVisited(false);
+            newTrackPoint.setPathToNextPoint(pathToNextPoint);
             newTrackPoint.setShipments(shipmentsForTrackPoint);
-            newTrackPoint.setOrderIndex(waypointOrder[i]);
-
+            newTrackPoint.setOrderIndex(trackPointOrderIndex);
+            
+            trackPointService.add(newTrackPoint);
             trackPointsForTrack.add(newTrackPoint);
         }
 
@@ -147,6 +153,20 @@ public class TrackScheduleService {
         newTrack.setEncodedPoyline(response[BEST_ROUTE_INDEX].overviewPolyline.getEncodedPath());
 
         return newTrack;
+    }
+    
+    private int getOrderIndexFromWaypointsOrder(int passedWaypointOrderIndex, int[] returnedWaypointsOrder){
+        if(null == returnedWaypointsOrder || 0 == returnedWaypointsOrder.length){
+            throw new IllegalArgumentException();
+        }
+        
+        for(int i=0; i<returnedWaypointsOrder.length; ++i){
+            if(returnedWaypointsOrder[i] == passedWaypointOrderIndex){
+                return i;
+            }
+        }
+        
+        throw new IllegalArgumentException();
     }
 
     private DirectionsRoute[] getRoutesFromGoogleDirectionsApi(List<Shipment> shipments, Location baseLocation) {
@@ -205,5 +225,15 @@ public class TrackScheduleService {
     private Courier getFreeCourierForTrack() {
         Courier testCourier = courierService.getCourierById(2);
         return testCourier;
+    }
+
+    private String buildPathToNextPoint(DirectionsLeg directionsLeg) {
+        StringBuilder sb = new StringBuilder();
+        
+        for(DirectionsStep step : directionsLeg.steps){
+            sb.append(step.polyline.getEncodedPath());
+        }
+        
+        return sb.toString();
     }
 }

@@ -60,7 +60,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(User user) {
-        getUserDao().deleteUser(user);
+        user.setActive(false);
+        updateUser(user);
     }
 
     @Override

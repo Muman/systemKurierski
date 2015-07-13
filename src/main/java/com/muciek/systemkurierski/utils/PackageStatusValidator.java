@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.muciek.systemkurierski.utils;
 
 import com.muciek.systemkurierski.models.PackageStatus;
@@ -40,15 +35,15 @@ public class PackageStatusValidator {
     private void initValidator(){
         validationRules = new HashMap<String,List<String>>();
         
-        List<String> RECIPIENT_ABSENT_rules = Arrays.asList(PackageStatus.Type.INITIATED.getStatus());
-        List<String> READY_FOR_KURIERX_rules = Arrays.asList(PackageStatus.Type.RECEPTION_SCAN.getStatus());
-        List<String> INITIATED_rules = Arrays.asList(PackageStatus.Type.RECEPTION_SCAN.getStatus());
+        List<String> RECIPIENT_ABSENT_rules = Arrays.asList(PackageStatus.Type.PACKAGE_ARRIVED.getStatus());
+        List<String> READY_FOR_KURIERX_rules = Arrays.asList(PackageStatus.Type.COLLECTED.getStatus());
+        List<String> INITIATED_rules = Arrays.asList(PackageStatus.Type.COLLECTED.getStatus());
         List<String> INITIAL_STATUS_rules = Arrays.asList(PackageStatus.Type.READY_FOR_KURIERX.getStatus(),
-                PackageStatus.Type.INITIATED.getStatus());
+                PackageStatus.Type.PACKAGE_ARRIVED.getStatus());
         
         validationRules.put(PackageStatus.Type.RECIPIENT_ABSENT.getStatus(), RECIPIENT_ABSENT_rules);
         validationRules.put(PackageStatus.Type.READY_FOR_KURIERX.getStatus(), READY_FOR_KURIERX_rules);
-        validationRules.put(PackageStatus.Type.INITIATED.getStatus(), INITIATED_rules);
+        validationRules.put(PackageStatus.Type.PACKAGE_ARRIVED.getStatus(), INITIATED_rules);
         validationRules.put(null, INITIATED_rules);
     }
     

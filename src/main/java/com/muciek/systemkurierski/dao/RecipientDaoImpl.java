@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class RecipientDaoImpl implements RecipientDao{
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -55,5 +54,4 @@ public class RecipientDaoImpl implements RecipientDao{
         List list = getSessionFactory().getCurrentSession().createQuery("from Recipient").list();
         return list;
     }
-    
 }

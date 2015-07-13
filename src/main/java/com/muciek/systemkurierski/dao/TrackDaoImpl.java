@@ -68,8 +68,8 @@ public class TrackDaoImpl implements TrackDao {
 
     @Override
     public List<Track> getAll() {
-//        List list = getSessionFactory().getCurrentSession().createCriteria(Track.class).list();
+//     List list = getSessionFactory().getCurrentSession().createCriteria(Track.class).list();
        List list = getSessionFactory().getCurrentSession().createQuery("from Track").list();
-        return list;
+       return list;
     }
 }

@@ -18,10 +18,8 @@ IndexApp.controller('IndexController', ['$scope', '$http', function ($scope, $ht
             newUserWrapper.user = newUser;
             newUserWrapper.userInfo = newUserInfo;
 
-           //var user = {"firstName": "asd", "lastName": "ad", "companyName": "asd", "username": "asd", "password": "asd", "email": "asd@asd.pl", "phoneNumber": "231123", "city": "asdasd", "address": "asdsad", "postalCode": "asd", "enabled": true, "company": true};
-
             $http.post('/SystemKurierski/register', newUserWrapper).success(function (response) {
-                console.log(response);
+                document.location.href='/SystemKurierski/login';
             }).error(function (response) {
                 console.log(response);
             });

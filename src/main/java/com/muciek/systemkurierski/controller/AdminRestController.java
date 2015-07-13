@@ -20,6 +20,7 @@ import com.muciek.systemkurierski.service.PackageOptionService;
 import com.muciek.systemkurierski.service.PackageStatusService;
 import com.muciek.systemkurierski.service.ShipmentService;
 import com.muciek.systemkurierski.service.TrackScheduleService;
+import com.muciek.systemkurierski.service.TrackService;
 import com.muciek.systemkurierski.service.UserInfoService;
 import com.muciek.systemkurierski.service.UserService;
 import java.io.IOException;
@@ -72,6 +73,17 @@ public class AdminRestController {
 
     @Autowired
     TrackScheduleService trackScheduleService;
+    
+    @Autowired
+    TrackService trackService;
+
+    public TrackService getTrackService() {
+        return trackService;
+    }
+
+    public void setTrackService(TrackService trackService) {
+        this.trackService = trackService;
+    }
 
     public TrackScheduleService getTrackScheduleService() {
         return trackScheduleService;
@@ -261,7 +273,7 @@ public class AdminRestController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public @ResponseBody
     List<User> getAllUsers() {
-        return getUserService().getAllUsers();
+        return getUserService().getAllActiveUsers();
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
@@ -316,6 +328,12 @@ public class AdminRestController {
     public @ResponseBody
     void changeUserPassword(@RequestBody HashMap<String, Object> map) {
         getUserService().changePassword(map);
+    }
+    
+    @RequestMapping(value = "/trackss", method = RequestMethod.GET)
+    public @ResponseBody
+    List<Track> getAllTracks(){
+        return getTrackService().getAll();
     }
 
     @RequestMapping(value = "/update/{name}", method = RequestMethod.PUT)
@@ -376,7 +394,8 @@ public class AdminRestController {
                 courier.setPasswod((String) params.get("password"));  
                 courier.setPesel((String) params.get("pesel"));                
                 courier.setSurname((String) params.get("surname"));  
-                courier.setName((String) params.get("name"));                  
+                courier.setName((String) params.get("name"));    
+                courier.setActive(true);
                 ObjectMapper mapper = new ObjectMapper();
                 int locationId = (Integer) (params.get("location_id"));
                 Location location = getLocationService().getLocationById(locationId);

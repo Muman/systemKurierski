@@ -5,6 +5,8 @@
  */
 package com.muciek.systemkurierski.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -25,13 +27,14 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 @Table(name = "track_points")
-public class TrackPoint {
+public class TrackPoint implements Serializable{
 
     private int id;
     private int orderIndex;
     private double longitude;
     private double latitude;
     private boolean visited;
+    private String pathToNextPoint;
     private Track track;
     private Set<Shipment> shipments = new HashSet<>();
 
@@ -43,13 +46,14 @@ public class TrackPoint {
     public void setOrderIndex(int orderIndex) {
         this.orderIndex = orderIndex;
     }
-
+    
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "TrackPoint_Shipment",
             joinColumns = {
                 @JoinColumn(name = "trackPoint_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "shipment_id")})
+    @JsonIgnore
     public Set<Shipment> getShipments() {
         return shipments;
     }
@@ -59,7 +63,7 @@ public class TrackPoint {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false, unique = true)
     public int getId() {
         return id;
@@ -87,7 +91,7 @@ public class TrackPoint {
         this.longitude = longitude;
     }
 
-    @Column(name = "latitude", nullable = false, unique = true)
+    @Column(name = "latitude", nullable = false, unique = false)
     public double getLatitude() {
         return latitude;
     }
@@ -96,8 +100,18 @@ public class TrackPoint {
         this.latitude = latitude;
     }
 
+    @Column(length = 10000, name = "path_to_next_point", nullable = false, unique = false)
+    public String getPathToNextPoint() {
+        return pathToNextPoint;
+    }
+
+    public void setPathToNextPoint(String pathToNextPoint) {
+        this.pathToNextPoint = pathToNextPoint;
+    }
+
     @ManyToOne
     @JoinColumn(name = "track_id")
+    @JsonIgnore
     public Track getTrack() {
         return track;
     }
@@ -105,5 +119,4 @@ public class TrackPoint {
     public void setTrack(Track track) {
         this.track = track;
     }
-
 }

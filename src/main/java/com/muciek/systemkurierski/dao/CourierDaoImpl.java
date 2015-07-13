@@ -34,7 +34,8 @@ public class CourierDaoImpl implements CourierDao {
 
     @Override
     public void delete(Courier courier) {
-        getSessionFactory().getCurrentSession().delete(courier);
+        courier.setActive(false);
+        update(courier);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class CourierDaoImpl implements CourierDao {
 
     @Override
     public List<Courier> getAll() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from Courier").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from Courier c where c.active = true").list();
         return list;
     }
 

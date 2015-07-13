@@ -20,16 +20,16 @@ INSERT INTO users_info(
             3, 'Krakowskie Przedmieœcie 1', 'Warszawa', 'true', 'MobileSoft', 'comarch@comarch.pl', 'Bronek', 
             'Bronek', '345897771', '35-024');
 
-INSERT INTO users(username,password,enabled,user_info_id)
-VALUES ('admin','$2a$06$xYTm9Xf5expg9p39V6kVEuHCgT5kPAMXAIVoWjFyOvhq0BYdAlEDW', TRUE,3);
-INSERT INTO users(username,password,enabled)
-VALUES ('user','$2a$06$mAUzj1DmcxQniMTJ7wNFWeKobyEorZkxeD1TwZVc.om0PvPAW2152', TRUE);
-INSERT INTO users(username,password,enabled)
-VALUES ('guest','$2a$06$o2Jj9uUlv1dwm7DmzfJVjOUuuu3C8.MgAu.7S00SjiwCW5gsyi4qa', TRUE);
-INSERT INTO users(username,password,enabled,user_info_id)
-VALUES ('jank','$2a$12$RAaQ1PLiODjC41bEJpIQd.K5rjkHQzbhN2GDFUk5BZUNjk2ehdmSS', TRUE,1);
-INSERT INTO users(username,password,enabled,user_info_id)
-VALUES ('filip','$2a$12$hCjr3HtF3W8C4LmIjyznHOX/RABCWj4tYOL2UaoLwdcscR.XMT.O6', TRUE,2);
+INSERT INTO users(username,password,enabled,user_info_id,active)
+VALUES ('admin','$2a$06$xYTm9Xf5expg9p39V6kVEuHCgT5kPAMXAIVoWjFyOvhq0BYdAlEDW', TRUE,3,true);
+INSERT INTO users(username,password,enabled,active)
+VALUES ('user','$2a$06$mAUzj1DmcxQniMTJ7wNFWeKobyEorZkxeD1TwZVc.om0PvPAW2152', TRUE,true);
+INSERT INTO users(username,password,enabled,active)
+VALUES ('guest','$2a$06$o2Jj9uUlv1dwm7DmzfJVjOUuuu3C8.MgAu.7S00SjiwCW5gsyi4qa', TRUE,true);
+INSERT INTO users(username,password,enabled,user_info_id,active)
+VALUES ('jank','$2a$12$RAaQ1PLiODjC41bEJpIQd.K5rjkHQzbhN2GDFUk5BZUNjk2ehdmSS', TRUE,1,true);
+INSERT INTO users(username,password,enabled,user_info_id,active)
+VALUES ('filip','$2a$12$hCjr3HtF3W8C4LmIjyznHOX/RABCWj4tYOL2UaoLwdcscR.XMT.O6', TRUE,2,true);
 
 INSERT INTO user_roles (username, ROLE)
 VALUES ('admin', 'ROLE_USER');
@@ -45,43 +45,43 @@ INSERT INTO user_roles (username, ROLE)
 VALUES ('filip', 'ROLE_USER');
 
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (1, 'Paczka kurierska o wadze do 5 kilogramów', 'Paczka do 5 kg', 10.00);
+            id, description, name, price,active)
+    VALUES (1, 'Paczka kurierska o wadze do 5 kilogramów', 'Paczka do 5 kg', 10.00,true);
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (2, 'Paczka kurierska o wadze do 3 kilogramów', 'Paczka do 3 kg', 7.50);
+            id, description, name, price,active)
+    VALUES (2, 'Paczka kurierska o wadze do 3 kilogramów', 'Paczka do 3 kg', 7.50,true);
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (3, 'List/Koperta do 2 kg', 'List o wadze do 2kg', 5.00);
+            id, description, name, price,active)
+    VALUES (3, 'List/Koperta do 2 kg', 'List o wadze do 2kg', 5.00,true);
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (4, 'Paczka kurierska o wadze do 10 kilogramów', 'Paczka do 10 kg', 15.00);
+            id, description, name, price,active)
+    VALUES (4, 'Paczka kurierska o wadze do 10 kilogramów', 'Paczka do 10 kg', 15.00,true);
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (5, 'Paczka kurierska o wadze do 15 kilogramów', 'Paczka do 15 kg', 25.00);
+            id, description, name, price,active)
+    VALUES (5, 'Paczka kurierska o wadze do 15 kilogramów', 'Paczka do 15 kg', 25.00,true);
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (6, 'Paczka kurierska o wadze do 25 kilogramów', 'Paczka do 25 kg', 50.00);
+            id, description, name, price,active)
+    VALUES (6, 'Paczka kurierska o wadze do 25 kilogramów', 'Paczka do 25 kg', 50.00,true);
 INSERT INTO package_options(
-            id, description, name, price)
-    VALUES (7, 'Paleta do 25 kg', 'Paleta do 25 kg', 80.00);
+            id, description, name, price,active)
+    VALUES (7, 'Paleta do 25 kg', 'Paleta do 25 kg', 80.00,true);
 
 INSERT INTO locations(
-            id, address, city, name, postal_code)
-    VALUES (1, 'Genera³a Stanis³awa Maczka 6', 'Rzeszów', 'Oddzia³ 2 Rzeszów', '34-586');
+            id, address, city, name, postal_code,active)
+    VALUES (1, 'Genera³a Stanis³awa Maczka 6', 'Rzeszów', 'Oddzia³ 2 Rzeszów', '34-586',true);
 
 
 INSERT INTO locations(
-            id, address, city, name, postal_code)
-VALUES (2, 'Akademicka 2', 'Rzeszów', 'Sortownia G³ówna Rzeszów', '34-586');
+            id, address, city, name, postal_code,active)
+VALUES (2, 'Akademicka 2', 'Rzeszów', 'Sortownia G³ówna Rzeszów', '34-586',true);
 
 INSERT INTO locations(
-            id, address, city, name, postal_code)
-VALUES (3, 'Targowa 21', 'Rzeszów', 'Oddzia³ 3 Rzeszów', '34-522');
+            id, address, city, name, postal_code,active)
+VALUES (3, 'Targowa 21', 'Rzeszów', 'Oddzia³ 3 Rzeszów', '34-522',true);
 
 INSERT INTO locations(
-            id, address, city, name, postal_code)
-VALUES (4, 'POLSKA', 'POLSKA', 'POLSKA', '00-000');
+            id, address, city, name, postal_code,active)
+VALUES (4, 'POLSKA', 'POLSKA', 'POLSKA', '00-000',true);
 
     INSERT INTO recipient(
             id, address, city, name, phonenumber, postalcode)
@@ -184,61 +184,61 @@ INSERT INTO shipment(
 /****/
 
 INSERT INTO couriers(
-            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password)
-    VALUES (1, '2015-04-23','d.davids@kurierx.pl', '2012-04-23', 'David', '87898787876', 'Davids', 2,'d.davids','qaz');
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password,active)
+    VALUES (1, '2015-04-23','d.davids@kurierx.pl', '2012-04-23', 'David', '87898787876', 'Davids', 2,'d.davids','qaz',true);
 
 INSERT INTO couriers(
-            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password)
-    VALUES (2, '2016-04-23','p.jhonson@kurierx.pl', '2011-04-23', 'Piotr', '84898737876', 'Jhonson', 2,'p.jhonson','qaz');
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password,active)
+    VALUES (2, '2016-04-23','p.jhonson@kurierx.pl', '2011-04-23', 'Piotr', '84898737876', 'Jhonson', 2,'p.jhonson','qaz',true);
 
 INSERT INTO couriers(
-            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password)
-    VALUES (3, '2015-07-23','j.fergusson@kurierx.pl', '2013-04-23', 'Jan', '83898787876', 'Fergusson', 2,'j.fergusson','qaz');
+            id, dismiss_date, email, hire_date, name, pesel, surname, location_id,login,password,active)
+    VALUES (3, '2015-07-23','j.fergusson@kurierx.pl', '2013-04-23', 'Jan', '83898787876', 'Fergusson', 2,'j.fergusson','qaz',true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (1, 'Gotowe dla KurierX','2015-02-02', 1, 2, 1);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (1, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 1,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (2, 'Gotowe dla KurierX','2015-02-02', 1, 2, 2);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (2, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 2,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (3, 'Gotowe dla KurierX','2015-02-02', 1, 2, 3);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (3, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 3,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (4, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 4);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (4, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 4,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (5, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 5);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (5, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 5,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (6, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 6);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (6, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 6,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (7, 'Gotowe dla KurierX','2015-02-02', 1, 2, 7);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (7, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 7,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (8, 'Gotowe dla KurierX','2015-02-02', 1, 2, 8);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (8, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 8,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (9, 'Gotowe dla KurierX','2015-02-02', 1, 2, 9);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (9, 'Oczekuje na odbiór przez KurierX','2015-02-02', 1, 2, 9,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-    VALUES (10, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 10);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+    VALUES (10, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 10,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (11, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 11);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (11, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 11,true);
 
 INSERT INTO package_status(
-            id, name, status_date, courier_id, location_id, shipment_id)
-VALUES (12, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 12);
+            id, name, status_date, courier_id, location_id, shipment_id,active)
+VALUES (12, 'Nadejscie przesy³ki','2015-02-02', 1, 2, 12,true);

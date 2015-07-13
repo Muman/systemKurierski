@@ -23,6 +23,7 @@ public class PackageOption {
     private String name;
     private String description;
     private double price;
+    private boolean active;
     
     public PackageOption(int id, String name, String description, double price) {
         this.id = id;
@@ -42,9 +43,18 @@ public class PackageOption {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Column(nullable = false)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",nullable = false, unique = true)
     public int getId() {
         return id;

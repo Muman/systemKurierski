@@ -28,7 +28,7 @@ public class Recipient {
     private String phoneNumber;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false,unique = true)
     public int getId() {
         return id;

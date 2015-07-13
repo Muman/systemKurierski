@@ -120,7 +120,7 @@ AdminControllers.controller('AdminLocationController', ['$scope', '$http', funct
                 $scope.locations = response;
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.addLocation = function (newLocation) {
@@ -129,7 +129,7 @@ AdminControllers.controller('AdminLocationController', ['$scope', '$http', funct
                 newLocation = {};
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.updateLocation = function (locationToUpdate) {
@@ -137,13 +137,10 @@ AdminControllers.controller('AdminLocationController', ['$scope', '$http', funct
                 $scope.getAllLocations();
             }).error(function () {
                 console.log('so sad');
-            })
-        }
+            });
+        };
 
         $scope.deleteLocation = function (locationToDelete) {
-            console.log("deleting location ");
-            console.log(locationToDelete);
-
             if (!locationToDelete) {
                 alert("delete null!!");
             }
@@ -151,8 +148,8 @@ AdminControllers.controller('AdminLocationController', ['$scope', '$http', funct
                 $scope.getAllLocations();
             }).error(function () {
                 console.log('so sad');
-            })
-        }
+            });
+        };
 
         $scope.getAllLocations();
     }]);
@@ -170,7 +167,7 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
                 $scope.packageOptions = response;
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.addPackageOption = function (newPackageOption) {
@@ -178,7 +175,7 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
                 $scope.getAllPackageOptions();
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.updatePackageOption = function (packageOption) {
@@ -186,7 +183,7 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
                 $scope.getAllPackageOptions();
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.deletePackageOption = function (packageOption) {
@@ -194,7 +191,7 @@ AdminControllers.controller('AdminPackageOptionController', ['$scope', '$http', 
                 $scope.getAllPackageOptions();
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.getAllPackageOptions();
@@ -214,7 +211,7 @@ AdminControllers.controller('AdminUserController', ['$scope', '$http', function 
                 console.log(response);
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.addUser = function (newUser) {
@@ -228,7 +225,7 @@ AdminControllers.controller('AdminUserController', ['$scope', '$http', function 
                 $scope.getAllUsers();
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.updateUser = function (user) {
@@ -236,15 +233,16 @@ AdminControllers.controller('AdminUserController', ['$scope', '$http', function 
                 $scope.getAllUsers()();
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.deleteUser = function (user) {
-            $http.delete('user/' + user.name).success(function (response) {
-                $scope.getAllUsers()();
+            console.log(user);
+            $http.delete('user/' + user.username).success(function (response) {
+                $scope.getAllUsers();
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
 
         $scope.getAllUserRoles = function () {
@@ -253,7 +251,7 @@ AdminControllers.controller('AdminUserController', ['$scope', '$http', function 
             }).error(function (response) {
 
             });
-        }
+        };
 
         $scope.selectUserRole = function (userRole) {
             $scope.selectedUserRole = userRole;
@@ -350,16 +348,16 @@ AdminControllers.controller('AdminTracksController', ['$scope', '$http', 'alertS
                 $scope.locations = response;
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
         
         $scope.getAllTracks = function () {
 
-            $http.get('track/').success(function (response) {
+            $http.get('trackss/').success(function (response) {
                 $scope.tracks = response;
             }).error(function () {
                 console.log('so sad');
-            })
+            });
         };
         
         $scope.generateTracks = function () {
@@ -368,11 +366,12 @@ AdminControllers.controller('AdminTracksController', ['$scope', '$http', 'alertS
           $scope.params["location_id"] = $scope.selectedLocation.id;
             
           $http.post('scheduleTracks/',$scope.params).success(function (response) {
-              $scope.generatedTracks = response;
+              $scope.tracks = response;
           }).error(function () {
               console.log('Errror while generating tracks');
           })       
         };
        
         $scope.getAllLocations();
+        $scope.getAllTracks();
     }]);

@@ -6,6 +6,7 @@
 package com.muciek.systemkurierski.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -24,19 +25,28 @@ import org.hibernate.annotations.Fetch;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     private String username;
     private String password;
     private boolean enabled;
+    private UserInfo userInfo;
+    private boolean active;
 
     @JsonIgnore
     private Set<UserRole> userRole = new HashSet<>(0);
     
     @JsonIgnore
     private Set<Shipment> shipment = new HashSet<>();
+    
+    @Column(nullable = false)
+    public boolean isActive() {
+        return active;
+    }
 
-    private UserInfo userInfo;
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_INFO_ID")

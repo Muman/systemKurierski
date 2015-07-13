@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
@@ -21,7 +22,7 @@ import javax.persistence.OneToMany;
 
 /**
  *
- * @author Muman
+ * @author Piotr Muciek
  */
 @Entity
 @Table(name = "tracks")
@@ -34,18 +35,37 @@ public class Track {
     private boolean active;
     private String encodedPoyline;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false, unique = true)
+    public int getId() {
+        return id;
+    }
+    
     @Column(length = 10000,name = "encoded_polyline", nullable = false, updatable = true)
     public String getEncodedPoyline() {
         return encodedPoyline;
     }
-
-    public void setEncodedPoyline(String encodedPoyline) {
-        this.encodedPoyline = encodedPoyline;
+    
+    @OneToMany(mappedBy = "track", fetch = FetchType.EAGER)
+    public Set<TrackPoint> getTrackPoints() {
+        return trackPoints;
     }
-
+    
     @Column(name = "create_date", nullable = false, updatable = false)
     public Date getCreated() {
         return created;
+    }
+        
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "courier_id")
+    public Courier getCourier() {
+        return courier;
+    }
+    
+    public void setEncodedPoyline(String encodedPoyline) {
+        this.encodedPoyline = encodedPoyline;
     }
 
     public void setCreated(Date created) {
@@ -59,35 +79,15 @@ public class Track {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    public int getId() {
-        return id;
-    }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "courier_id")
-    public Courier getCourier() {
-        return courier;
     }
 
     public void setCourier(Courier courier) {
         this.courier = courier;
     }
     
-    @JsonIgnore
-    @OneToMany(mappedBy = "track")
-    public Set<TrackPoint> getTrackPoints() {
-        return trackPoints;
-    }
-
     public void setTrackPoints(Set<TrackPoint> trackPoints) {
         this.trackPoints = trackPoints;
     }

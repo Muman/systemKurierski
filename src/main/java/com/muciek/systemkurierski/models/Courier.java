@@ -41,38 +41,14 @@ public class Courier {
     private String passwod;
     private Location location;
     private Set<Track> tracks = new HashSet<Track>();
+    private boolean active;
 
-//    public Courier() {
-//    }
-//
-//    public Courier(int id, String name, String surname, String pesel, String email, Date hireDate, Date dismissDate) {
-//        this.id = id;
-//        this.name = name;
-//        this.surname = surname;
-//        this.pesel = pesel;
-//        this.email = email;
-//        this.hireDate = hireDate;
-//        this.dismissDate = dismissDate;
-//    }
-//
-//    public Courier(int id, String name, String surname, String pesel, String email, Date hireDate, Date dismissDate, String login, String passwod, Location location) {
-//        this.id = id;
-//        this.name = name;
-//        this.surname = surname;
-//        this.pesel = pesel;
-//        this.email = email;
-//        this.hireDate = hireDate;
-//        this.dismissDate = dismissDate;
-//        this.login = login;
-//        this.passwod = passwod;
-//        this.location = location;
-//    }
 
     /**
      * @return the id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false, unique = true)
     public int getId() {
         return id;
@@ -94,6 +70,15 @@ public class Courier {
         this.login = login;
     }
 
+    @Column(nullable = false)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+    
     @JsonIgnore
     @Column(name = "password", nullable = false, unique = false)
     public String getPasswod() {

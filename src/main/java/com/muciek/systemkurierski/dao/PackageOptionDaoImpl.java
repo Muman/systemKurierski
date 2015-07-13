@@ -36,7 +36,8 @@ public class PackageOptionDaoImpl implements PackageOptionDao {
 
     @Override
     public void delete(PackageOption packageOption) {
-        getSessionFactory().getCurrentSession().delete(packageOption);
+        packageOption.setActive(false);
+        update(packageOption);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class PackageOptionDaoImpl implements PackageOptionDao {
     @Override
     public List<PackageOption> getAll() {
         List list = getSessionFactory().getCurrentSession().
-                createQuery("from PackageOption").list();
+                createQuery("from PackageOption where active = true").list();
         return list;
     }
 }

@@ -38,7 +38,8 @@ public class LocationDaoImpl implements LocationDao{
 
     @Override
     public void delete(Location location) {
-               getSessionFactory().getCurrentSession().delete(location);
+        location.setActive(false);
+        update(location);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class LocationDaoImpl implements LocationDao{
 
     @Override
     public List<Location> getAll() {
-        List list = getSessionFactory().getCurrentSession().createQuery("from Location").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from Location where active = true").list();
         return list;
     }
 

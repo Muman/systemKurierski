@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.muciek.systemkurierski.service;
 
 import com.muciek.systemkurierski.dao.ShipmentDao;
@@ -153,7 +148,7 @@ public class ShipmentServiceImpl implements ShipmentService {
         List<Shipment> resultList = new ArrayList<Shipment>();
 
         //get ell shipments arrived to location
-        List<Shipment> initiatedShipments = getAllShipmentsWithStatusFromLocation(PackageStatus.Type.INITIATED,location);
+        List<Shipment> initiatedShipments = getAllShipmentsWithStatusFromLocation(PackageStatus.Type.PACKAGE_ARRIVED,location);
 
         // get all shiments assigned to location to be received by courier
         List<Shipment> readyForKurierxShipments = getAllShipmentsWithStatusFromLocation(PackageStatus.Type.READY_FOR_KURIERX,location);

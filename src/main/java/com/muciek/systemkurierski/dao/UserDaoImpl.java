@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 
         List<User> users = new ArrayList<>();
 
-        users = getSessionFactory().getCurrentSession().createQuery("from User where username=?")
+        users = getSessionFactory().getCurrentSession().createQuery("from User where username=? and active=true")
                 .setParameter(0, username).list();
 
         if (users.size() > 0) {
@@ -58,13 +58,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllActiveUsers() { //todo
-        List list = getSessionFactory().getCurrentSession().createQuery("from User where enabled = true").list();
+        List list = getSessionFactory().getCurrentSession().createQuery("from User where active = true").list();
         return list;
     }
 
     @Override
     public void deleteUser(User user) {
-        getSessionFactory().getCurrentSession().delete(user);
+        user.setActive(false);
+        updateUser(user);
     }
 
     @Override
